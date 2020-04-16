@@ -12,6 +12,7 @@ require_once "models/clientes.modelo.php";
 require_once "models/ventas.modelo.php";
 require_once "models/productos.modelo.php";
 require_once "models/categorias.modelo.php";
+require_once "models/detalle-venta.modelo.php";
 
 $plantilla = new ControladorPlantilla();
 $plantilla -> ctrlPlantilla();

@@ -70,7 +70,7 @@
                     <div class="form-group">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                        <select class="form-control" name="agregarCliente" id="agregarCliente">
+                        <select class="form-control" name="agregarCliente" id="agregarCliente" required>
                           <option value="">Seleccionar Cliente</option>
                           <?php
                             $item = null;
@@ -91,8 +91,10 @@
                     <!-- INPUT PARA AGREGAR PRODUCTO -->
                     <div class="form-group row productos">
 
-                        
                     </div>
+
+                    <!-- INPUT PARA ALMACENAR LOS DATOS EN JSON -->
+                    <input type="hidden" name="listaProductos" id="listaProductos">
 
                     <!-- BOTON PARA AGREGAR PRODUCTOS (DISPOSITIVOS MOVILES) -->
                     <button class="btn btn-default hidden-lg btnAgregarProducto">Agregar Producto</button>
@@ -145,6 +147,7 @@
                             <option value="TC">Tarjeta de crédito</option>
                             <option value="TD">Tarjeta de débito</option>
                           </select>
+                          <input type="hidden" name="listaMetodoPago" id="listaMetodoPago">
                         </div>
                       </div>
 
