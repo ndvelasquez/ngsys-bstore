@@ -165,7 +165,10 @@
                 <div class="box-footer">
                   <button type="submit" class="btn btn-primary pull-right">Guardar Venta</button>
                 </div>
-
+                <?php
+                $crearVenta = new ControladorVentas;
+                $crearVenta -> ctrlCrearVenta();
+                ?>
               </form>
             </div>
          </div>

@@ -36,45 +36,31 @@
             </thead>
             <tbody>
               <?php
-                // $item = null;
-                // $valor = null;
+                $item = null;
+                $valor = null;
 
-                // $clientes = ControladorClientes::ctrlMostrarClientes($item, $valor);
+                $ventas = ControladorVentas::ctrlMostrarVentas($item, $valor);
 
-                // foreach ($clientes as $key => $value) {
-                //   echo '<tr>
-                //           <td>'.$value["id"].'</td>
-                //           <td>'.$value["nombre"].'</td>
-                //           <td>'.$value["tipo_documento"].'</td>
-                //           <td>'.$value["documento"].'</td>
-                //           <td>'.$value["email"].'</td>
-                //           <td>'.$value["telefono"].'</td>
-                //           <td>'.$value["direccion"].'</td>
-                //           <td>'.$value["fecha_creacion"].'</td>
-                //   ';
-                //   echo '<td>
-                //           <div class="btn-group">
-                //           <button class="btn btn-warning btn-editarCliente" idCliente="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarCliente"><i class="fa fa-pencil"></i></button>
-                //           <button class="btn btn-danger btn-eliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>
-                //           </div>
-                //         </td>
-                //     </tr>';
-                // }
+                foreach ($ventas as $key => $value) {
+                  echo '<tr>
+                          <td>'.$value["id"].'</td>
+                          <td>'.$value["codigo"].'</td>
+                          <td>'.$value["cliente"].'</td>
+                          <td>'.$value["vendedor"].'</td>
+                          <td>'.$value["metodo_pago"].'</td>
+                          <td>$'.$value["neto"].'</td>
+                          <td>$'.$value["total"].'</td>
+                          <td>'.$value["fecha_creacion"].'</td>
+                  ';
+                  echo '<td>
+                          <div class="btn-group">
+                          <button class="btn btn-primary btn-imprimirDetalle" idVenta="'.$value["id"].'"><i class="fa fa-print"></i></button>
+                          <button class="btn btn-danger btn-eliminarVenta" idVenta="'.$value["id"].'"><i class="fa fa-times"></i></button>
+                          </div>
+                        </td>
+                    </tr>';
+                }
               ?>
-              <td>1</td>
-              <td>1001</td>
-              <td>Pepito Perez</td>
-              <td>Nestor Velasquez</td>
-              <td>Efectivo</td>
-              <td>$ 500.00</td>
-              <td>$ 590.00</td>
-              <td>2020-04-10</td>
-              <td>
-                <div class="btn-group">
-                  <button class="btn btn-info btn-imprimir"><i class="fa fa-print"></i></button>
-                  <button class="btn btn-danger btn-anularVenta"><i class="fa fa-times"></i></button>
-                </div>
-              </td>
             </tbody>
           </table>
         </div>

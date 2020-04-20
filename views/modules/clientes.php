@@ -30,6 +30,8 @@
                 <th>Email</th>
                 <th>Teléfono</th>
                 <th>Dirección</th>
+                <th>Total de compras</th>
+                <th>última compra</th>
                 <th>Agregado</th>
                 <th>Acciones</th>
               </tr>
@@ -50,6 +52,8 @@
                           <td>'.$value["email"].'</td>
                           <td>'.$value["telefono"].'</td>
                           <td>'.$value["direccion"].'</td>
+                          <td>'.$value["compras"].'</td>
+                          <td>'.$value["ultima_compra"].'</td>
                           <td>'.$value["fecha_creacion"].'</td>
                   ';
                   echo '<td>

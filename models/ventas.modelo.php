@@ -7,12 +7,12 @@
         // MOSTRAR VENTAS
         static public function mdlMostrarVenta($tabla, $item, $valor) {
             if ($item != null) {
-                $sentencia = Conexion::conectar()->prepare("SELECT ventas.*, clientes.nombre as cliente, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = ventas.id_cliente INNER JOIN usuarios ON usuarios.id = ventas.id_usuario WHERE $item = :$item ORDER BY fecha DESC");
+                $sentencia = Conexion::conectar()->prepare("SELECT ventas.*, clientes.nombre as cliente, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = ventas.id_cliente INNER JOIN usuarios ON usuarios.id = ventas.id_usuario WHERE $item = :$item ORDER BY id DESC");
                 $sentencia -> bindParam(":".$item, $valor, PDO::PARAM_STR);
                 $sentencia -> execute();
             }
             else {
-                $sentencia = Conexion::conectar()->prepare("SELECT ventas.*, clientes.nombre as cliente, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = ventas.id_cliente INNER JOIN usuarios ON usuarios.id = ventas.id_usuario ");
+                $sentencia = Conexion::conectar()->prepare("SELECT ventas.*, clientes.nombre as cliente, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = ventas.id_cliente INNER JOIN usuarios ON usuarios.id = ventas.id_usuario");
                 $sentencia -> execute();
 
                 return $sentencia -> fetchAll();

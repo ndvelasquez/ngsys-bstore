@@ -2,9 +2,9 @@
     <!-- Logo -->
     <a href="inicio" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>NGS</b></span>
+      <span class="logo-mini"><img src="views/img/plantilla/logo.png"></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>NG</b>SYS 1.0</span>
+      <span class="logo-lg"><img src="views/img/plantilla/logo-grande.png"></span>
     </a>
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top">

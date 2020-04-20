@@ -20,7 +20,6 @@
         */
 
         static public function ctrlCrearVenta() {
-
             if (isset($_POST["codVenta"])
                && isset($_POST["idVendedor"])
                && isset($_POST["agregarCliente"])
@@ -37,7 +36,12 @@
 
                     
                     $tabla = "ventas";
-                    $listaProductos = json_decode($_POST["listaProductos"]);
+                    $listaProductos = json_decode($_POST["listaProductos"], true);
+                    $totalProductosComprados = array();
+                    // Formateo el precio a un formato adecuado para la BD
+                    $precioTotal = $_POST["totalVenta"];
+                    $precioFormateado = (0+str_replace(",","",$precioTotal));
+                    $precioFormateado = number_format($precioFormateado,2,".","");
                     
                     $datos = array(
                         "codigo" => $_POST["codVenta"],
@@ -46,7 +50,7 @@
                         "productos" => $_POST["listaProductos"],
                         "neto" => $_POST["precioNeto"],
                         "impuestos" => $_POST["valorImpuesto"],
-                        "total" => $_POST["totalVenta"],
+                        "total" => $precioFormateado,
                         "metodo_pago" => $_POST["listaMetodoPago"],
                         "estado" => 1
                     );
@@ -57,7 +61,7 @@
                         GUARDO EL DETALLE DE LA VENTA
                         ===============================================*/
                         $item =  "codigo";
-                        $valor = $datos["codVenta"];
+                        $valor = $_POST["codVenta"];
                         // Traigo la venta insertada recientemente
                         $traerVenta = ModeloVentas::mdlMostrarVenta($tabla, $item, $valor);
                         foreach ($listaProductos as $key => $producto) {
@@ -71,12 +75,30 @@
                                 "estado" => 1
                             );
                             $respuestaDetalleVenta = ModeloDetalleVentas::mdlCrearDetalleVenta($tablaDetalleVenta, $datosDetalleVenta);
+                            array_push($totalProductosComprados, $producto["cantidad"]);
                         }
-                        if ($respuestaDetalleVenta == "ok") {
+                        /*==============================================
+                        ACTUALIZAR LAS COMPRAS DEL CLIENTE
+                        ================================================*/
+                        $tablaClientes = "clientes";
+                        $item = "id";
+                        $valorCliente = $_POST["agregarCliente"];
+                        $traerCliente = ModeloClientes::mdlMostrarCliente($tablaClientes,$item,$valorCliente);
+
+                        $item1 = "compras";
+                        $valor1 = array_sum($totalProductosComprados) + $traerCliente["compras"];
+                        $comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1, $valor1, $valorCliente);
+                        /*==============================================
+                        ACTUALIZAR LA ULTIMA FECHA DE COMPRA DEL CLIENTE
+                        ================================================*/
+                        $item1a = "ultima_compra";
+                        $valor1a = date('Y-m-d H:i:s');
+                        $ultimaCompra = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1a, $valor1a, $valorCliente);
+                        if ($respuestaDetalleVenta == "ok" && $comprasCliente == "ok" && $ultimaCompra == "ok") {
                             echo "<script>
                             Swal.fire({
                                 type: 'success',
-                                title: 'Venta creada',
+                                title: 'Venta creada con éxito',
                                 icon: 'success',
                                 confirmButtonText: 'Cerrar',
                                 closeOnConfirm: false
