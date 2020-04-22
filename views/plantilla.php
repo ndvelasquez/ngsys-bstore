@@ -80,6 +80,7 @@ SCRIPTS
             || $_GET["ruta"] == "clientes"
             || $_GET["ruta"] == "ventas"
             || $_GET["ruta"] == "crear-venta"
+            || $_GET["ruta"] == "editar-venta"
             || $_GET["ruta"] == "reporte-ventas"
             || $_GET["ruta"] == "salir") {
           include "modules/".$_GET["ruta"].".php";

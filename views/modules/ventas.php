@@ -30,6 +30,7 @@
                 <th>Forma de pago</th>
                 <th>Neto</th>
                 <th>Total</th>
+                <th>Estado</th>
                 <th>Fecha</th>
                 <th>Acciones</th>
               </tr>
@@ -49,16 +50,27 @@
                           <td>'.$value["vendedor"].'</td>
                           <td>'.$value["metodo_pago"].'</td>
                           <td>$'.$value["neto"].'</td>
-                          <td>$'.$value["total"].'</td>
-                          <td>'.$value["fecha_creacion"].'</td>
-                  ';
-                  echo '<td>
-                          <div class="btn-group">
-                          <button class="btn btn-primary btn-imprimirDetalle" idVenta="'.$value["id"].'"><i class="fa fa-print"></i></button>
-                          <button class="btn btn-danger btn-eliminarVenta" idVenta="'.$value["id"].'"><i class="fa fa-times"></i></button>
-                          </div>
-                        </td>
-                    </tr>';
+                          <td>$'.$value["total"].'</td>';
+                          if ($value["estado"] == 1) {
+                            echo '<td>Activa</td>';
+                          }
+                          else {
+                            echo '<td>Anulada</td>';
+                          }
+                  echo    '<td>'.$value["fecha_creacion"].'</td>';
+                    echo '<td>';
+                    echo    '<div class="btn-group">';
+                    echo     '<button class="btn btn-primary btn-imprimirDetalle" codVenta="'.$value["codigo"].'"><i class="fa fa-print"></i></button>';
+                    echo     '<button class="btn btn-warning btn-editarVenta" idVenta="'.$value["id"].'"><i class="fa fa-pencil"></i></button>';
+                    if ($value["estado"] != 2) {
+                      echo '<button class="btn btn-danger btn-anularVenta" idVenta="'.$value["id"].'"><i class="fa fa-times"></i></button>';
+                    }
+                    else {
+                      echo '<button class="btn btn-default"><i class="fa fa-times"></i></button>';
+                    }
+                    echo    '</div>';
+                    echo '</td>';
+                  echo '</tr>';
                 }
               ?>
             </tbody>
@@ -72,3 +84,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <?php
+    $anularVenta = new ControladorVentas;
+    $anularVenta -> ctrlAnularVenta();
+  ?>

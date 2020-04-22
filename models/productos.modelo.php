@@ -62,6 +62,20 @@
 
             $sentencia = null;
         }
+        // ACTUALIZAR PRODUCTO
+        static public function mdlActualizarProducto($tabla, $item1, $valor1, $criterio) {
+            $sentencia = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE id = :id");
+            $sentencia -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+            $sentencia -> bindParam(":id", $criterio, PDO::PARAM_STR);
+
+            if($sentencia -> execute()) {
+                return "ok";
+            }
+            else {
+                return "error";
+            }
+            $sentencia = null;
+        }
         // ELIMINAR PRODUCTOS
         static public function mdlEliminarProducto($tabla, $datos) {
             $sentencia = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
