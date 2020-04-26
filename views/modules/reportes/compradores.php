@@ -30,7 +30,7 @@
       xkey: 'y',
       ykeys: ['a'],
       labels: ['Total en compras'],
-      preUnits: '$',
+      preUnits: 'S/',
       hideHover: 'auto'
     });
 </script>

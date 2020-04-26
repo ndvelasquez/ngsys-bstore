@@ -1,34 +1,34 @@
 <?php
 ob_start();
 
-require_once "../../../controllers/ventas.controlador.php";
-require_once "../../../models/ventas.modelo.php";
+require_once "../../../controllers/cotizaciones.controlador.php";
+require_once "../../../models/cotizaciones.modelo.php";
 
 require_once "../../../controllers/productos.controlador.php";
 require_once "../../../models/productos.modelo.php";
 
-class imprimirFactura{
+class imprimirCotizacion{
 
 public $codigo;
 
-public function traerImpresionFactura(){
+public function traerImpresionCotizacion(){
 
 //TRAEMOS LA INFORMACIÓN DE LA VENTA
 
-$itemVenta = "codigo";
-$valorVenta = $this->codigo;
+$itemCot = "codigo";
+$valorCot = $this->codigo;
 
-$respuestaVenta = ControladorVentas::ctrlMostrarVentas($itemVenta, $valorVenta);
+$respuestaCotizacion = ControladorCotizaciones::ctrlMostrarCotizaciones($itemCot, $valorCot);
 
-$fecha = substr($respuestaVenta["fecha_creacion"],0,-8);
+$fecha = substr($respuestaCotizacion["fecha_creacion"],0,-8);
 $fecha = date_create($fecha);
 $fecha = date_format($fecha, "d/m/Y");
-$productos = json_decode($respuestaVenta["productos"], true);
-$neto = number_format($respuestaVenta["neto"],2);
-$impuesto = number_format($respuestaVenta["impuestos"],2);
-$total = number_format($respuestaVenta["total"],2);
-$cliente = $respuestaVenta["cliente"];
-$vendedor = $respuestaVenta["vendedor"];
+$productos = json_decode($respuestaCotizacion["productos"], true);
+$neto = number_format($respuestaCotizacion["neto"],2);
+$impuesto = number_format($respuestaCotizacion["impuestos"],2);
+$total = number_format($respuestaCotizacion["total"],2);
+$cliente = $respuestaCotizacion["cliente"];
+$vendedor = $respuestaCotizacion["vendedor"];
 
 
 //REQUERIMOS LA CLASE TCPDF
@@ -79,7 +79,7 @@ $bloque1 = <<<EOF
 				
 			</td>
 
-			<td style="background-color:white; width:110px; text-align:center; color:red"><br><br>BOLETA N.<br>$valorVenta</td>
+			<td style="background-color:white; width:110px; text-align:center; color:red"><br><br>COTIZACIÓN N.<br>$valorCot</td>
 
 		</tr>
 
@@ -167,9 +167,9 @@ $tablaProducto = "productos";
 $itemProducto = "descripcion";
 $valorProducto = $item["descripcion"];
 
-$respuestaProducto = ControladorProductos::ctrlMostrarProductos($tablaProducto,$itemProducto, $valorProducto);
+// $respuestaProducto = ControladorProductos::ctrlMostrarProductos($tablaProducto,$itemProducto, $valorProducto);
 
-$valorUnitario = number_format($respuestaProducto["precio_venta"], 2);
+$valorUnitario = number_format($item["precio"], 2);
 
 $precioTotal = number_format($item["total"], 2);
 
@@ -277,14 +277,14 @@ $pdf->writeHTML($bloque5, false, false, false, false, '');
 // ---------------------------------------------------------
 //SALIDA DEL ARCHIVO 
 ob_end_clean();
-$pdf->Output('factura.pdf', 'I');
+$pdf->Output('cotizacion.pdf', 'I');
 
 }
 
 }
 
-$factura = new imprimirFactura();
-$factura -> codigo = $_GET["codigo"];
-$factura -> traerImpresionFactura();
+$cotizacion = new imprimirCotizacion();
+$cotizacion -> codigo = $_GET["codigo"];
+$cotizacion -> traerImpresionCotizacion();
 
 ?>

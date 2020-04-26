@@ -697,7 +697,7 @@ $(document).ready(function () {
                     '<div class="col-xs-3 ingresoPrecio" style="padding-left: 0px">' +
                     '<div class="input-group">' +
                         '<input type="text" class="form-control precioProducto" name="precioProducto" precioReal="'+precio+'" value="'+precio+'" readonly required>' +
-                        '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>' +
+                        '<span class="input-group-addon"><b>S/</b></span>' +
                     '</div>' +
                     '</div>' +
                 '</div>'
@@ -787,7 +787,7 @@ $(document).ready(function () {
                     '<div class="col-xs-3 ingresoPrecio" style="padding-left: 0px">' +
                     '<div class="input-group">' +
                         '<input type="text" class="form-control precioProducto" name="precioProducto" precioReal="" value="" readonly required>' +
-                        '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>' +
+                        '<span class="input-group-addon"><b>S/</b></span>' +
                     '</div>' +
                     '</div>' +
                 '</div>'
@@ -982,7 +982,7 @@ $(document).ready(function () {
 
 			 	'<div class="input-group">'+ 
 
-			 		'<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+ 
+			 		'<span class="input-group-addon"><b>S/</b></span>'+ 
 
 			 		'<input type="text" class="form-control" id="valorEfectivo" placeholder="Cliente entregó" required>'+
 
@@ -994,7 +994,7 @@ $(document).ready(function () {
 
 			 	'<div class="input-group">'+
 
-			 		'<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+
+			 		'<span class="input-group-addon"><b>S/</b></span>'+
 
 			 		'<input type="text" class="form-control" id="cambioEfectivo" placeholder="A devolver" readonly required>'+
 
@@ -1337,5 +1337,47 @@ $(document).ready(function () {
     }
    });
 
+   /*======================================================
+    BOTON PARA EDITAR COTIZACION
+    ========================================================*/
+    $(document).on("click", ".btn-editarCotizacion", function () {
+        let idCotizacion = $(this).attr("idCotizacion");
+        
+        window.location = "index.php?ruta=editar-cotizacion&idCotizacion="+idCotizacion;
+    });
+
+    /* 
+    =====================================================
+    ANULAR COTIZACION
+    ====================================================
+    */
+   $(document).on("click", ".btn-anularCotizacion", function () {
+    let idCotizacion = $(this).attr("idCotizacion");
+    
+    Swal.fire({
+        title: '¿Desea anular la cotización?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Anular'
+    }).then((result) => {
+            if (result.value) {
+            window.location = "index.php?ruta=cotizaciones&idCotizacion="+idCotizacion;
+            }
+        })
+    });
+
+    /* 
+    =====================================================
+    IMPRIMIR LA COTIZACION
+    ====================================================
+    */
+   $(document).on("click", ".btn-imprimirCotizacion", function () {
+    let codigoCotizacion = $(this).attr("codCotizacion");
+
+    window.open("extensions/tcpdf/pdf/cotizacion.php?codigo="+codigoCotizacion, "_blank");
+    // window.open("extensions/tcpdf/pdf/pdf.php");
+   });
 
 });

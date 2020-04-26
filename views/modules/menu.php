@@ -68,9 +68,21 @@
                 </a>
             </li>
             <li>
+                <a href="cotizaciones">
+                    <i class="fa fa-circle-o"></i>
+                    <span>cotizaciones</span>
+                </a>
+            </li>
+            <li>
                 <a href="crear-venta">
                     <i class="fa fa-circle-o"></i>
                     <span>Crear venta</span>
+                </a>
+            </li>
+            <li>
+                <a href="crear-cotizacion">
+                    <i class="fa fa-circle-o"></i>
+                    <span>Crear cotización</span>
                 </a>
             </li>
             <li>

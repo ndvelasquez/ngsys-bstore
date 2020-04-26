@@ -91,8 +91,11 @@ SCRIPTS
             || $_GET["ruta"] == "categorias"
             || $_GET["ruta"] == "clientes"
             || $_GET["ruta"] == "ventas"
+            || $_GET["ruta"] == "cotizaciones"
             || $_GET["ruta"] == "crear-venta"
+            || $_GET["ruta"] == "crear-cotizacion"
             || $_GET["ruta"] == "editar-venta"
+            || $_GET["ruta"] == "editar-cotizacion"
             || $_GET["ruta"] == "reporte-ventas"
             || $_GET["ruta"] == "salir") {
           include "modules/".$_GET["ruta"].".php";

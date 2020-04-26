@@ -31,7 +31,7 @@
       xkey: 'y',
       ykeys: ['a'],
       labels: ['VENTAS'],
-      preUnits: '$',
+      preUnits: 'S/',
       hideHover: 'auto'
     });
 </script>

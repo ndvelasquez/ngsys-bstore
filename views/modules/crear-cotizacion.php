@@ -3,13 +3,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Crear venta
+        Crear Cotización
         <small>Panel de control</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="inicio"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="ventas">ventas</a></li>
-        <li class="active">Crear venta</li>
+        <li class="active">Crear Cotización</li>
       </ol>
     </section>
 
@@ -48,18 +48,18 @@
                           $item = null;
                           $valor = null;
 
-                          $ventas = ControladorVentas::ctrlMostrarVentas($item, $valor);
+                          $cotizaciones = ControladorCotizaciones::ctrlMostrarCotizaciones($item, $valor);
 
-                          if(!$ventas) {
-                            echo '<input type="text" class="form-control" name="codVenta" id="codVenta" value="10001" readonly>';
+                          if(!$cotizaciones) {
+                            echo '<input type="text" class="form-control" name="codCotizacion" id="codCotizacion" value="10001" readonly>';
                           }
                           else {
-                            foreach ($ventas as $key => $value) {
+                            foreach ($cotizaciones as $key => $value) {
                               # code...
                             }
                             $codigo = $value["codigo"] + 1;
 
-                            echo '<input type="text" class="form-control" name="codVenta" id="codVenta" value="'.$codigo.'" readonly>';
+                            echo '<input type="text" class="form-control" name="codCotizacion" id="codCotizacion" value="'.$codigo.'" readonly>';
                           }
                         ?>
                         
@@ -107,7 +107,7 @@
                         <table class="table">
                           <thead>
                             <tr>
-                              <th>Impuestos</th>
+                              <th>IGV</th>
                               <th>Total</th>
                             </tr>
                           </thead>
@@ -125,7 +125,7 @@
                               <td style="width: 50%">
                                 <div class="input-group">
                                   <input type="text" class="form-control" name="totalVenta" total="" id="totalVenta" min="1" placeholder="0" readonly required>
-                                  <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+                                  <span class="input-group-addon"><b>S/</b></span>
                                 </div>
                               </td>
                             </tr>
@@ -134,40 +134,16 @@
                       </div>
                     </div>
 
-                    <hr>
-
-                    <!-- INPUT METODO DE PAGO -->
-                    <div class="form-group row">
-
-                      <div class="col-xs-6" style="padding-right: 0px">
-                        <div class="input-group">
-                          <select class="form-control" name="metodoDePago" id="metodoDePago" required>
-                            <option value="">Seleccione método de pago</option>
-                            <option value="efectivo">Efectivo</option>
-                            <option value="TC">Tarjeta de crédito</option>
-                            <option value="TD">Tarjeta de débito</option>
-                          </select>
-                          <input type="hidden" name="listaMetodoPago" id="listaMetodoPago">
-                        </div>
-                      </div>
-
-                      <div class="cajasMetodoPago">
-                        
-                      </div>
-
-                    </div>
-
-
                   </div>
 
                 </div>
                 
                 <div class="box-footer">
-                  <button type="submit" class="btn btn-primary pull-right">Guardar Venta</button>
+                  <button type="submit" class="btn btn-primary pull-right">Guardar Cotización</button>
                 </div>
                 <?php
-                $crearVenta = new ControladorVentas;
-                $crearVenta -> ctrlCrearVenta();
+                $crearCotizacion = new ControladorCotizaciones;
+                $crearCotizacion -> ctrlCrearCotizacion();
                 ?>
               </form>
             </div>

@@ -8,7 +8,6 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="inicio"><i class="fa fa-home"></i> Inicio</a></li>
-        <li><a href="inicio"></a></li>
         <li class="active">Administrar usuarios</li>
       </ol>
     </section>

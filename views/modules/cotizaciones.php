@@ -3,13 +3,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Administración de ventas
+        Administración de cotizaciones
         <small>Panel de control</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="inicio"><i class="fa fa-home"></i> Inicio</a></li>
         <li><a href="ventas">ventas</a></li>
-        <li class="active">Administrar ventas</li>
+        <li class="active">cotizaciones</li>
       </ol>
     </section>
 
@@ -17,7 +17,7 @@
     <section class="content">
       <div class="box">
         <div class="box-header with-border">
-          <a href="crear-venta"><button class="btn btn-primary">Agregar Venta</button></a>
+          <a href="crear-cotizacion"><button class="btn btn-primary">Agregar Cotización</button></a>
           <button type="button" class="btn btn-default pull-right" id="daterange-btn">
             <span>
               <i class="fa fa-calendar"></i> Rango de fecha
@@ -30,10 +30,9 @@
             <thead>
               <tr>
                 <th style="width: 10px">#</th>
-                <th>COD Factura</th>
+                <th>Código</th>
                 <th>Cliente</th>
                 <th>Vendedor</th>
-                <th>Forma de pago</th>
                 <th>Neto</th>
                 <th>Total</th>
                 <th>Estado</th>
@@ -52,7 +51,7 @@
                 $fechaFinal = null;
               }
 
-                $ventas = ControladorVentas::ctrlRangoFechasVenta($fechaInicial, $fechaFinal);
+                $ventas = ControladorCotizaciones::ctrlRangoFechasCotizacion($fechaInicial, $fechaFinal);
 
                 foreach ($ventas as $key => $value) {
                   echo '<tr>
@@ -60,9 +59,8 @@
                           <td>'.$value["codigo"].'</td>
                           <td>'.$value["cliente"].'</td>
                           <td>'.$value["vendedor"].'</td>
-                          <td>'.$value["metodo_pago"].'</td>
-                          <td>$'.$value["neto"].'</td>
-                          <td>$'.$value["total"].'</td>';
+                          <td>S/'.$value["neto"].'</td>
+                          <td>S/'.$value["total"].'</td>';
                           if ($value["estado"] == 1) {
                             echo '<td>Activa</td>';
                           }
@@ -72,10 +70,10 @@
                   echo    '<td>'.$value["fecha_creacion"].'</td>';
                     echo '<td>';
                     echo    '<div class="btn-group">';
-                    echo     '<button class="btn btn-primary btn-imprimirDetalle" codVenta="'.$value["codigo"].'"><i class="fa fa-print"></i></button>';
-                    echo     '<button class="btn btn-warning btn-editarVenta" idVenta="'.$value["id"].'"><i class="fa fa-pencil"></i></button>';
+                    echo     '<button class="btn btn-primary btn-imprimirCotizacion" codCotizacion="'.$value["codigo"].'"><i class="fa fa-print"></i></button>';
+                    echo     '<button class="btn btn-warning btn-editarCotizacion" idCotizacion="'.$value["id"].'"><i class="fa fa-pencil"></i></button>';
                     if ($value["estado"] != 2) {
-                      echo '<button class="btn btn-danger btn-anularVenta" idVenta="'.$value["id"].'"><i class="fa fa-times"></i></button>';
+                      echo '<button class="btn btn-danger btn-anularCotizacion" idCotizacion="'.$value["id"].'"><i class="fa fa-times"></i></button>';
                     }
                     else {
                       echo '<button class="btn btn-default"><i class="fa fa-times"></i></button>';
@@ -97,6 +95,6 @@
   </div>
   <!-- /.content-wrapper -->
   <?php
-    $anularVenta = new ControladorVentas;
-    $anularVenta -> ctrlAnularVenta();
+    $anularCotizacion = new ControladorCotizaciones;
+    $anularCotizacion -> ctrlAnularCotizacion();
   ?>
