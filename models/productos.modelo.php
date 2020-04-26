@@ -12,7 +12,7 @@
                 $sentencia -> execute();
             }
             else {
-                $sentencia = Conexion::conectar()->prepare("SELECT productos.*, categorias.nombre as categoria FROM $tabla INNER JOIN categorias on categorias.id = productos.id_categoria");
+                $sentencia = Conexion::conectar()->prepare("SELECT productos.*, categorias.nombre as categoria FROM $tabla INNER JOIN categorias on categorias.id = productos.id_categoria ORDER BY productos.id DESC");
                 $sentencia -> execute();
 
                 return $sentencia -> fetchAll();
@@ -88,6 +88,14 @@
             else {
                 return "error";
             }
+            $sentencia = null;
+        }
+        // MOSTRAR PRODUCTOS MAS VENDIDOS
+        static public function mdlMasVendidos($tabla) {
+            $sentencia = Conexion::conectar()->prepare("SELECT descripcion, ventas, (SELECT SUM(ventas) FROM productos) as total FROM $tabla ORDER BY ventas DESC LIMIT 5");
+            $sentencia -> execute();
+            
+            return $sentencia -> fetchAll();
             $sentencia = null;
         }
     }

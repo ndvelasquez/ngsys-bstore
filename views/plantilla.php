@@ -30,6 +30,10 @@ session_start();
   <link rel="stylesheet" href="views/plugins/iCheck/all.css">
   <!-- bootstrap datepicker -->
   <link rel="stylesheet" href="views/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="views/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+  <!-- Morris js -->
+  <link rel="stylesheet" href="views/bower_components/morris.js/morris.css">
   <!-- 
 ========================
 SCRIPTS
@@ -62,6 +66,14 @@ SCRIPTS
 <script src="views/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <!-- Jquery number -->
 <script src="views/plugins/jquery-number/jquery.number.js"></script>
+<!-- date-range-picker -->
+<script src="views/bower_components/moment/min/moment.min.js"></script>
+<script src="views/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- Morris js -->
+<script src="views/bower_components/raphael/raphael.min.js"></script>
+<script src="views/bower_components/morris.js/morris.min.js"></script>
+<!-- ChartJS -->
+<script src="views/bower_components/chart.js/Chart.js"></script>
 
 </head>
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini login-page">

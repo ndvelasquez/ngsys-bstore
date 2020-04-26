@@ -294,7 +294,7 @@
                     // CONVIERTO LA LISTA DE PRODUCTOS EN JSON A UN ARRAY
                     $listarProductos = json_decode($traerVenta["productos"], true);
                     /*=============================================================
-                    ACTUALIZAR EL STOCK DE LOS PRODUCTOS
+                    ACTUALIZAR EL STOCK Y LAS VENTAS DE LOS PRODUCTOS
                     ===============================================================*/
                     foreach ($listarProductos as $key => $value) {
                         $tablaProducto = "productos";
@@ -302,8 +302,11 @@
                         $valorProducto = $value["id"];
                         $traerProducto = ModeloProductos::mdlMostrarProducto($tablaProducto, $itemProducto, $valorProducto);
                         $stockActualizado = $traerProducto["stock"] + $value["cantidad"];
+                        $ventasActualizadas = $traerProducto["ventas"] - $value["cantidad"];
                         $item1 = "stock";
+                        $item2 = "ventas";
                         $actualizarProducto = ModeloProductos::mdlActualizarProducto($tablaProducto, $item1, $stockActualizado, $valorProducto);
+                        $actualizarProducto = ModeloProductos::mdlActualizarProducto($tablaProducto, $item2, $ventasActualizadas, $valorProducto);
                         array_push($totalProductosComprados, $value["cantidad"]);
                     }
                     /*=============================================================
@@ -348,5 +351,156 @@
                 }
            }
         }
+
+        /*
+        =====================================
+        MOSTRAR VENTAS POR RANGO DE FECHA
+        =====================================
+        */
+        static public function ctrlRangoFechasVenta($fechaInicial, $fechaFinal) {
+            $tabla = "ventas";
+            $respuesta = ModeloVentas::mdlMostrarRangoFechasVenta($tabla,$fechaInicial,$fechaFinal);
+            return $respuesta;
+        }
+
+        /*
+        =====================================
+        MOSTRAR PRODUCTOS MAS VENDIDOS
+        =====================================
+        */
+        static public function ctrlVentasPorVendedor($tabla) {
+            $respuesta = ModeloVentas::mdlVentasPorVendedor($tabla);
+            return $respuesta;
+        }
+        /*
+        =====================================
+        MOSTRAR CLIENTES CON MAS COMPRAS
+        =====================================
+        */
+        static public function ctrlComprasCliente($tabla) {
+            $respuesta = ModeloVentas::mdlComprasPorCliente($tabla);
+            return $respuesta;
+        }
+
+        /*======================================================
+        SUMAR EL TOTAL DE VENTAS
+        ========================================================*/
+        static public function ctrlSumaTotalVentas() {
+            $tabla = "ventas";
+            $item = null;
+            $valor = null;
+            $traerVentas = ModeloVentas::mdlMostrarVenta($tabla, $item, $valor);
+            $sumarTotalVentas = 0;
+            foreach ($traerVentas as $key => $itemVenta) {
+                if ($itemVenta["estado"] != 2) {
+                    $sumarTotalVentas += $itemVenta["total"];
+                }
+            }
+            return $sumarTotalVentas;
+        }
+
+        /*=============================================
+	    DESCARGAR EXCEL
+	    =============================================*/
+
+        public function ctrlDescargarReporte(){
+
+            if(isset($_GET["reporte"])){
+
+                $tabla = "ventas";
+
+                if(isset($_GET["fechaInicial"]) && isset($_GET["fechaFinal"])){
+
+                    $ventas = ModeloVentas::mdlMostrarRangoFechasVenta($tabla, $_GET["fechaInicial"], $_GET["fechaFinal"]);
+
+                }else{
+
+                    $item = null;
+                    $valor = null;
+
+                    $ventas = ModeloVentas::mdlMostrarVenta($tabla, $item, $valor);
+
+                }
+
+
+			/*=============================================
+			CREAR EL ARCHIVO DE EXCEL
+			=============================================*/
+
+			$Name = $_GET["reporte"].'.xls';
+
+			header('Expires: 0');
+			header('Cache-control: private');
+			header("Content-type: application/vnd.ms-excel"); // Archivo de Excel
+			header("Cache-Control: cache, must-revalidate"); 
+			header('Content-Description: File Transfer');
+			header('Last-Modified: '.date('D, d M Y H:i:s'));
+			header("Pragma: public"); 
+			header('Content-Disposition:; filename="'.$Name.'"');
+			header("Content-Transfer-Encoding: binary");
+
+			echo utf8_decode("<table border='0'> 
+
+					<tr> 
+					<td style='font-weight:bold; border:1px solid #eee;'>CÓDIGO</td> 
+					<td style='font-weight:bold; border:1px solid #eee;'>CLIENTE</td>
+					<td style='font-weight:bold; border:1px solid #eee;'>VENDEDOR</td>
+					<td style='font-weight:bold; border:1px solid #eee;'>CANTIDAD</td>
+					<td style='font-weight:bold; border:1px solid #eee;'>PRODUCTOS</td>
+					<td style='font-weight:bold; border:1px solid #eee;'>IMPUESTO</td>
+					<td style='font-weight:bold; border:1px solid #eee;'>NETO</td>		
+					<td style='font-weight:bold; border:1px solid #eee;'>TOTAL</td>		
+					<td style='font-weight:bold; border:1px solid #eee;'>METODO DE PAGO</td	
+                    <td style='font-weight:bold; border:1px solid #eee;'>FECHA</td>
+                    <td style='font-weight:bold; border:1px solid #eee;'>ESTADO</td>		
+					</tr>");
+
+			foreach ($ventas as $row => $item){
+
+			 echo utf8_decode("<tr>
+			 			<td style='border:1px solid #eee;'>".$item["codigo"]."</td> 
+			 			<td style='border:1px solid #eee;'>".$item["cliente"]."</td>
+			 			<td style='border:1px solid #eee;'>".$item["vendedor"]."</td>
+			 			<td style='border:1px solid #eee;'>");
+
+			 	$productos =  json_decode($item["productos"], true);
+
+			 	foreach ($productos as $key => $valueProductos) {
+			 			
+			 			echo utf8_decode($valueProductos["cantidad"]."<br>");
+			 		}
+
+			 	echo utf8_decode("</td><td style='border:1px solid #eee;'>");	
+
+		 		foreach ($productos as $key => $valueProductos) {
+			 			
+		 			echo utf8_decode($valueProductos["descripcion"]."<br>");
+		 		
+		 		}
+
+		 		echo utf8_decode("</td>
+					<td style='border:1px solid #eee;'>$ ".number_format($item["impuestos"],2)."</td>
+					<td style='border:1px solid #eee;'>$ ".number_format($item["neto"],2)."</td>	
+					<td style='border:1px solid #eee;'>$ ".number_format($item["total"],2)."</td>
+					<td style='border:1px solid #eee;'>".$item["metodo_pago"]."</td>
+                    <td style='border:1px solid #eee;'>".substr($item["fecha_creacion"],0,10)."</td>");
+                if ($item["estado"] != 2) {
+                    echo utf8_decode("<td style='border:1px solid #eee;'>Activa</td>
+                    </tr>");
+                }
+                else {
+                    echo utf8_decode("<td style='border:1px solid #eee;'>Anulada</td>
+                    </tr>");
+                }
+
+
+			}
+
+
+			echo "</table>";
+
+		}
+
+	}
     }
 ?>

@@ -1,6 +1,6 @@
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Ng </b>SYS</a>
+    <img src="views/img/plantilla/logo.png" width="100px" height="100px" alt="">
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

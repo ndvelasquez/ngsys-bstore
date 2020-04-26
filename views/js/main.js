@@ -732,6 +732,23 @@ $(document).ready(function () {
     }
    });
 
+   /*=============================================
+    VERIFICAR VARIABLES DEL LOCAL STORAGE
+    ==============================================*/
+   if (localStorage.getItem("capturarRango") != null) {
+    $('#daterange-btn span').html(localStorage.getItem('capturarRango'));
+   }
+   else {
+    $('#daterange-btn span').html('<i class="fa fa-calendar"></i> Rango de fecha');
+   }
+
+    if (localStorage.getItem("capturarRango2") != null) {
+        $('#daterange-btn2 span').html(localStorage.getItem('capturarRango2'));
+       }
+       else {
+        $('#daterange-btn2 span').html('<i class="fa fa-calendar"></i> Rango de fecha');
+       }
+
    /*====================================================
     AGREGAR PRODUCTOS DESDE DISPOSITIVOS MOVILES
     =====================================================*/
@@ -1129,6 +1146,7 @@ $(document).ready(function () {
     $('.tablaProductoVenta').on( 'draw.dt', function(){
         quitarAgregarProducto();
     });
+
     /* 
     =====================================================
     ANULAR VENTA
@@ -1150,6 +1168,7 @@ $(document).ready(function () {
             }
         })
     });
+
     /* 
     =====================================================
     IMPRIMIR LA BOLETA DE LA VENTA
@@ -1161,4 +1180,162 @@ $(document).ready(function () {
     window.open("extensions/tcpdf/pdf/factura.php?codigo="+codigoVenta, "_blank");
     // window.open("extensions/tcpdf/pdf/pdf.php");
    });
+
+   /* 
+    =====================================================
+    RANGO DE FECHAS
+    ====================================================
+    */
+   $('#daterange-btn').daterangepicker(
+    {
+      ranges   : {
+        'Hoy'       : [moment(), moment()],
+        'Ayer'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Últimos 7 días' : [moment().subtract(6, 'days'), moment()],
+        'Últimos 30 días': [moment().subtract(29, 'days'), moment()],
+        'Este mes'  : [moment().startOf('month'), moment().endOf('month')],
+        'Último mes'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      },
+      startDate: moment(),
+      endDate  : moment()
+    },
+    function (start, end) {
+      $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      let fechaInicial = start.format('YYYY-MM-DD');
+      let fechaFinal = end.format('YYYY-MM-DD');
+      let capturarRango = $('#daterange-btn span').html();
+
+      localStorage.setItem('capturarRango', capturarRango);
+
+      window.location = 'index.php?ruta=ventas&fechaInicial='+fechaInicial+'&fechaFinal='+fechaFinal;
+    }
+  );
+    /* 
+    =====================================================
+    LO MISMO PARA EL RANGO DE LOS REPORTES
+    ====================================================
+    */
+   $('#daterange-btn2').daterangepicker(
+    {
+      ranges   : {
+        'Hoy'       : [moment(), moment()],
+        'Ayer'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Últimos 7 días' : [moment().subtract(6, 'days'), moment()],
+        'Últimos 30 días': [moment().subtract(29, 'days'), moment()],
+        'Este mes'  : [moment().startOf('month'), moment().endOf('month')],
+        'Último mes'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      },
+      startDate: moment(),
+      endDate  : moment()
+    },
+    function (start, end) {
+      $('#daterange-btn2 span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      let fechaInicial = start.format('YYYY-MM-DD');
+      let fechaFinal = end.format('YYYY-MM-DD');
+      let capturarRango = $('#daterange-btn2 span').html();
+
+      localStorage.setItem('capturarRango2', capturarRango);
+
+      window.location = 'index.php?ruta=reporte-ventas&fechaInicial='+fechaInicial+'&fechaFinal='+fechaFinal;
+    }
+  );
+
+    /* 
+    =====================================================
+    CANCELAR SELECCION DEL RANGO
+    ====================================================
+    */
+   $('.daterangepicker.opensleft .range_inputs .cancelBtn').on('click', function () {
+       localStorage.removeItem('capturarRango');
+       localStorage.clear();
+       window.location = 'ventas';
+   });
+   /* 
+    =====================================================
+    CANCELAR SELECCION DEL RANGO (REPORTES)
+    ====================================================
+    */
+   $('.daterangepicker.opensright .range_inputs .cancelBtn').on('click', function () {
+    localStorage.removeItem('capturarRango2');
+    localStorage.clear();
+    window.location = 'reporte-ventas';
+        
+    });
+
+    /* 
+    =====================================================
+    CAPTURAR EL RANGO SELECCIONADO POR DEFECTO
+    ====================================================
+    */   
+   $('.daterangepicker.opensleft .ranges li').on('click', function () {
+    let textoHoy = $(this).attr('data-range-key');
+
+    if (textoHoy == "Hoy") {
+        let fecha = new Date();
+        let dia = fecha.getDate();
+        let mes = fecha.getMonth() + 1;
+        let year = fecha.getFullYear();
+
+        if (mes < 10) {
+            var fechaInicial = year+'-0'+mes+'-'+dia;
+            var fechaFinal = year+'-0'+mes+'-'+dia;
+        }
+        else if (dia < 10) {
+            var fechaInicial = year+'-'+mes+'-0'+dia;
+            var fechaFinal = year+'-'+mes+'-0'+dia;
+        }
+        else if (dia < 10 && mes < 10) {
+            var fechaInicial = year+'-0'+mes+'-0'+dia;
+            var fechaFinal = year+'-0'+mes+'-0'+dia;
+        }
+        else {
+            var fechaInicial = year+'-'+mes+'-'+dia;
+            var fechaFinal = year+'-'+mes+'-'+dia;
+        }
+
+        localStorage.setItem("capturarRango", "Hoy");
+
+        window.location = 'index.php?ruta=ventas&fechaInicial='+fechaInicial+'&fechaFinal='+fechaFinal;
+    }
+   });
+   /* 
+    =====================================================
+    CAPTURAR EL RANGO SELECCIONADO POR DEFECTO (REPORTES)
+    ====================================================
+    */   
+   $('.daterangepicker.opensright .ranges li').on('click', function () {
+    let textoHoy = $(this).attr('data-range-key');
+
+    if (textoHoy == "Hoy") {
+        console.log('ola k ase');
+        
+        let fecha = new Date();
+        let dia = fecha.getDate();
+        let mes = fecha.getMonth() + 1;
+        let year = fecha.getFullYear();
+
+        if (mes < 10) {
+            var fechaInicial = year+'-0'+mes+'-'+dia;
+            var fechaFinal = year+'-0'+mes+'-'+dia;
+        }
+        else if (dia < 10) {
+            var fechaInicial = year+'-'+mes+'-0'+dia;
+            var fechaFinal = year+'-'+mes+'-0'+dia;
+        }
+        else if (dia < 10 && mes < 10) {
+            var fechaInicial = year+'-0'+mes+'-0'+dia;
+            var fechaFinal = year+'-0'+mes+'-0'+dia;
+        }
+        else {
+            var fechaInicial = year+'-'+mes+'-'+dia;
+            var fechaFinal = year+'-'+mes+'-'+dia;
+        }
+
+        localStorage.setItem("capturarRango2", "Hoy");
+
+        window.location = 'index.php?ruta=reporte-ventas&fechaInicial='+fechaInicial+'&fechaFinal='+fechaFinal;
+    }
+   });
+
+
 });

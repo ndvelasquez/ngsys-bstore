@@ -79,6 +79,49 @@
             }
             $sentencia = null;
         }
+
+        // MOSTRAR VENTAS POR RANGO DE FECHAS
+        static public function mdlMostrarRangoFechasVenta($tabla, $fechaInicio, $fechaFin) {
+            if ($fechaInicio == null) {
+                $sentencia = Conexion::conectar()->prepare("SELECT ventas.*, clientes.nombre as cliente, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = ventas.id_cliente INNER JOIN usuarios ON usuarios.id = ventas.id_usuario");
+                $sentencia -> execute();
+
+                return $sentencia -> fetchAll();
+            }
+            else if ($fechaInicio == $fechaFin) {
+                $sentencia = Conexion::conectar()->prepare("SELECT ventas.*, clientes.nombre as cliente, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = ventas.id_cliente INNER JOIN usuarios ON usuarios.id = ventas.id_usuario WHERE ventas.fecha_creacion LIKE '%$fechaInicio%'");
+                $sentencia -> bindParam(":ventas.fecha_creacion", $fechaInicio, PDO::PARAM_STR);
+                $sentencia -> execute();
+
+                return $sentencia -> fetchAll();
+            }
+            else {
+                $sentencia = Conexion::conectar()->prepare("SELECT ventas.*, clientes.nombre as cliente, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = ventas.id_cliente INNER JOIN usuarios ON usuarios.id = ventas.id_usuario WHERE ventas.fecha_creacion BETWEEN '$fechaInicio' AND '$fechaFin'");
+                $sentencia -> execute();
+
+                return $sentencia -> fetchAll();
+            }
+            $sentencia = null;
+        }
+
+        // MOSTRAR EL TOTAL DE VENTAS POR VENDEDOR
+        static public function mdlVentasPorVendedor($tabla) {
+            $sentencia = Conexion::conectar()->prepare("SELECT usuarios.nombre as vendedor, (SELECT SUM(total)) AS total_ventas FROM $tabla
+            INNER JOIN usuarios ON usuarios.id = ventas.id_usuario
+            WHERE ventas.estado = 1
+            GROUP BY id_usuario;");
+            $sentencia -> execute();
+            return $sentencia -> fetchAll();
+        }
+        // MOSTRAR EL TOTAL COMPRADO POR CLIENTE
+        static public function mdlComprasPorCliente($tabla) {
+            $sentencia = Conexion::conectar()->prepare("SELECT clientes.nombre as cliente, clientes.compras as cantidad_compras, (SELECT SUM(total)) AS total_compras FROM $tabla
+            INNER JOIN clientes ON clientes.id = ventas.id_cliente
+            WHERE ventas.estado = 1
+            GROUP BY id_cliente;");
+            $sentencia -> execute();
+            return $sentencia -> fetchAll();
+        }
     }
 
 ?>

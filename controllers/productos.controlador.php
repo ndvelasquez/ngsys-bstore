@@ -332,5 +332,15 @@
                 }
            }
         }
+
+        /*
+        =====================================
+        MOSTRAR PRODUCTOS MAS VENDIDOS
+        =====================================
+        */
+        static public function ctrlMasVendidos($tabla) {
+            $respuesta = ModeloProductos::mdlMasVendidos($tabla);
+            return $respuesta;
+        }
     }
 ?>

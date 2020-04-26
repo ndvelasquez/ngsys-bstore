@@ -18,6 +18,12 @@
       <div class="box">
         <div class="box-header with-border">
           <a href="crear-venta"><button class="btn btn-primary">Agregar Venta</button></a>
+          <button type="button" class="btn btn-default pull-right" id="daterange-btn">
+            <span>
+              <i class="fa fa-calendar"></i> Rango de fecha
+            </span>
+              <i class="fa fa-caret-down"></i>
+          </button>
         </div>
         <div class="box-body">
           <table class="table table-bordered table-striped dt-responsive tablas">
@@ -37,10 +43,16 @@
             </thead>
             <tbody>
               <?php
-                $item = null;
-                $valor = null;
+              if (isset($_GET["fechaInicial"])) {
+                $fechaInicial = $_GET["fechaInicial"];
+                $fechaFinal = $_GET["fechaFinal"];
+              }
+              else {
+                $fechaInicial = null;
+                $fechaFinal = null;
+              }
 
-                $ventas = ControladorVentas::ctrlMostrarVentas($item, $valor);
+                $ventas = ControladorVentas::ctrlRangoFechasVenta($fechaInicial, $fechaFinal);
 
                 foreach ($ventas as $key => $value) {
                   echo '<tr>
