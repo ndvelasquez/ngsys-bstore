@@ -437,7 +437,7 @@ $(document).ready(function () {
                 $("#editarPrecioVenta").val(respuesta["precio_venta"]);
                 $("#imagenActual").val(respuesta["imagen"]);
                 
-                if(respuesta["imagen"] != null) {
+                if(respuesta["imagen"] != null && respuesta["imagen"] != "") {
                     $('.preview').attr('src', respuesta["imagen"]);
                 }
 
@@ -739,14 +739,14 @@ $(document).ready(function () {
     $('#daterange-btn span').html(localStorage.getItem('capturarRango'));
    }
    else {
-    $('#daterange-btn span').html('<i class="fa fa-calendar"></i> Rango de fecha');
+    $('#daterange-btn span').html('<i class="far fa-calendar-alt"></i> Rango de fecha');
    }
 
     if (localStorage.getItem("capturarRango2") != null) {
         $('#daterange-btn2 span').html(localStorage.getItem('capturarRango2'));
        }
        else {
-        $('#daterange-btn2 span').html('<i class="fa fa-calendar"></i> Rango de fecha');
+        $('#daterange-btn2 span').html('<i class="far fa-calendar-alt"></i> Rango de fecha');
        }
 
    /*====================================================
@@ -1420,5 +1420,14 @@ $(document).ready(function () {
    $(document).on("click", ".imprimirProductos", function () {
     window.open("extensions/tcpdf/pdf/productos.php", "_blank");
    });
+
+   /*======================================================
+    BOTON PARA VER MOVIMIENTOS DEL PRODUCTO
+    ========================================================*/
+    $(document).on("click", ".btn-editarVenta", function () {
+        let idVenta = $(this).attr("idVenta");
+        
+        window.location = "index.php?ruta=editar-venta&idVenta="+idVenta;
+    });
 
 });

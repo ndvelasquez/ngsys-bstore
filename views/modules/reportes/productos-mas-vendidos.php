@@ -24,7 +24,7 @@
                 <ul class="chart-legend clearfix">
                     <?php
                         foreach ($productos as $key => $value) {
-                            echo '<li><i class="fa fa-circle-o text-'.$arrayColoresLabels[$key].'"></i> '.$value["descripcion"].'</li>';
+                            echo '<li><i class="fas fa-circle text-'.$arrayColoresLabels[$key].'"></i> '.$value["descripcion"].'</li>';
                         }
                     ?>
                 </ul>

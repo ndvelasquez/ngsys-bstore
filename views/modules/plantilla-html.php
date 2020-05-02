@@ -46,7 +46,7 @@
                 <td>18/03/2020 19:30</td>
                 <td>
                   <div class="btn-group">
-                    <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-warning"><i class="far fa-edit"></i></button>
                     <button class="btn btn-danger"><i class="fa fa-times"></i></button>
                   </div>
                 </td>

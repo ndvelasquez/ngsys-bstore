@@ -42,9 +42,15 @@ $productos = ControladorProductos::ctrlMostrarProductos($item, $valor);
 
       echo '<li class="item">
 
-        <div class="product-img">
+        <div class="product-img">';
 
-          <img src="'.$productos[$i]["imagen"].'" alt="Product Image">
+        if ($productos["imagen"] != null && $productos["imagen"] != "") {
+          echo '<img src="'.$productos[$i]["imagen"].'" alt="Product Image">';
+        }
+        else {
+          echo '<img src="views/img/productos/default/anonymous.png" alt="Product Image">';
+        }
+        echo '
 
         </div>
 

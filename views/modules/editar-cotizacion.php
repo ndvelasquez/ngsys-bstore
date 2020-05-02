@@ -255,7 +255,7 @@
             <!-- INPUT DE FECHA DE NACIMIENTO -->
             <div class="form-group">
               <div class="input-group">
-                <label class="input-group-addon" for="fechaNacimiento"><i class="fa fa-calendar"></i></label>
+                <label class="input-group-addon" for="fechaNacimiento"><i class="far fa-calendar-alt"></i></label>
                 <input type="text" id="fechaNacimiento" name="fechaNacimiento" class="form-control" value="" placeholder="Fecha de nacimiento" data-toggle="tooltip" title="campo obligatorio" required>
               </div>
             </div>

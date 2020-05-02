@@ -39,7 +39,7 @@
         </li>
         <li>
           <a href="productos">
-            <i class="fa fa-product-hunt"></i> <span>Productos</span>
+            <i class="fab fa-product-hunt"></i> <span>Productos</span>
           </a>
         </li>
         <li>
@@ -54,7 +54,7 @@
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-list-ul"></i> 
+            <i class="fas fa-list-ul"></i>
             <span>Ventas</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -63,31 +63,31 @@
           <ul class="treeview-menu">
             <li>
                 <a href="ventas">
-                    <i class="fa fa-circle-o"></i>
+                    <i class="far fa-circle"></i>
                     <span>Administrar ventas</span>
                 </a>
             </li>
             <li>
                 <a href="cotizaciones">
-                    <i class="fa fa-circle-o"></i>
+                    <i class="far fa-circle"></i>
                     <span>cotizaciones</span>
                 </a>
             </li>
             <li>
                 <a href="crear-venta">
-                    <i class="fa fa-circle-o"></i>
+                    <i class="far fa-circle"></i>
                     <span>Crear venta</span>
                 </a>
             </li>
             <li>
                 <a href="crear-cotizacion">
-                    <i class="fa fa-circle-o"></i>
+                    <i class="far fa-circle"></i>
                     <span>Crear cotización</span>
                 </a>
             </li>
             <li>
                 <a href="reporte-ventas">
-                    <i class="fa fa-circle-o"></i>
+                    <i class="far fa-circle"></i>
                     <span>Reporte de ventas</span>
                 </a>
             </li>
@@ -103,7 +103,7 @@
           <ul class="treeview-menu">
             <li>
               <a href="movimientos">
-                <i class="fa fa-exchange"></i>
+                <i class="fas fa-exchange-alt"></i>
                 <span>Ver movimientos</span>
               </a>
             </li>

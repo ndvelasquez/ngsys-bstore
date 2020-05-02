@@ -20,7 +20,7 @@
           <div class="pull-right">
           <button class="btn btn-danger imprimirProductos">
                   <span>
-                    <i class="fa fa-file-pdf-o"></i> Descargar Lista de precios
+                    <i class="far fa-file-pdf"></i> Descargar Lista de precios
                   </span>
                 </button>
           </div>
@@ -100,7 +100,7 @@
             <!-- INPUT DE DESCRIPCION DEL PRODUCTO -->
             <div class="form-group">
               <div class="input-group">
-                <label class="input-group-addon" for="descripcion"><i class="fa fa-product-hunt"></i></label>
+                <label class="input-group-addon" for="descripcion"><i class="fab fa-product-hunt"></i></label>
                 <input type="text" name="descripcion" class="form-control" value="" placeholder="descripción del producto" data-toggle="tooltip" title="campo obligatorio" required pattern="[a-zA-ZñÑ 0-9]+">
               </div>
             </div>

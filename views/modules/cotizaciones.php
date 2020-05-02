@@ -20,7 +20,7 @@
           <a href="crear-cotizacion"><button class="btn btn-primary">Agregar Cotización</button></a>
           <button type="button" class="btn btn-default pull-right" id="daterange-btn">
             <span>
-              <i class="fa fa-calendar"></i> Rango de fecha
+              <i class="far fa-calendar-alt"></i> Rango de fecha
             </span>
               <i class="fa fa-caret-down"></i>
           </button>
@@ -71,7 +71,7 @@
                     echo '<td>';
                     echo    '<div class="btn-group">';
                     echo     '<button class="btn btn-primary btn-imprimirCotizacion" codCotizacion="'.$value["codigo"].'"><i class="fa fa-print"></i></button>';
-                    echo     '<button class="btn btn-warning btn-editarCotizacion" idCotizacion="'.$value["id"].'"><i class="fa fa-pencil"></i></button>';
+                    echo     '<button class="btn btn-warning btn-editarCotizacion" idCotizacion="'.$value["id"].'"><i class="far fa-edit"></i></button>';
                     if ($value["estado"] != 2) {
                       echo '<button class="btn btn-danger btn-anularCotizacion" idCotizacion="'.$value["id"].'"><i class="fa fa-times"></i></button>';
                     }

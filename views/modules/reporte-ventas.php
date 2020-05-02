@@ -22,7 +22,7 @@
 
         <button type="button" class="btn btn-default" id="daterange-btn2">
             <span>
-              <i class="fa fa-calendar"></i> Rango de fecha
+              <i class="far fa-calendar-alt"></i> Rango de fecha
             </span>
               <i class="fa fa-caret-down"></i>
           </button>
@@ -39,7 +39,7 @@
 
               <button class="btn btn-success">
                 <span>
-                  <i class="fa fa-file-excel-o"></i> Descargar Reportes en EXCEL
+                  <i class="far fa-file-excel"></i> Descargar Reportes en EXCEL
                 </span>
               </button>
             </a>

@@ -18,7 +18,7 @@
         <h2 class="headline text-yellow"> 404</h2>
 
         <div class="error-content">
-          <h3><i class="fa fa-warning text-yellow"></i> Oops! Página no encontrada.</h3>
+          <h3><i class="fas fa-exclamation-triangle text-yellow"></i> Oops! Página no encontrada.</h3>
 
           <p>
             No pudimos conseguir la página que estabas buscando.

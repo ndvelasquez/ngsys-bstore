@@ -31,7 +31,6 @@
                 <th>Dirección</th>
                 <th>Total de compras</th>
                 <th>última compra</th>
-                <th>Agregado</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -53,11 +52,11 @@
                           <td>'.$value["direccion"].'</td>
                           <td>'.$value["compras"].'</td>
                           <td>'.$value["ultima_compra"].'</td>
-                          <td>'.$value["fecha_creacion"].'</td>
+                          
                   ';
                   echo '<td>
                           <div class="btn-group">
-                          <button class="btn btn-warning btn-editarCliente" idCliente="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarCliente"><i class="fa fa-pencil"></i></button>
+                          <button class="btn btn-warning btn-editarCliente" idCliente="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarCliente"><i class="far fa-edit"></i></button>
                           <button class="btn btn-danger btn-eliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>
                           </div>
                         </td>
@@ -139,7 +138,7 @@
             <!-- INPUT DE FECHA DE NACIMIENTO -->
             <div class="form-group">
               <div class="input-group">
-                <label class="input-group-addon" for="fechaNacimiento"><i class="fa fa-calendar"></i></label>
+                <label class="input-group-addon" for="fechaNacimiento"><i class="far fa-calendar-alt"></i></label>
                 <input type="text" id="fechaNacimiento" name="fechaNacimiento" class="form-control" value="" placeholder="Fecha de nacimiento" data-toggle="tooltip" title="campo obligatorio" required>
               </div>
             </div>
@@ -233,7 +232,7 @@
             <!-- INPUT DE FECHA DE NACIMIENTO -->
             <div class="form-group">
               <div class="input-group">
-                <label class="input-group-addon" for="editarFechaNacimiento"><i class="fa fa-calendar"></i></label>
+                <label class="input-group-addon" for="editarFechaNacimiento"><i class="far fa-calendar-alt"></i></label>
                 <input type="text" id="editarFechaNacimiento" name="editarFechaNacimiento" class="form-control" value="" placeholder="Fecha de nacimiento" data-toggle="tooltip" title="campo obligatorio" required>
               </div>
             </div>
