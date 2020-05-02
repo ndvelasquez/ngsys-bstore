@@ -125,7 +125,7 @@
                               <td style="width: 50%">
                                 <div class="input-group">
                                   <input type="text" class="form-control" name="totalVenta" total="" id="totalVenta" min="1" placeholder="0" readonly required>
-                                  <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+                                  <span class="input-group-addon"><b>S/</b></span>
                                 </div>
                               </td>
                             </tr>
@@ -135,6 +135,14 @@
                     </div>
 
                     <hr>
+
+                    <!-- INPUT DE PORCENTAJE -->
+                    <div class="form-group" style="width: 50%">
+                      <div class="input-group">
+                        <input type="number" class="form-control porcentajeProducto" name="porcentaje" id="editarPorcentaje" min="0" max="99" placeholder="% de descuento">
+                        <span class="input-group-addon"><i class="fa fa-percent"></i></span>
+                      </div>
+                    </div>
 
                     <!-- INPUT METODO DE PAGO -->
                     <div class="form-group row">

@@ -149,7 +149,15 @@
                             "foto" => $ruta
                     );
                     $respuesta = ModeloUsuarios::mdlCrearUsuario($tabla,$datos);
-
+                    /*======================================================
+                    INSERTA EL LOG DE AUDITORIA
+                    ========================================================*/
+                    $datosAuditoria = array(
+                            "usuario" => $_SESSION["usuario"],
+                            "accion" => "INSERTAR",
+                            "tabla" => $tabla
+                    );
+                    $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                     if ($respuesta == "ok") {
                         echo "<script>
                         Swal.fire({
@@ -305,7 +313,15 @@
                             "foto" => $ruta
                     );
                     $respuesta = ModeloUsuarios::mdlEditarUsuario($tabla,$datos);
-
+                    /*======================================================
+                    INSERTA EL LOG DE AUDITORIA
+                    ========================================================*/
+                    $datosAuditoria = array(
+                        "usuario" => $_SESSION["usuario"],
+                        "accion" => "MODIFICAR",
+                        "tabla" => $tabla
+                    );
+                    $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                     if ($respuesta == "ok") {
                         echo "<script>
                         Swal.fire({
@@ -370,7 +386,15 @@
                     rmdir("views/img/usuarios/".$_GET["usuario"]);
                 }
                 $respuesta = ModeloUsuarios::mdlEliminarUsuario($tabla, $datos);
-
+                /*======================================================
+                INSERTA EL LOG DE AUDITORIA
+                ========================================================*/
+                $datosAuditoria = array(
+                    "usuario" => $_SESSION["usuario"],
+                    "accion" => "ELIMINAR",
+                    "tabla" => $tabla
+                );
+                $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                 if ($respuesta == "ok") {
                     echo "<script>
                         Swal.fire({

@@ -58,7 +58,15 @@
                                 "direccion" => $_POST["direccion"]
                             );
                             $respuesta = ModeloClientes::mdlCrearCliente($tabla,$datos);
-        
+                            /*======================================================
+                            INSERTA EL LOG DE AUDITORIA
+                            ========================================================*/
+                            $datosAuditoria = array(
+                                "usuario" => $_SESSION["usuario"],
+                                "accion" => "INSERTAR",
+                                "tabla" => $tabla
+                            );
+                            $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                             if ($respuesta == "ok") {
                                 echo "<script>
                                 Swal.fire({
@@ -113,10 +121,10 @@
 
                 if (preg_match('/[a-zA-ZñÑ]\w+/', $_POST["editarNombre"])
                 && preg_match('/[0-9]+/', $_POST["editarDocumento"])
-                && preg_match('/(\W|^)[\w.\-]{0,25}@(yahoo|hotmail|gmail)\.com(\W|$)/', $_POST["editarEmail"])
+                && preg_match('/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/', $_POST["editarEmail"])
                 && preg_match('/[0-9]+/', $_POST["editarTelefono"])) {
                     
-                    $tabla = "Clientes";
+                    $tabla = "clientes";
                     $datos = array(
                         "id" => $_POST["id"],
                         "nombre" => $_POST["editarNombre"],
@@ -128,7 +136,15 @@
                         "direccion" => $_POST["editarDireccion"]
                     );
                     $respuesta = ModeloClientes::mdlEditarCliente($tabla,$datos);
-
+                    /*======================================================
+                    INSERTA EL LOG DE AUDITORIA
+                    ========================================================*/
+                    $datosAuditoria = array(
+                        "usuario" => $_SESSION["usuario"],
+                        "accion" => "MODIFICAR",
+                        "tabla" => $tabla
+                    );
+                    $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                     if ($respuesta == "ok") {
                         echo "<script>
                         Swal.fire({
@@ -183,7 +199,15 @@
                 $datos = $_GET["idCliente"];
 
                 $respuesta = ModeloClientes::mdlEliminarCliente($tabla, $datos);
-
+                /*======================================================
+                INSERTA EL LOG DE AUDITORIA
+                ========================================================*/
+                $datosAuditoria = array(
+                    "usuario" => $_SESSION["usuario"],
+                    "accion" => "ELIMINAR",
+                    "tabla" => $tabla
+                );
+                $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                 if ($respuesta == "ok") {
                     echo "<script>
                         Swal.fire({

@@ -51,7 +51,15 @@
                         "estado" => 1
                     );
                     $respuesta = ModeloCotizaciones::mdlCrearCotizacion($tabla,$datos);
-
+                    /*======================================================
+                    INSERTA EL LOG DE AUDITORIA
+                    ========================================================*/
+                    $datosAuditoria = array(
+                        "usuario" => $_SESSION["usuario"],
+                        "accion" => "INSERTAR",
+                        "tabla" => $tabla
+                    );
+                    $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                     if ($respuesta == "ok") {
                         
                         echo "<script>
@@ -115,7 +123,15 @@
                             "total" => $_POST["totalVenta"]
                         );
                     $respuesta = ModeloCotizaciones::mdlEditarCotizacion($tabla,$datos);
-                    
+                    /*======================================================
+                    INSERTA EL LOG DE AUDITORIA
+                    ========================================================*/
+                    $datosAuditoria = array(
+                        "usuario" => $_SESSION["usuario"],
+                        "accion" => "MODIFICAR",
+                        "tabla" => $tabla
+                    );
+                    $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                     if ($respuesta == "ok") {
                         
                         echo "<script>
@@ -164,7 +180,15 @@
                 $datos = $_GET["idCotizacion"];
                
                 $respuesta = ModeloCotizaciones::mdlAnularCotizacion($tabla, $datos);
-
+                /*======================================================
+                INSERTA EL LOG DE AUDITORIA
+                ========================================================*/
+                $datosAuditoria = array(
+                    "usuario" => $_SESSION["usuario"],
+                    "accion" => "ELIMINAR",
+                    "tabla" => $tabla
+                );
+                $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                 if ($respuesta == "ok") {
                     
                     echo "<script>

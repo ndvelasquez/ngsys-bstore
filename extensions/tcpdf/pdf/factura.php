@@ -49,7 +49,7 @@ $bloque1 = <<<EOF
 		
 		<tr>
 			
-			<td style="width:150px"><img src="images/logo-negro-bloque.png"></td>
+			<td style="width:150px"><img src="images/logo-beauty.jpeg"></td>
 
 			<td style="background-color:white; width:140px">
 				
@@ -167,9 +167,9 @@ $tablaProducto = "productos";
 $itemProducto = "descripcion";
 $valorProducto = $item["descripcion"];
 
-$respuestaProducto = ControladorProductos::ctrlMostrarProductos($tablaProducto,$itemProducto, $valorProducto);
+// $respuestaProducto = ControladorProductos::ctrlMostrarProductos($tablaProducto,$itemProducto, $valorProducto);
 
-$valorUnitario = number_format($respuestaProducto["precio_venta"], 2);
+$valorUnitario = number_format($item["precio"], 2);
 
 $precioTotal = number_format($item["total"], 2);
 

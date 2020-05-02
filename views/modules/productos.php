@@ -17,6 +17,13 @@
       <div class="box">
         <div class="box-header with-border">
           <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto">Agregar producto</button>
+          <div class="pull-right">
+          <button class="btn btn-danger imprimirProductos">
+                  <span>
+                    <i class="fa fa-file-pdf-o"></i> Descargar Lista de precios
+                  </span>
+                </button>
+          </div>
         </div>
         <div class="box-body">
           <table class="table table-bordered table-striped dt-responsive tablaProducto">

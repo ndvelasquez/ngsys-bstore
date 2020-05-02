@@ -894,8 +894,8 @@ $(document).ready(function () {
    ==================================================*/
    $(".formularioVenta").on("change", ".cantidadProducto", function () {
     let precio = $(this).parent().parent().children(".ingresoPrecio").children().children(".precioProducto");
-    let precioUnitario = $(this).val() * precio.attr("precioReal");
-    $(precio).val(precioUnitario);
+    let precioSumado = $(this).val() * precio.attr("precioReal");
+    $(precio).val(precioSumado);
 
     let nuevoStock = Number($(this).attr("stock")) - $(this).val();
 
@@ -909,13 +909,16 @@ $(document).ready(function () {
             confirmButtonText: 'Cerrar'
         });
         $(this).val(1);
-        precioUnitario = $(this).val() * precio.attr("precioReal");
+        precioSumado = $(this).val() * precio.attr("precioReal");
     }
     // SUMAR TOTAL DE PRECIOS
     sumarTotalPrecios();
 
     // SUMAR LOS IMPUESTOS AL TOTAL
     agregarImpuesto();
+
+    // APLICAR DESCUENTOS
+    aplicaDescuento();
 
     // LISTAR PRODUCTOS EN JSON
     listarProductos();
@@ -1083,13 +1086,16 @@ $(document).ready(function () {
         let descripcion = $(".descripcionProducto");
         let precio = $(".precioProducto");
         let cantidad = $(".cantidadProducto");
+        let valorPorcentaje = $("#editarPorcentaje").val();
 
         for (let i = 0; i < descripcion.length; i++) {
+            let precioProducto = $(precio[i]).attr("precioReal");
+            let precioConPorcentaje = Number(precioProducto) - Number((precioProducto * Number(valorPorcentaje)) / 100);
             
             listarProducto.push({
                 "id" : $(descripcion[i]).attr("idProducto"),
                 "descripcion" : $(descripcion[i]).val(),
-                "precio" : $(precio[i]).attr("precioReal"),
+                "precio" : precioConPorcentaje,
                 "cantidad" : $(cantidad[i]).val(),
                 "stock" : $(cantidad[i]).attr("nuevoStock"),
                 "total" : $(precio[i]).val()
@@ -1139,6 +1145,32 @@ $(document).ready(function () {
         }
         
     }
+
+    /*================================================
+    APLICAR DESCUENTO A LOS PRODUCTOS
+    ==================================================*/
+    function aplicaDescuento () {
+        let valorPorcentaje = $("#editarPorcentaje").val();
+        let productos = $(".precioProducto");
+        let cantidad = $(".cantidadProducto");
+        
+        if (productos.length > 0) {
+            for (let i = 0; i < productos.length; i++) {
+                let precioProducto = Number($(productos[i]).attr("precioReal")) * Number($(cantidad[i]).val());
+                // let precioProducto = $(productos[i]).val();
+                let porcentaje = Number(precioProducto) - Number((precioProducto * Number(valorPorcentaje)) / 100);
+                
+                $(productos[i]).val(porcentaje);
+                sumarTotalPrecios();
+                listarProductos();
+            }
+        }
+    }
+
+    // INVOCO LA FUNCION DE APLICAR DESCUENTO 
+    $("#editarPorcentaje").change(function () { 
+       aplicaDescuento();
+    });
 
     /*=============================================
     CADA VEZ QUE CARGUE LA TABLA CUANDO NAVEGAMOS EN ELLA EJECUTAR LA FUNCIÓN:
@@ -1307,7 +1339,7 @@ $(document).ready(function () {
     let textoHoy = $(this).attr('data-range-key');
 
     if (textoHoy == "Hoy") {
-        console.log('ola k ase');
+        // console.log('ola k ase');
         
         let fecha = new Date();
         let dia = fecha.getDate();
@@ -1378,6 +1410,15 @@ $(document).ready(function () {
 
     window.open("extensions/tcpdf/pdf/cotizacion.php?codigo="+codigoCotizacion, "_blank");
     // window.open("extensions/tcpdf/pdf/pdf.php");
+   });
+
+   /* 
+    =====================================================
+    IMPRIMIR LISTA DE PRECIOS
+    ====================================================
+    */
+   $(document).on("click", ".imprimirProductos", function () {
+    window.open("extensions/tcpdf/pdf/productos.php", "_blank");
    });
 
 });

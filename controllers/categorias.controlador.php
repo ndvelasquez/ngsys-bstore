@@ -27,7 +27,15 @@
                     $tabla = "categorias";
                     $datos = $_POST["nombre"];
                     $respuesta = ModeloCategorias::mdlCrearCategoria($tabla,$datos);
-
+                    /*======================================================
+                    INSERTA EL LOG DE AUDITORIA
+                    ========================================================*/
+                    $datosAuditoria = array(
+                        "usuario" => $_SESSION["usuario"],
+                        "accion" => "INSERTAR",
+                        "tabla" => $tabla
+                    );
+                    $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                     if ($respuesta == "ok") {
                         echo "<script>
                         Swal.fire({
@@ -74,7 +82,15 @@
                     $tabla = "categorias";
                     $datos = array('id' => $_POST["idCategoria"], 'nombre' => $_POST["editarNombre"]);
                     $respuesta = ModeloCategorias::mdlEditarCategoria($tabla,$datos);
-
+                    /*======================================================
+                    INSERTA EL LOG DE AUDITORIA
+                    ========================================================*/
+                    $datosAuditoria = array(
+                        "usuario" => $_SESSION["usuario"],
+                        "accion" => "MODIFICAR",
+                        "tabla" => $tabla
+                    );
+                    $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                     if ($respuesta == "ok") {
                         echo "<script>
                         Swal.fire({
@@ -135,7 +151,15 @@
                 $datos = $_GET["idCategoria"];
 
                 $respuesta = ModeloCategorias::mdlEliminarCategoria($tabla, $datos);
-
+                /*======================================================
+                INSERTA EL LOG DE AUDITORIA
+                ========================================================*/
+                $datosAuditoria = array(
+                    "usuario" => $_SESSION["usuario"],
+                    "accion" => "ELIMINAR",
+                    "tabla" => $tabla
+                );
+                $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                 if ($respuesta == "ok") {
                     echo "<script>
                         Swal.fire({

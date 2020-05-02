@@ -92,6 +92,23 @@
                 </a>
             </li>
           </ul>
+        <li class="treeview">
+          <a href="#">
+            <i class="ion ion-clipboard"></i> 
+            <span>Inventario</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li>
+              <a href="movimientos">
+                <i class="fa fa-exchange"></i>
+                <span>Ver movimientos</span>
+              </a>
+            </li>
+          </ul>
+        </li>  
         </li>
     </ul>
     </section>

@@ -55,7 +55,15 @@
                         "estado" => 1
                     );
                     $respuesta = ModeloVentas::mdlCrearVenta($tabla,$datos);
-
+                    /*======================================================
+                    INSERTA EL LOG DE AUDITORIA
+                    ========================================================*/
+                    $datosAuditoria = array(
+                        "usuario" => $_SESSION["usuario"],
+                        "accion" => "INSERTAR",
+                        "tabla" => $tabla
+                    );
+                    $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                     if ($respuesta == "ok") {
                         /*=============================================
                         GUARDO EL DETALLE DE LA VENTA
@@ -71,10 +79,13 @@
                                 "id_venta" => $traerVenta["id"],
                                 "id_producto" => $producto["id"],
                                 "cantidad" => $producto["cantidad"],
+                                "tipo_movimiento" => "SALIDA",
                                 "precio" => $producto["precio"]
                             );
                             $respuestaDetalleVenta = ModeloDetalleVentas::mdlCrearDetalleVenta($tablaDetalleVenta, $datosDetalleVenta);
                             array_push($totalProductosComprados, $producto["cantidad"]);
+                            // INSERTO EL MOVIMIENTO
+                            $respuestaInventario = ModeloInventario::mdlInsertaMovimiento($datosDetalleVenta);
                         }
                         /*==============================================
                         ACTUALIZAR LAS COMPRAS DEL CLIENTE
@@ -195,6 +206,15 @@
                             "metodo_pago" => $_POST["listaMetodoPago"]
                         );
                     $respuesta = ModeloVentas::mdlEditarVenta($tabla,$datos);
+                    /*======================================================
+                    INSERTA EL LOG DE AUDITORIA
+                    ========================================================*/
+                    $datosAuditoria = array(
+                        "usuario" => $_SESSION["usuario"],
+                        "accion" => "MODIFICAR",
+                        "tabla" => $tabla
+                    );
+                    $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                     /*=======================================================
                     NOTA: a este punto, el detalle de las ventas y los productos
                     se actualizan mediante triggers
@@ -210,12 +230,15 @@
                                 "id_venta" => $traerVenta["id"],
                                 "id_producto" => $producto["id"],
                                 "cantidad" => $producto["cantidad"],
+                                "tipo_movimiento" => "SALIDA",
                                 "precio" => $producto["precio"],
                                 "estado" => 1
                             );
                             $respuestaDetalleVenta = ModeloDetalleVentas::mdlCrearDetalleVenta($tablaDetalleVenta, $datosDetalleVenta);
                             // LLENO EL ARRAY CON LA CANTIDAD DE PRODUCTOS QUE SE HAN VENDIDO
                             array_push($totalProductosComprados, $producto["cantidad"]);
+                            // INSERTO EL MOVIMIENTO
+                            $respuestaInventario = ModeloInventario::mdlInsertaMovimiento($datosDetalleVenta);
                         }
                         /*==============================================
                         ACTUALIZAR LAS COMPRAS DEL CLIENTE
@@ -287,7 +310,15 @@
                 $totalProductosComprados = array();
 
                 $respuesta = ModeloVentas::mdlAnularVenta($tabla, $datos);
-
+                /*======================================================
+                INSERTA EL LOG DE AUDITORIA
+                ========================================================*/
+                $datosAuditoria = array(
+                    "usuario" => $_SESSION["usuario"],
+                    "accion" => "ANULACION",
+                    "tabla" => $tabla
+                );
+                $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
                 if ($respuesta == "ok") {
                     // TRAIGO LA VENTA ANULADA RECIENTEMENTE
                     $traerVenta = ModeloVentas::mdlMostrarVenta($tabla, $item, $datos);
@@ -300,6 +331,7 @@
                         $tablaProducto = "productos";
                         $itemProducto = "id";
                         $valorProducto = $value["id"];
+                        $cantidadProducto = $value["cantidad"];
                         $traerProducto = ModeloProductos::mdlMostrarProducto($tablaProducto, $itemProducto, $valorProducto);
                         $stockActualizado = $traerProducto["stock"] + $value["cantidad"];
                         $ventasActualizadas = $traerProducto["ventas"] - $value["cantidad"];
@@ -308,6 +340,14 @@
                         $actualizarProducto = ModeloProductos::mdlActualizarProducto($tablaProducto, $item1, $stockActualizado, $valorProducto);
                         $actualizarProducto = ModeloProductos::mdlActualizarProducto($tablaProducto, $item2, $ventasActualizadas, $valorProducto);
                         array_push($totalProductosComprados, $value["cantidad"]);
+
+                        // INSERTO EL MOVIMIENTO
+                        $datosInventario = array (
+                            "id_producto" => $valorProducto,
+                            "tipo_movimiento" => "ENTRADA",
+                            "cantidad" => $cantidadProducto
+                        );
+                        $respuestaInventario = ModeloInventario::mdlInsertaMovimiento($datosInventario);
                     }
                     /*=============================================================
                     ACTUALIZAR LAS COMPRAS DEL CLIENTE
