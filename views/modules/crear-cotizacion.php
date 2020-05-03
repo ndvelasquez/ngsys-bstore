@@ -8,7 +8,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="inicio"><i class="fa fa-home"></i> Inicio</a></li>
-        <li><a href="ventas">ventas</a></li>
+        <li><a href="pedidos">pedidos</a></li>
         <li class="active">Crear Cotización</li>
       </ol>
     </section>

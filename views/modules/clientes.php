@@ -24,12 +24,8 @@
               <tr>
                 <th style="width: 10px">#</th>
                 <th>Nombre</th>
-                <th>Tipo de documento</th>
-                <th>N° de documento</th>
-                <th>Email</th>
                 <th>Teléfono</th>
-                <th>Dirección</th>
-                <th>Total de compras</th>
+                <th>Dirección de envío</th>
                 <th>última compra</th>
                 <th>Acciones</th>
               </tr>
@@ -45,19 +41,18 @@
                   echo '<tr>
                           <td>'.$value["id"].'</td>
                           <td>'.$value["nombre"].'</td>
-                          <td>'.$value["tipo_documento"].'</td>
-                          <td>'.$value["documento"].'</td>
-                          <td>'.$value["email"].'</td>
                           <td>'.$value["telefono"].'</td>
                           <td>'.$value["direccion"].'</td>
-                          <td>'.$value["compras"].'</td>
                           <td>'.$value["ultima_compra"].'</td>
                           
                   ';
                   echo '<td>
                           <div class="btn-group">
-                          <button class="btn btn-warning btn-editarCliente" idCliente="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarCliente"><i class="far fa-edit"></i></button>
-                          <button class="btn btn-danger btn-eliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>
+                          <button class="btn btn-warning btn-editarCliente" idCliente="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarCliente"><i class="far fa-edit"></i></button>';
+                        if($_SESSION["perfil"] == "Administrador") {
+                          echo '<button class="btn btn-danger btn-eliminarCliente" idCliente="'.$value["id"].'"><i class="fa fa-times"></i></button>';
+                        }
+                        echo '  
                           </div>
                         </td>
                     </tr>';

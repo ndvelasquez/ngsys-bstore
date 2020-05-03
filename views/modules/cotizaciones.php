@@ -8,7 +8,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="inicio"><i class="fa fa-home"></i> Inicio</a></li>
-        <li><a href="ventas">ventas</a></li>
+        <li><a href="pedidos">pedidos</a></li>
         <li class="active">cotizaciones</li>
       </ol>
     </section>
@@ -78,6 +78,7 @@
                     else {
                       echo '<button class="btn btn-default"><i class="fa fa-times"></i></button>';
                     }
+                    echo     '<button class="btn btn-success btn-convierteVenta" idCotizacion="'.$value["id"].'"><i class="ion ion-ios-cart"></i><span> Generar Pedido</span></button>';
                     echo    '</div>';
                     echo '</td>';
                   echo '</tr>';

@@ -696,6 +696,7 @@ $(document).ready(function () {
                     '<!-- Precio del producto -->' +
                     '<div class="col-xs-3 ingresoPrecio" style="padding-left: 0px">' +
                     '<div class="input-group">' +
+                        
                         '<input type="text" class="form-control precioProducto" name="precioProducto" precioReal="'+precio+'" value="'+precio+'" readonly required>' +
                         '<span class="input-group-addon"><b>S/</b></span>' +
                     '</div>' +
@@ -711,11 +712,28 @@ $(document).ready(function () {
             $(".precioProducto").number(true, 2);
             // LISTAR PRODUCTOS EN JSON
             listarProductos();
+            // MODIFICAR EL PRECIO DE DELIVERY
+            modificaPrecioDelivery();
 
         }
     });
-
    });
+
+   /*=====================================================
+   FUNCION PARA MODIFICAR EL PRECIO DEL DELIVERY
+   =======================================================*/
+   function modificaPrecioDelivery() {
+       let arrayDescripciones = $(".descripcionProducto");
+       let arrayPrecios = $(".precioProducto");
+       for (let i = 0; i < arrayDescripciones.length; i++) {
+            
+            if($(arrayDescripciones[i]).val() == "delivery") {
+                $(arrayPrecios[i]).removeAttr("readonly");
+            }
+           
+       }
+       
+   }
 
    /*=============================================
     RECUPERAR EL ID DEL PRODUCTO AL NAVEGAR POR LA TABLA DINAMICA
@@ -1203,13 +1221,25 @@ $(document).ready(function () {
 
     /* 
     =====================================================
-    IMPRIMIR LA BOLETA DE LA VENTA
+    IMPRIMIR LA BOLETA DE LA VENTA (Administrador)
     ====================================================
     */
    $(document).on("click", ".btn-imprimirDetalle", function () {
     let codigoVenta = $(this).attr("codVenta");
 
-    window.open("extensions/tcpdf/pdf/factura.php?codigo="+codigoVenta, "_blank");
+    window.open("extensions/tcpdf/pdf/pedido.php?codigo="+codigoVenta, "_blank");
+    // window.open("extensions/tcpdf/pdf/pdf.php");
+   });
+
+   /* 
+    =====================================================
+    IMPRIMIR LA BOLETA DE LA VENTA (Vendedor)
+    ====================================================
+    */
+   $(document).on("click", ".btn-imprimirDetalleVendedor", function () {
+    let codigoVenta = $(this).attr("codVenta");
+
+    window.open("extensions/tcpdf/pdf/pedido-vendedor.php?codigo="+codigoVenta, "_blank");
     // window.open("extensions/tcpdf/pdf/pdf.php");
    });
 
@@ -1424,10 +1454,19 @@ $(document).ready(function () {
    /*======================================================
     BOTON PARA VER MOVIMIENTOS DEL PRODUCTO
     ========================================================*/
-    $(document).on("click", ".btn-editarVenta", function () {
-        let idVenta = $(this).attr("idVenta");
+    $(document).on("click", ".btn-verMovimientos", function () {
+        let idProducto = $(this).attr("idProducto");
         
-        window.location = "index.php?ruta=editar-venta&idVenta="+idVenta;
+        window.location = "index.php?ruta=movimientos&idProducto="+idProducto;
+    });
+
+    /*======================================================
+    BOTON PARA GENERAR VENTA A PARTIR DE LA COTIZACION SELECCIONADA
+    ========================================================*/
+    $(document).on("click", ".btn-convierteVenta", function () {
+        let idCotizacion = $(this).attr("idCotizacion");
+        
+        window.location = "index.php?ruta=crear-pedido2&idCotizacion="+idCotizacion;
     });
 
 });

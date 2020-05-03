@@ -32,16 +32,29 @@
             </thead>
             <tbody>
               <?php
-                $item = null;
-                $valor = null;
+                if (isset($_GET["idProducto"])) {
+                  $item = "id";
+                  $valor = $_GET["idProducto"];
+                  $movimientos = ControladorInventario::ctrlMostrarMovimientos($item, $valor);
+                }
+                else {
+                  $item = null;
+                  $valor = null;
+                  $movimientos = ControladorInventario::ctrlMostrarMovimientos($item, $valor);
+                }
 
-                $movimientos = ControladorInventario::ctrlMostrarMovimientos($item, $valor);
 
                 foreach ($movimientos as $key => $value) {
                   echo '<tr>
                           <td>'.$value["id"].'</td>
-                          <td>'.$value["producto"].'</td>
-                          <td>'.$value["tipo_movimiento"].'</td>
+                          <td>'.$value["producto"].'</td>';
+                          if($value["tipo_movimiento"] == "ENTRADA") {
+                            echo '<td>'.$value["tipo_movimiento"].'&nbsp;<i class="fas fa-long-arrow-alt-up" style="color: green;"></i></td>';
+                          }
+                          else {
+                            echo '<td>'.$value["tipo_movimiento"].'&nbsp;<i class="fas fa-long-arrow-alt-down" style="color: red;"></i></td>';
+                          }
+                          echo '
                           <td>'.$value["cantidad"].'</td>
                           <td>'.$value["fecha"].'</td>
                   ';

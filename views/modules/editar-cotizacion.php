@@ -97,7 +97,7 @@
                                 <div class="col-xs-3 ingresoPrecio" style="padding-left: 0px">
                                     <div class="input-group">
                                         <input type="text" class="form-control precioProducto" name="precioProducto" precioReal="'.$producto["precio"].'" value="'.$producto["total"].'" readonly required>
-                                        <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+                                        <span class="input-group-addon"><b>S/</b></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                               <td style="width: 50%">
                                 <div class="input-group">
                                   <input type="text" class="form-control" name="totalVenta" total="" id="totalVenta" min="1" value="<?=$cotizacion["total"]?>" readonly required>
-                                  <span class="input-group-addon"><i class="ion ion-social-usd"></i></span>
+                                  <span class="input-group-addon"><b>S/</b></span>
                                 </div>
                               </td>
                             </tr>

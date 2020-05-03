@@ -3,13 +3,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Crear venta
+        Nuevo Pedido
         <small>Panel de control</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="inicio"><i class="fa fa-home"></i> Inicio</a></li>
-        <li><a href="ventas">ventas</a></li>
-        <li class="active">Crear venta</li>
+        <li><a href="pedidos">pedidos</a></li>
+        <li class="active">Nuevo pedido</li>
       </ol>
     </section>
 
@@ -30,7 +30,17 @@
 
 
                   <div class="box">
+                  <?php
+                    $item = "id";
+                    $valor = $_GET["idCotizacion"];
 
+                    $venta = ControladorCotizaciones::ctrlMostrarCotizaciones($item,$valor);
+                    $porcentajeVenta = ($venta["impuestos"] * 100) / ($venta["neto"]);
+                    $porcentajeVenta = round($porcentajeVenta,0);
+                    // var_dump($venta);
+                  ?>
+                    
+                    
                     <!-- INPUT VENDEDOR -->
                     <div class="form-group">
                       <div class="input-group">
@@ -70,27 +80,47 @@
                     <div class="form-group">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                        <select class="form-control" name="agregarCliente" id="agregarCliente" required>
-                          <option value="">Seleccionar Cliente</option>
-                          <?php
-                            $item = null;
-                            $valor = null;
-
-                            $cliente = ControladorClientes::ctrlMostrarClientes($item, $valor);
-
-                            foreach ($cliente as $key => $value) {
-                              echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>';
-                            }
-                          ?>
-                        </select>
-
-                        <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarCliente" data-dismiss="modal">Agregar Cliente</button></span>
+                        <input type="text" class="form-control" name="cliente" id="cliente" value="<?=$venta["cliente"]?>" readonly>
+                        <input type="hidden" name="idCliente" value="<?=$venta["id_cliente"]?>" readonly>
                       </div>
                     </div>
 
                     <!-- INPUT PARA AGREGAR PRODUCTO -->
                     <div class="form-group row productos">
+                        <?php
+                        $listarProductos = json_decode($venta["productos"], true);
+                        foreach ($listarProductos as $key => $producto) {
+                            $itemProducto = "id";
+                            $valorProducto = $producto["id"];
+                            $traerProducto = ControladorProductos::ctrlMostrarProductos($itemProducto, $valorProducto);
+                            $stockAntiguo = $traerProducto["stock"] + $producto["cantidad"];
+                            echo '
+                            <div class="row" style="padding:5px 15px">
 
+                                <!-- Descripción del producto -->
+                                <div class="col-xs-6" style="padding-right: 0px">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto="'.$producto["id"].'"><i class="fa fa-times" aria-hidden="true"></i></button></span>
+                                        <input type="text" class="form-control descripcionProducto" name="agregarProducto" id="agregarProducto" idProducto="'.$producto["id"].'" value="'.$producto["descripcion"].'" required>
+                                    </div>
+                                </div>
+
+                                <!-- Cantidad del producto -->
+                                <div class="col-xs-3 ingresoCantidad">
+                                <input type="number" class="form-control cantidadProducto" name="cantidadProducto" min="1" value="'.$producto["cantidad"].'" stock="'.$stockAntiguo.'" nuevoStock="'.$traerProducto["stock"].'" required>
+                                </div>
+
+                                <!-- Precio del producto -->
+                                <div class="col-xs-3 ingresoPrecio" style="padding-left: 0px">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control precioProducto" name="precioProducto" precioReal="'.$producto["precio"].'" value="'.$producto["total"].'" readonly required>
+                                        <span class="input-group-addon"><b>S/</b></span>
+                                    </div>
+                                </div>
+                            </div>
+                            ';
+                        }
+                        ?>
                     </div>
 
                     <!-- INPUT PARA ALMACENAR LOS DATOS EN JSON -->
@@ -115,16 +145,16 @@
                             <tr>
                               <td style="width: 50%">
                                 <div class="input-group">
-                                  <input type="number" class="form-control" name="impuestoVenta" id="impuestoVenta" min="1" placeholder="0" required>
-                                  <input type="hidden" name="valorImpuesto" id="valorImpuesto">
-                                  <input type="hidden" name="precioNeto" id="precioNeto">
+                                  <input type="number" class="form-control" name="impuestoVenta" id="impuestoVenta" min="1" value="<?=$porcentajeVenta?>" required>
+                                  <input type="hidden" name="valorImpuesto" id="valorImpuesto" value="<?=$venta["impuestos"]?>">
+                                  <input type="hidden" name="precioNeto" id="precioNeto" value="<?=$venta["neto"]?>">
                                   <span class="input-group-addon"><i class="fa fa-percent"></i></span>
                                 </div>
                               </td>
 
                               <td style="width: 50%">
                                 <div class="input-group">
-                                  <input type="text" class="form-control" name="totalVenta" total="" id="totalVenta" min="1" placeholder="0" readonly required>
+                                  <input type="text" class="form-control" name="totalVenta" total="" id="totalVenta" min="1" value="<?=$venta["total"]?>" readonly required>
                                   <span class="input-group-addon"><b>S/</b></span>
                                 </div>
                               </td>
@@ -135,14 +165,6 @@
                     </div>
 
                     <hr>
-
-                    <!-- INPUT DE PORCENTAJE -->
-                    <div class="form-group" style="width: 50%">
-                      <div class="input-group">
-                        <input type="number" class="form-control porcentajeProducto" name="porcentaje" id="editarPorcentaje" min="0" max="99" placeholder="% de descuento">
-                        <span class="input-group-addon"><i class="fa fa-percent"></i></span>
-                      </div>
-                    </div>
 
                     <!-- INPUT METODO DE PAGO -->
                     <div class="form-group row">
@@ -155,7 +177,7 @@
                             <option value="TC">Tarjeta de crédito</option>
                             <option value="TD">Tarjeta de débito</option>
                           </select>
-                          <input type="hidden" name="listaMetodoPago" id="listaMetodoPago">
+                          <input type="hidden" name="listaMetodoPago" id="listaMetodoPago" value="">
                         </div>
                       </div>
 

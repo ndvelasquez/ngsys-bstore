@@ -29,7 +29,7 @@
                         $stock = "<button class='btn btn-success btn-xs'>".$productos[$i]["stock"]."</button>";
                     }
 
-                    $botones = "<div class='btn-group'><button class='btn btn-warning btn-editarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='far fa-edit'></i></button><button class='btn btn-danger btn-eliminarProducto' idProducto='".$productos[$i]["id"]."' imagenProducto='".$productos[$i]["imagen"]."' codProducto='".$productos[$i]["codigo"]."'><i class='fa fa-times'></i></button></div>";
+                    $botones = "<div class='btn-group'><button class='btn btn-warning btn-editarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='far fa-edit'></i></button><button class='btn btn-danger btn-eliminarProducto' idProducto='".$productos[$i]["id"]."' imagenProducto='".$productos[$i]["imagen"]."' codProducto='".$productos[$i]["codigo"]."'><i class='fa fa-times'></i></button><button class='btn btn-primary btn-verMovimientos' idProducto='".$productos[$i]["id"]."'><i class='far fa-eye'></i></button></div>";
 
                     $datosJson .='[
                         "'.($i + 1).'",

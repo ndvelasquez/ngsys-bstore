@@ -28,6 +28,8 @@ $neto = number_format($respuestaVenta["neto"],2);
 $impuesto = number_format($respuestaVenta["impuestos"],2);
 $total = number_format($respuestaVenta["total"],2);
 $cliente = $respuestaVenta["cliente"];
+$telefono = $respuestaVenta["telefono"];
+$direccion = $respuestaVenta["direccion"];
 $vendedor = $respuestaVenta["vendedor"];
 
 
@@ -53,13 +55,13 @@ $bloque1 = <<<EOF
 
 			<td style="background-color:white; width:140px">
 				
-				<div style="font-size:8.5px; text-align:right; line-height:15px;">
+				<div style="font-size:10px; text-align:right; line-height:15px;">
 					
 					<br>
-					RUC: 20538973431
+					RUC: 20603325461
 
 					<br>
-					Dirección: Calle 44B 92-11, Surco, Lima
+					Dirección: Av. La Paz 356, Int. 202, Miraflores
 
 				</div>
 
@@ -67,20 +69,23 @@ $bloque1 = <<<EOF
 
 			<td style="background-color:white; width:140px">
 
-				<div style="font-size:8.5px; text-align:right; line-height:15px;">
+				<div style="font-size:10px; text-align:right; line-height:15px;">
 					
 					<br>
-					Teléfono: 51 952 285 377
-					
+					Teléfono: +51 952 773 839
 					<br>
-					ventas@ngsystem.com
+					&nbsp;&nbsp; +51 990 723 836
 
 				</div>
 				
 			</td>
 
-			<td style="background-color:white; width:110px; text-align:center; color:red"><br><br>BOLETA N.<br>$valorVenta</td>
+			<td style="background-color:white; width:110px; text-align:center; color:red"><br><br>RECIBO N°<br>$valorVenta</td>
 
+		</tr>
+
+		<tr>
+			<td style="background-color:#ff99cc; font-size: 20px; line-height:20px; width:540px; text-align:center; color:white">Detalle de compra</td>
 		</tr>
 
 	</table>
@@ -110,10 +115,14 @@ $bloque2 = <<<EOF
 			<td style="border: 1px solid #666; background-color:white; width:390px">
 
 				Cliente: $cliente
+				<br>
+				Teléfono: $telefono
+				<br>
+				Dirección de envío: $direccion
 
 			</td>
 
-			<td style="border: 1px solid #666; background-color:white; width:150px; text-align:right">
+			<td style="border: 1px solid #666; background-color:white; width:150px; text-align:center;">
 			
 				Fecha: $fecha
 
@@ -178,7 +187,7 @@ $bloque4 = <<<EOF
 	<table style="font-size:10px; padding:5px 10px;">
 
 		<tr>
-			
+				
 			<td style="border: 1px solid #666; color:#333; background-color:white; width:260px; text-align:center">
 				$item[descripcion]
 			</td>
@@ -204,7 +213,6 @@ $bloque4 = <<<EOF
 EOF;
 
 $pdf->writeHTML($bloque4, false, false, false, false, '');
-
 }
 
 // ---------------------------------------------------------
@@ -273,11 +281,10 @@ EOF;
 $pdf->writeHTML($bloque5, false, false, false, false, '');
 
 
-
 // ---------------------------------------------------------
 //SALIDA DEL ARCHIVO 
 ob_end_clean();
-$pdf->Output('factura.pdf', 'I');
+$pdf->Output('pedido.pdf', 'I');
 
 }
 

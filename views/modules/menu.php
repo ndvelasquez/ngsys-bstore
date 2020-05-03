@@ -27,26 +27,33 @@
 
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">Navegación principal</li>
-        <li class="active">
-          <a href="inicio">
-            <i class="fa fa-home"></i> <span>Inicio</span>
-          </a>
-        </li>
-        <li>
-          <a href="usuarios">
-            <i class="fa fa-user"></i> <span>Usuarios</span>
-          </a>
-        </li>
-        <li>
-          <a href="productos">
-            <i class="fab fa-product-hunt"></i> <span>Productos</span>
-          </a>
-        </li>
-        <li>
-          <a href="categorias">
-            <i class="fa fa-th"></i> <span>Categorías</span>
-          </a>
-        </li>
+        <?php
+          if($_SESSION["perfil"] == "Administrador") {
+            echo '
+            <li class="active">
+              <a href="inicio">
+                <i class="fa fa-home"></i> <span>Inicio</span>
+              </a>
+            </li>
+            <li>
+              <a href="usuarios">
+                <i class="fa fa-user"></i> <span>Usuarios</span>
+              </a>
+            </li>
+            <li>
+              <a href="productos">
+                <i class="fab fa-product-hunt"></i> <span>Productos</span>
+              </a>
+            </li>
+            <li>
+              <a href="categorias">
+                <i class="fa fa-th"></i> <span>Categorías</span>
+              </a>
+            </li>
+            ';
+          }
+        ?>
+        
         <li>
           <a href="clientes">
             <i class="fa fa-user"></i> <span>Clientes</span>
@@ -55,16 +62,16 @@
         <li class="treeview">
           <a href="#">
             <i class="fas fa-list-ul"></i>
-            <span>Ventas</span>
+            <span>Pedidos</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li>
-                <a href="ventas">
+                <a href="pedidos">
                     <i class="far fa-circle"></i>
-                    <span>Administrar ventas</span>
+                    <span>Ver pedidos</span>
                 </a>
             </li>
             <li>
@@ -74,9 +81,9 @@
                 </a>
             </li>
             <li>
-                <a href="crear-venta">
+                <a href="crear-pedido">
                     <i class="far fa-circle"></i>
-                    <span>Crear venta</span>
+                    <span>Crear pedido</span>
                 </a>
             </li>
             <li>
@@ -85,31 +92,45 @@
                     <span>Crear cotización</span>
                 </a>
             </li>
-            <li>
-                <a href="reporte-ventas">
-                    <i class="far fa-circle"></i>
-                    <span>Reporte de ventas</span>
-                </a>
-            </li>
+            <?php
+              if($_SESSION["perfil"] == "Administrador") {
+                echo '
+                <li>
+                  <a href="reporte-ventas">
+                      <i class="far fa-circle"></i>
+                      <span>Reporte de ventas</span>
+                  </a>
+                </li>
+                ';
+              }
+            ?>
+            
           </ul>
-        <li class="treeview">
-          <a href="#">
-            <i class="ion ion-clipboard"></i> 
-            <span>Inventario</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li>
-              <a href="movimientos">
-                <i class="fas fa-exchange-alt"></i>
-                <span>Ver movimientos</span>
+          <?php
+            if($_SESSION["perfil"] == "Administrador") {
+              echo '
+              <li class="treeview">
+              <a href="#">
+                <i class="ion ion-clipboard"></i> 
+                <span>Inventario</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
               </a>
+              <ul class="treeview-menu">
+                <li>
+                  <a href="movimientos">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Ver movimientos</span>
+                  </a>
+                </li>
+              </ul>
             </li>
-          </ul>
-        </li>  
-        </li>
+              ';
+            }
+          ?>
+          
+      </li>
     </ul>
     </section>
     <!-- /.sidebar -->
