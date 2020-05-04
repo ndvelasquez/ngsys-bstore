@@ -97,7 +97,7 @@
                     <input type="hidden" name="listaProductos" id="listaProductos">
 
                     <!-- BOTON PARA AGREGAR PRODUCTOS (DISPOSITIVOS MOVILES) -->
-                    <button class="btn btn-default hidden-lg btnAgregarProducto">Agregar Producto</button>
+                    <button class="btn btn-default hidden-lg" data-toggle="modal" data-target="#modalTablaProductosMovil">Agregar Producto</button>
 
                     <hr>
 
@@ -115,7 +115,7 @@
                             <tr>
                               <td style="width: 50%">
                                 <div class="input-group">
-                                  <input type="number" class="form-control" name="impuestoVenta" id="impuestoVenta" min="1" placeholder="0" required>
+                                  <input type="number" class="form-control" name="impuestoVenta" id="impuestoVenta" min="0" placeholder="0" required>
                                   <input type="hidden" name="valorImpuesto" id="valorImpuesto">
                                   <input type="hidden" name="precioNeto" id="precioNeto">
                                   <span class="input-group-addon"><i class="fa fa-percent"></i></span>
@@ -166,7 +166,7 @@
               <div class="box-header with-border"></div>
 
               <div class="box-body">
-                <table class="table table-bordered table-striped dt-responsive tablaProductoVenta">
+                <table class="table table-bordered table-striped dt-responsive tablaProductoCotizacion">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
@@ -188,6 +188,31 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <!-- ================================
+  LISTADO DE PRODUCTOS MOVILES MODAL
+  ====================================-->
+  <div id="modalTablaProductosMovil" class="modal fade" role="dialog">
+    <div class="box box-warning">
+      <div class="box-header with-border">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+              
+        <table class="table table-bordered table-striped dt-responsive tablaProductoVenta">
+          <thead>
+            <tr>
+              <th style="width: 10px">#</th>
+              <th>Imagen</th>
+              <th>Código</th>
+              <th>Descripción</th>
+              <th>Stock</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+        </table>
+              
+    </div>
+  </div>
 
   <!-- Modal de agregar Cliente-->
 <div id="modalAgregarCliente" class="modal fade" role="dialog">

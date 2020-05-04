@@ -35,16 +35,11 @@
         static public function ctrlCrearCliente() {
 
             if (isset($_POST["nombre"])
-                && isset($_POST["tipoDocumento"])
-                && isset($_POST["documento"])
-                && isset($_POST["email"])
                 && isset($_POST["telefono"])
-                && isset($_POST["direccion"])
-                && isset($_POST["fechaNacimiento"])) {
+                && isset($_POST["direccion"])) {
 
                     if (preg_match('/[a-zA-ZñÑ]\w+/', $_POST["nombre"])
-                        && preg_match('/[0-9]+/', $_POST["documento"])
-                        && preg_match('/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/', $_POST["email"])
+                        
                         && preg_match('/^[()\-0-9 ]+$/', $_POST["telefono"])) {
 
                             $tabla = "clientes";

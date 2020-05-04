@@ -93,7 +93,7 @@
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="tipoDocumento"><i class="fa fa-id-badge"></i></label>
-                <select id="tipoDocumento" name="tipoDocumento" class="form-control" data-toggle="tooltip" title="campo obligatorio" required>
+                <select id="tipoDocumento" name="tipoDocumento" class="form-control" data-toggle="tooltip" title="opcional" >
                   <option value="">Seleccione un tipo de documento</option>
                   <option value="dni">DNI</option>
                   <option value="carnet de extranjeria">Carnet de extranjería</option>
@@ -106,21 +106,21 @@
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="documento"><i class="fa fa-id-card"></i></label>
-                <input type="number" id="documento" name="documento" class="form-control" value="" placeholder="N° de documento" data-toggle="tooltip" title="campo obligatorio" required min="0" minlength="7" pattern="[0-9]+">
+                <input type="number" id="documento" name="documento" class="form-control" value="" placeholder="N° de documento" data-toggle="tooltip" title="opcional" min="0" minlength="7" pattern="[0-9]+">
               </div>
             </div>
             <!-- INPUT DEL NOMBRE -->
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="nombre"><i class="fa fa-font"></i></label>
-                <input type="text" id="nombre" name="nombre" class="form-control" value="" placeholder="Nombre del Cliente" data-toggle="tooltip" title="campo obligatorio" required pattern="[a-zA-ZñÑ ]+">
+                <input type="text" id="nombre" name="nombre" class="form-control" value="" placeholder="Nombre del Cliente" data-toggle="tooltip" title="campo obligatorio" required pattern="[a-zA-ZñÑ0-9.´\- ]+">
               </div>
             </div>
             <!-- INPUT DEL EMAIL -->
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="email"><i class="fa fa-envelope"></i></label>
-                <input type="email" id="email" name="email" class="form-control" value="" placeholder="Email del Cliente" data-toggle="tooltip" title="campo obligatorio" required>
+                <input type="email" id="email" name="email" class="form-control" value="" placeholder="Email del Cliente" data-toggle="tooltip" title="opcional">
               </div>
             </div>
             <!-- INPUT DEL TELEFONO -->
@@ -134,14 +134,14 @@
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="fechaNacimiento"><i class="far fa-calendar-alt"></i></label>
-                <input type="text" id="fechaNacimiento" name="fechaNacimiento" class="form-control" value="" placeholder="Fecha de nacimiento" data-toggle="tooltip" title="campo obligatorio" required>
+                <input type="text" id="fechaNacimiento" name="fechaNacimiento" class="form-control" value="" placeholder="Fecha de nacimiento" data-toggle="tooltip" title="opcional">
               </div>
             </div>
             <!-- INPUT DE DIRECCION -->
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="direcicon"><i class="fa fa-map-marker"></i></label>
-                <textarea name="direccion" class="form-control" placeholder="Dirección del cliente" data-toggle="tooltip" title="campo obligatorio" id="direccion" cols="5" rows="3" required></textarea>
+                <textarea name="direccion" class="form-control" placeholder="Dirección de despacho" data-toggle="tooltip" title="campo obligatorio" id="direccion" cols="5" rows="3" required></textarea>
               </div>
             </div>
           </div>
@@ -187,7 +187,7 @@
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="editarTipoDocumento"><i class="fa fa-users"></i></label>
-                <select name="editarTipoDocumento" class="form-control" data-toggle="tooltip" title="campo obligatorio" required>
+                <select name="editarTipoDocumento" class="form-control" data-toggle="tooltip" title="opcional">
                   <option value="" id="editarTipoDocumento"></option>
                   <option value="dni">DNI</option>
                   <option value="carnet de extranjeria">Carnet de extranjería</option>
@@ -200,21 +200,21 @@
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="editarDocumento"><i class="fa fa-id-card"></i></label>
-                <input type="number" id="editarDocumento" name="editarDocumento" class="form-control" value="" placeholder="N° de documento" data-toggle="tooltip" title="campo obligatorio" required min="0" minlength="7" pattern="[0-9]+">
+                <input type="number" id="editarDocumento" name="editarDocumento" class="form-control" value="" placeholder="N° de documento" data-toggle="tooltip" title="opcional" min="0" minlength="7" pattern="[0-9]+">
               </div>
             </div>
             <!-- INPUT DEL NOMBRE -->
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="editarNombre"><i class="fa fa-font"></i></label>
-                <input type="text" id="editarNombre" name="editarNombre" class="form-control" value="" placeholder="Nombre del Cliente" data-toggle="tooltip" title="campo obligatorio" required pattern="[a-zA-ZñÑ ]+">
+                <input type="text" id="editarNombre" name="editarNombre" class="form-control" value="" placeholder="Nombre del Cliente" data-toggle="tooltip" title="campo obligatorio" required pattern="[a-zA-ZñÑ0-9.\- ]+">
               </div>
             </div>
             <!-- INPUT DEL EMAIL -->
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="editarEmail"><i class="fa fa-envelope"></i></label>
-                <input type="email" id="editarEmail" name="editarEmail" class="form-control" value="" placeholder="Email del Cliente" data-toggle="tooltip" title="campo obligatorio" required>
+                <input type="email" id="editarEmail" name="editarEmail" class="form-control" value="" placeholder="Email del Cliente" data-toggle="tooltip" title="opcional">
               </div>
             </div>
             <!-- INPUT DEL TELEFONO -->
@@ -228,7 +228,7 @@
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="editarFechaNacimiento"><i class="far fa-calendar-alt"></i></label>
-                <input type="text" id="editarFechaNacimiento" name="editarFechaNacimiento" class="form-control" value="" placeholder="Fecha de nacimiento" data-toggle="tooltip" title="campo obligatorio" required>
+                <input type="text" id="editarFechaNacimiento" name="editarFechaNacimiento" class="form-control" value="" placeholder="Fecha de nacimiento" data-toggle="tooltip" title="opcional">
               </div>
             </div>
             <!-- INPUT DE DIRECCION -->

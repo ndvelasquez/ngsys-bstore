@@ -27,7 +27,8 @@
                && isset($_POST["precioNeto"])
                && isset($_POST["valorImpuesto"])
                && isset($_POST["totalVenta"])
-               && isset($_POST["listaMetodoPago"])) {
+               && isset($_POST["listaMetodoPago"])
+               && isset($_POST["observacion"])) {
 
                 if (preg_match('/[0-9]+/', $_POST["codVenta"])
                   && preg_match('/[0-9.]+/', $_POST["precioNeto"])
@@ -52,6 +53,7 @@
                         "impuestos" => $_POST["valorImpuesto"],
                         "total" => $precioFormateado,
                         "metodo_pago" => $_POST["listaMetodoPago"],
+                        "observacion" => $_POST["observacion"],
                         "estado" => 1
                     );
                     $respuesta = ModeloVentas::mdlCrearVenta($tabla,$datos);
@@ -203,7 +205,8 @@
                             "neto" => $_POST["precioNeto"],
                             "impuestos" => $_POST["valorImpuesto"],
                             "total" => $_POST["totalVenta"],
-                            "metodo_pago" => $_POST["listaMetodoPago"]
+                            "metodo_pago" => $_POST["listaMetodoPago"],
+                            "observacion" => $_POST["observacion"]
                         );
                     $respuesta = ModeloVentas::mdlEditarVenta($tabla,$datos);
                     /*======================================================
@@ -256,7 +259,7 @@
                                 closeOnConfirm: false
                               }).then((result) =>{
                                 if(result.value){
-                                    window.location = 'ventas';
+                                    window.location = 'pedidos';
                                 }
                               });
                                   </script>";
@@ -272,7 +275,7 @@
                             closeOnConfirm: false
                           }).then((result) =>{
                             if(result.value){
-                                window.location = 'ventas';
+                                window.location = 'pedidos';
                             }
                           });
                               </script>";
@@ -288,7 +291,7 @@
                             closeOnConfirm: false
                           }).then((result) =>{
                             if(result.value){
-                                window.location = 'ventas';
+                                window.location = 'pedidos';
                             }
                           });
                               </script>";
@@ -368,7 +371,7 @@
                                 closeOnConfirm: false
                               }).then((result) =>{
                                 if(result.value){
-                                    window.location = 'ventas';
+                                    window.location = 'pedidos';
                                 }
                               });
                                   </script>";
@@ -384,7 +387,7 @@
                             closeOnConfirm: false
                           }).then((result) =>{
                             if(result.value){
-                                window.location = 'ventas';
+                                window.location = 'pedidos';
                             }
                           });
                               </script>";

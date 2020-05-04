@@ -97,7 +97,7 @@
                     <input type="hidden" name="listaProductos" id="listaProductos">
 
                     <!-- BOTON PARA AGREGAR PRODUCTOS (DISPOSITIVOS MOVILES) -->
-                    <button class="btn btn-default hidden-lg btnAgregarProducto">Agregar Producto</button>
+                    <button class="btn btn-default hidden-lg" data-toggle="modal" data-target="#modalTablaProductosMovil">Agregar Producto</button>
 
                     <hr>
 
@@ -107,7 +107,7 @@
                         <table class="table">
                           <thead>
                             <tr>
-                              <th>Impuestos</th>
+                              <th>IGV</th>
                               <th>Total</th>
                             </tr>
                           </thead>
@@ -115,7 +115,7 @@
                             <tr>
                               <td style="width: 50%">
                                 <div class="input-group">
-                                  <input type="number" class="form-control" name="impuestoVenta" id="impuestoVenta" min="1" placeholder="0" required>
+                                  <input type="number" class="form-control" name="impuestoVenta" id="impuestoVenta" min="0" placeholder="0" required>
                                   <input type="hidden" name="valorImpuesto" id="valorImpuesto">
                                   <input type="hidden" name="precioNeto" id="precioNeto">
                                   <span class="input-group-addon"><i class="fa fa-percent"></i></span>
@@ -154,6 +154,8 @@
                             <option value="efectivo">Efectivo</option>
                             <option value="TC">Tarjeta de crédito</option>
                             <option value="TD">Tarjeta de débito</option>
+                            <option value="transferencia">Transferencia Bancaria</option>
+                            <option value="contraentrega">Pago Contraentrega</option>
                           </select>
                           <input type="hidden" name="listaMetodoPago" id="listaMetodoPago">
                         </div>
@@ -163,6 +165,14 @@
                         
                       </div>
 
+                    </div>
+
+                    <!-- INPUT DE OBSERVACION -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <label class="input-group-addon" for="observacion"><i class="fas fa-pencil-alt"></i></label>
+                        <textarea name="observacion" class="form-control" placeholder="Añadir Observación" data-toggle="tooltip" title="Opcional" id="observacion" cols="5" rows="3"></textarea>
+                      </div>
                     </div>
 
 
@@ -210,6 +220,31 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+  <!-- ================================
+  LISTADO DE PRODUCTOS MOVILES MODAL
+  ====================================-->
+  <div id="modalTablaProductosMovil" class="modal fade" role="dialog">
+    <div class="box box-warning">
+      <div class="box-header with-border">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+              
+        <table class="table table-bordered table-striped dt-responsive tablaProductoVenta">
+          <thead>
+            <tr>
+              <th style="width: 10px">#</th>
+              <th>Imagen</th>
+              <th>Código</th>
+              <th>Descripción</th>
+              <th>Stock</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+        </table>
+              
+    </div>
+  </div>
 
   <!-- Modal de agregar Cliente-->
 <div id="modalAgregarCliente" class="modal fade" role="dialog">

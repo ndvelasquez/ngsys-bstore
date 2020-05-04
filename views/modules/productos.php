@@ -101,7 +101,7 @@
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="descripcion"><i class="fab fa-product-hunt"></i></label>
-                <input type="text" name="descripcion" class="form-control" value="" placeholder="descripción del producto" data-toggle="tooltip" title="campo obligatorio" required pattern="[a-zA-ZñÑ 0-9]+">
+                <input type="text" name="descripcion" class="form-control" value="" placeholder="descripción del producto" data-toggle="tooltip" title="campo obligatorio" required pattern="[a-zA-ZñÑ0-9.´\- ]+">
               </div>
             </div>
             <!-- INPUT DE LA CANTIDAD DEL PRODUCTO -->

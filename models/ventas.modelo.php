@@ -24,7 +24,7 @@
         }
         // INSERTA NUEVA VENTA
         static public function mdlCrearVenta($tabla,$datos) {
-            $sentencia = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, id_usuario, id_cliente, productos, neto, impuestos, total, metodo_pago, estado) VALUES (:codigo, :id_usuario, :id_cliente, :productos, :neto, :impuestos, :total, :metodo_pago, 1)");
+            $sentencia = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, id_usuario, id_cliente, productos, neto, impuestos, total, metodo_pago, observacion, estado) VALUES (:codigo, :id_usuario, :id_cliente, :productos, :neto, :impuestos, :total, :metodo_pago, :observacion, 1)");
             $sentencia -> bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
             $sentencia -> bindParam(":id_usuario", $datos["id_usuario"], PDO::PARAM_INT);
             $sentencia -> bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
@@ -33,6 +33,7 @@
             $sentencia -> bindParam(":impuestos", $datos["impuestos"], PDO::PARAM_STR);
             $sentencia -> bindParam(":total", $datos["total"], PDO::PARAM_STR);
             $sentencia -> bindParam(":metodo_pago", $datos["metodo_pago"], PDO::PARAM_STR);
+            $sentencia -> bindParam(":observacion", $datos["observacion"], PDO::PARAM_STR);
 
             if($sentencia -> execute()) {
                 return "ok";

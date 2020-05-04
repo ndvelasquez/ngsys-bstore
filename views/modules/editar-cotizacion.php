@@ -110,9 +110,17 @@
                     <input type="hidden" name="listaProductos" id="listaProductos">
 
                     <!-- BOTON PARA AGREGAR PRODUCTOS (DISPOSITIVOS MOVILES) -->
-                    <button class="btn btn-default hidden-lg btnAgregarProducto">Agregar Producto</button>
+                    <button class="btn btn-default hidden-lg btnAgregarProductoCoti">Agregar Producto</button>
 
                     <hr>
+
+                    <!-- INPUT DE PORCENTAJE -->
+                    <div class="form-group" style="width: 50%">
+                      <div class="input-group">
+                        <input type="number" class="form-control porcentajeProducto" name="porcentaje" id="editarPorcentaje" min="0" max="99" placeholder="% de descuento">
+                        <span class="input-group-addon"><i class="fa fa-percent"></i></span>
+                      </div>
+                    </div>
 
                     <!-- INPUT DE IMPUESTOS Y TOTAL -->
                     <div class="row">
@@ -120,7 +128,7 @@
                         <table class="table">
                           <thead>
                             <tr>
-                              <th>Impuestos</th>
+                              <th>IGV</th>
                               <th>Total</th>
                             </tr>
                           </thead>
@@ -128,7 +136,7 @@
                             <tr>
                               <td style="width: 50%">
                                 <div class="input-group">
-                                  <input type="number" class="form-control" name="impuestoVenta" id="impuestoVenta" min="1" value="<?=$porcentajecotizacion?>" required>
+                                  <input type="number" class="form-control" name="impuestoVenta" id="impuestoVenta" min="0" value="<?=$porcentajecotizacion?>" required>
                                   <input type="hidden" name="valorImpuesto" id="valorImpuesto" value="<?=$cotizacion["impuestos"]?>">
                                   <input type="hidden" name="precioNeto" id="precioNeto" value="<?=$cotizacion["neto"]?>">
                                   <span class="input-group-addon"><i class="fa fa-percent"></i></span>

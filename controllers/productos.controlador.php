@@ -27,8 +27,7 @@
                && isset($_POST["precioCompra"])
                && isset($_POST["precioVenta"])) {
 
-                if (preg_match('/[a-zA-ZñÑ0-9]\w+/', $_POST["descripcion"])
-                  && preg_match('/[0-9]+/', $_POST["codProducto"])
+                   if (preg_match('/[0-9]+/', $_POST["codProducto"])
                   && preg_match('/[0-9.]+/', $_POST["precioCompra"])
                   && preg_match('/[0-9.]+/', $_POST["precioVenta"])) {
 
