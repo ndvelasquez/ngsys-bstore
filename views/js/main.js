@@ -432,7 +432,6 @@ $(document).ready(function () {
                 $("#editarCategoria").val(respuesta["id_categoria"]);
                 $("#editarCategoria").html(respuesta["categoria"]);
                 $("#editarCategoria").val(respuesta["id_categoria"]);
-                $("#editarCantidad").val(respuesta["stock"]);
                 $("#editarPrecioCompra").val(respuesta["precio_compra"]);
                 $("#editarPrecioVenta").val(respuesta["precio_venta"]);
                 $("#imagenActual").val(respuesta["imagen"]);
@@ -1610,4 +1609,123 @@ $(document).ready(function () {
         window.location = "index.php?ruta=crear-pedido2&idCotizacion="+idCotizacion;
     });
 
+    /*===========================================================
+    **************************************************
+    *******************PARA LA COTIZACION*************
+    **************************************************
+    =============================================================*/
+    $(".formularioCotizacion").on("change", ".precioProducto", function (e) {
+        let precioDelivery = $(this).val();
+        $(this).attr("precioReal", precioDelivery);
+        console.log($(this).attr("precioReal"));
+        // SUMAR TOTAL DE PRECIOS
+        sumarTotalPrecios();
+        // SUMAR LOS IMPUESTOS AL TOTAL
+        agregarImpuesto();
+        // FORMATEAR EL PRECIO
+        $(".precioProducto").number(true, 2);
+        // LISTAR PRODUCTOS EN JSON
+        listarProductos();
+        
+    });
+    
+    /* 
+        =====================================================
+        QUITAR PRODUCTO COTIZACION
+        =====================================================
+        */
+       var idQuitarProducto;
+       localStorage.removeItem("quitarProducto");
+       $(".formularioCotizacion").on("click", "button.quitarProducto", function() {
+        $(this).parent().parent().parent().parent().remove();
+        let idProducto = $(this).attr("idProducto");
+    
+        /*=========================================================
+          ALMACENAR EN EL LOCALSTORAGE EL ID DEL PRODUCTO A QUITAR
+          =========================================================
+        */
+        if (localStorage.getItem("quitarProducto") == null) {
+            idQuitarProducto = [];
+        }
+        else {
+            idQuitarProducto.concat(localStorage.getItem("quitarProducto"));
+        }
+        idQuitarProducto.push({"idProducto": idProducto});
+        localStorage.setItem("quitarProducto", JSON.stringify(idQuitarProducto));
+    
+        $("button.recuperarBoton[idProducto='"+idProducto+"']").removeClass("btn-default");
+        $("button.recuperarBoton[idProducto='"+idProducto+"']").addClass("btn-primary agregarProducto");
+    
+        if($(".productos").children().length != 0) {
+            // SUMAR TOTAL DE PRECIOS
+            sumarTotalPrecios();
+            // SUMAR LOS IMPUESTOS AL TOTAL
+            agregarImpuesto();
+            // LISTAR PRODUCTOS EN JSON
+            listarProductos();
+            
+        }
+        else {
+            $("#totalVenta").val(0);
+            $("#totalVenta").attr("total",0);
+        }
+    
+       });
+    
+       
+    
+    /*================================================
+       MODIFICAR PRECIO DEL PRODUCTO SEGUN LA CANTIDAD EN COTIZACION
+       ==================================================*/
+       $(".formularioCotizacion").on("change", ".cantidadProducto", function () {
+        let precio = $(this).parent().parent().children(".ingresoPrecio").children().children(".precioProducto");
+        let precioSumado = $(this).val() * precio.attr("precioReal");
+        $(precio).val(precioSumado);
+    
+        let nuevoStock = Number($(this).attr("stock")) - $(this).val();
+    
+        $(this).attr("nuevoStock", nuevoStock);
+    
+        precioSumado = $(this).val() * precio.attr("precioReal");
+        // if (Number($(this).attr("stock")) < Number($(this).val())) {
+        //     Swal.fire({
+        //         title: 'La cantidad supera el stock',
+        //         text: 'Sólo hay '+$(this).attr("stock")+' unidades disponibles',
+        //         icon: 'error',
+        //         confirmButtonText: 'Cerrar'
+        //     });
+        // }
+        // SUMAR TOTAL DE PRECIOS
+        sumarTotalPrecios();
+    
+        // SUMAR LOS IMPUESTOS AL TOTAL
+        agregarImpuesto();
+    
+        // APLICAR DESCUENTOS
+        aplicaDescuento();
+    
+        // LISTAR PRODUCTOS EN JSON
+        listarProductos();
+        
+       });
+    
+        /*=================================================
+       CALCULAR EL CAMBIO EN COTIZACION
+       ===================================================*/
+       $(".formularioCotizacion").on("change", "input#valorEfectivo", function () {
+        let efectivo = $(this).val();
+        let cambio = Number(efectivo) - Number($("#totalVenta").val());
+        let inputCambio = $(this).parent().parent().parent().children("#capturarCambioEfectivo").children().children("#cambioEfectivo");
+        $(inputCambio).val(cambio);
+        
+    });
+    
+    /*=============================================
+        INVOCO FUNCION MÉTODO DE PAGO AL COLOCAR EL COD DE TRANSACCION CON TC O TD
+        =============================================*/
+    
+        $(".formularioCotizacion").on("change", "input#codigoTransaccion", function () {
+            // LISTAR METODO EN EL INPUT
+            listarMetodos();
+        });
 });

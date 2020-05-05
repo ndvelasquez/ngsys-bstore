@@ -235,6 +235,7 @@
                             "id" => $_POST["idProducto"],
                             "codigo" => $_POST["editarCodProducto"],
                             "descripcion" => $_POST["editarDescripcion"],
+                            "cantidad" => $_POST["editarCantidad"],
                             "categoria" => $_POST["editarCategoria"],
                             "precioCompra" => $_POST["editarPrecioCompra"],
                             "precioVenta" => $_POST["editarPrecioVenta"],

@@ -44,11 +44,12 @@
         }
         // EDITAR PRODUCTO
         static public function mdlEditarProducto($tabla,$datos) {
-            $sentencia = Conexion::conectar()->prepare("UPDATE $tabla SET codigo = :codigo, descripcion = :descripcion, id_categoria = :id_categoria, precio_compra = :precio_compra, precio_venta = :precio_venta, imagen = :imagen WHERE id = :id");
+            $sentencia = Conexion::conectar()->prepare("UPDATE $tabla SET codigo = :codigo, descripcion = :descripcion, id_categoria = :id_categoria, stock = stock + :cantidad, precio_compra = :precio_compra, precio_venta = :precio_venta, imagen = :imagen WHERE id = :id");
             $sentencia -> bindParam(":id", $datos["id"], PDO::PARAM_INT);
             $sentencia -> bindParam(":id_categoria", $datos["categoria"], PDO::PARAM_INT);
             $sentencia -> bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
             $sentencia -> bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
+            $sentencia -> bindParam(":cantidad", $datos["cantidad"], PDO::PARAM_STR);
             $sentencia -> bindParam(":precio_compra", $datos["precioCompra"], PDO::PARAM_STR);
             $sentencia -> bindParam(":precio_venta", $datos["precioVenta"], PDO::PARAM_STR);
             $sentencia -> bindParam(":imagen", $datos["imagen"], PDO::PARAM_STR);

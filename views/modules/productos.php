@@ -219,7 +219,7 @@
             <!-- INPUT DE DESCRIPCION DEL PRODUCTO -->
             <div class="form-group">
               <div class="input-group">
-                <label class="input-group-addon" for="editarDescripcion"><i class="fa fa-product-hunt"></i></label>
+                <label class="input-group-addon" for="editarDescripcion"><i class="fab fa-product-hunt"></i></label>
                 <input type="text" id="editarDescripcion" name="editarDescripcion" class="form-control" value="" placeholder="descripción del producto" data-toggle="tooltip" title="campo obligatorio" required pattern="[a-zA-ZñÑ 0-9]+">
               </div>
             </div>
@@ -227,7 +227,7 @@
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="cantidad"><i class="fa fa-plus"></i></label>
-                <input type="number" id="editarCantidad" name="editarCantidad" readonly class="form-control" value="" placeholder="cantidad" data-toggle="tooltip" title="campo obligatorio" required min="0" pattern="[0-9]+">
+                <input type="number" id="editarCantidad" name="editarCantidad" class="form-control" value="" placeholder="cantidad" data-toggle="tooltip" title="campo obligatorio" min="0" pattern="[0-9]+">
               </div>
             </div>
             <!-- INPUT DE PRECIO DE COMPRA -->

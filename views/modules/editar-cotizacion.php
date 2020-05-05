@@ -24,7 +24,7 @@
 
               <div class="box-header with-border"></div>
 
-              <form method="post" role="form" class="formularioVenta">
+              <form method="post" role="form" class="formularioCotizacion">
 
                 <div class="box-body">
 
