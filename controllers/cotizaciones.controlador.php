@@ -15,6 +15,20 @@
 
         /*
         =====================================
+        MOSTRAR COTIZACIONES POR VENDEDOR
+        =====================================
+        */
+
+        static public function ctrlMostrarCotizacionesVendedor($fechaInicial, $fechaFinal) {
+            $tabla = "cotizaciones";
+            $vendedor = $_SESSION["id"];
+            $respuesta = ModeloCotizaciones::mdlMostrarCotizacionVendedor($tabla, $fechaInicial, $fechaFinal, $vendedor);
+
+            return $respuesta;
+        }
+
+        /*
+        =====================================
         GUARDAR COTIZACION
         =====================================
         */

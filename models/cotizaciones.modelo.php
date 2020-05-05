@@ -7,7 +7,7 @@
         // MOSTRAR COTIZACIONES
         static public function mdlMostrarCotizacion($tabla, $item, $valor) {
             if ($item != null) {
-                $sentencia = Conexion::conectar()->prepare("SELECT cotizaciones.*, clientes.nombre as cliente, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = cotizaciones.id_cliente INNER JOIN usuarios ON usuarios.id = cotizaciones.id_usuario WHERE Cotizaciones.$item = :$item");
+                $sentencia = Conexion::conectar()->prepare("SELECT cotizaciones.*, clientes.nombre as cliente, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = cotizaciones.id_cliente INNER JOIN usuarios ON usuarios.id = cotizaciones.id_usuario WHERE cotizaciones.$item = :$item");
                 $sentencia -> bindParam(":".$item, $valor, PDO::PARAM_STR);
                 $sentencia -> execute();
             }
@@ -22,6 +22,7 @@
             return $sentencia -> fetch();
             $sentencia = null;
         }
+
         // INSERTA NUEVA COTIZACION
         static public function mdlCrearCotizacion($tabla,$datos) {
             $sentencia = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, id_usuario, id_cliente, productos, neto, impuestos, total, estado) VALUES (:codigo, :id_usuario, :id_cliente, :productos, :neto, :impuestos, :total, 1)");
@@ -78,7 +79,34 @@
             $sentencia = null;
         }
 
-        // MOSTRAR COTIZACIONES POR RANGO DE FECHAS
+        // MOSTRAR COTIZACIONES POR RANGO DE FECHAS Y VENDEDOR
+        static public function mdlMostrarCotizacionVendedor($tabla, $fechaInicio, $fechaFin, $vendedor) {
+            if ($fechaInicio == null) {
+                $sentencia = Conexion::conectar()->prepare("SELECT cotizaciones.*, clientes.nombre as cliente, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = cotizaciones.id_cliente INNER JOIN usuarios ON usuarios.id = cotizaciones.id_usuario WHERE cotizaciones.id_usuario = :id_usuario");
+                $sentencia -> bindParam(":id_usuario", $vendedor, PDO::PARAM_STR);
+                $sentencia -> execute();
+
+                return $sentencia -> fetchAll();
+            }
+            else if ($fechaInicio == $fechaFin) {
+                $sentencia = Conexion::conectar()->prepare("SELECT cotizaciones.*, clientes.nombre as cliente, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = cotizaciones.id_cliente INNER JOIN usuarios ON usuarios.id = cotizaciones.id_usuario WHERE cotizaciones.fecha_creacion LIKE '%$fechaInicio%' AND cotizaciones.id_usuario = :id_usuario");
+                $sentencia -> bindParam(":cotizaciones.fecha_creacion", $fechaInicio, PDO::PARAM_STR);
+                $sentencia -> bindParam(":id_usuario", $vendedor, PDO::PARAM_STR);
+                $sentencia -> execute();
+
+                return $sentencia -> fetchAll();
+            }
+            else {
+                $sentencia = Conexion::conectar()->prepare("SELECT cotizaciones.*, clientes.nombre as cliente, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = cotizaciones.id_cliente INNER JOIN usuarios ON usuarios.id = cotizaciones.id_usuario WHERE cotizaciones.fecha_creacion BETWEEN '$fechaInicio' AND '$fechaFin' AND cotizaciones.id_usuario = :id_usuario");
+                $sentencia -> bindParam(":id_usuario", $vendedor, PDO::PARAM_STR);
+                $sentencia -> execute();
+
+                return $sentencia -> fetchAll();
+            }
+            $sentencia = null;
+        }
+
+        // MOSTRAR COTIZACIONES POR RANGO DE FECHA
         static public function mdlMostrarRangoFechasCotizacion($tabla, $fechaInicio, $fechaFin) {
             if ($fechaInicio == null) {
                 $sentencia = Conexion::conectar()->prepare("SELECT cotizaciones.*, clientes.nombre as cliente, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = cotizaciones.id_cliente INNER JOIN usuarios ON usuarios.id = cotizaciones.id_usuario");

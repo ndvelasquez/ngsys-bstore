@@ -62,10 +62,10 @@
                           <td>S/'.$value["neto"].'</td>
                           <td>S/'.$value["total"].'</td>';
                           if ($value["estado"] == 1) {
-                            echo '<td>Activa</td>';
+                            echo '<td><span class="bg-green">Activa</span></td>';
                           }
                           else {
-                            echo '<td>Anulada</td>';
+                            echo '<td><span class="bg-red">Anulada</span></td>';
                           }
                   echo    '<td>'.$value["fecha_creacion"].'</td>';
                     echo '<td>';

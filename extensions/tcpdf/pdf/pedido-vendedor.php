@@ -31,6 +31,7 @@ $cliente = $respuestaVenta["cliente"];
 $telefono = $respuestaVenta["telefono"];
 $direccion = $respuestaVenta["direccion"];
 $vendedor = $respuestaVenta["vendedor"];
+$observacion = $respuestaVenta["observacion"];
 
 
 //REQUERIMOS LA CLASE TCPDF
@@ -204,6 +205,26 @@ EOF;
 $pdf->writeHTML($bloque4, false, false, false, false, '');
 
 }
+
+// ---------------------------------------------------------
+
+$bloque5 = <<<EOF
+
+	<table style="font-size: 10px; padding:5px 10px;">
+		<tr>
+			<td style="background-color:white; border-bottom: 1px solid #666; width:460px;"></td>
+		</tr>
+
+		<tr>
+			<td style="border: 1px solid #666; color:#333; background-color:white; width:460px; text-align:left">
+			<b>Observación:</b> <br> $observacion
+			</td>
+		</tr>
+	</table>
+
+EOF;
+
+$pdf->writeHTML($bloque5, false, false, false, false, '');
 
 
 // ---------------------------------------------------------

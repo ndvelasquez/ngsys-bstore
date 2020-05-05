@@ -50,8 +50,12 @@
                 $fechaInicial = null;
                 $fechaFinal = null;
               }
-
-                $ventas = ControladorCotizaciones::ctrlRangoFechasCotizacion($fechaInicial, $fechaFinal);
+                if($_SESSION["perfil"] == "Administrador") {
+                  $ventas = ControladorCotizaciones::ctrlRangoFechasCotizacion($fechaInicial, $fechaFinal);
+                }
+                else {
+                  $ventas = ControladorCotizaciones::ctrlMostrarCotizacionesVendedor($fechaInicial, $fechaFinal);
+                }
 
                 foreach ($ventas as $key => $value) {
                   echo '<tr>

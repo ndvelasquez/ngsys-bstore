@@ -31,6 +31,7 @@ $cliente = $respuestaVenta["cliente"];
 $telefono = $respuestaVenta["telefono"];
 $direccion = $respuestaVenta["direccion"];
 $vendedor = $respuestaVenta["vendedor"];
+$observacion = $respuestaVenta["observacion"];
 
 
 //REQUERIMOS LA CLASE TCPDF
@@ -223,7 +224,7 @@ $bloque5 = <<<EOF
 
 		<tr>
 
-			<td style="color:#333; background-color:white; width:340px; text-align:center"></td>
+			<td style="color:#333; border-bottom: 1px solid #666; background-color:white; width:340px; text-align:center"></td>
 
 			<td style="border-bottom: 1px solid #666; background-color:white; width:100px; text-align:center"></td>
 
@@ -233,7 +234,7 @@ $bloque5 = <<<EOF
 		
 		<tr>
 		
-			<td style="border-right: 1px solid #666; color:#333; background-color:white; width:340px; text-align:center"></td>
+			<td style="border-right: 1px solid #666; border-left: 1px solid #666; border-bottom: 1px solid #666; color:#333; background-color:white; width:340px; text-align:left" rowspan="3"><b>Observación:</b> <br> $observacion</td>
 
 			<td style="border: 1px solid #666;  background-color:white; width:100px; text-align:center">
 				Neto:
@@ -247,8 +248,6 @@ $bloque5 = <<<EOF
 
 		<tr>
 
-			<td style="border-right: 1px solid #666; color:#333; background-color:white; width:340px; text-align:center"></td>
-
 			<td style="border: 1px solid #666; background-color:white; width:100px; text-align:center">
 				IGV:
 			</td>
@@ -260,8 +259,6 @@ $bloque5 = <<<EOF
 		</tr>
 
 		<tr>
-		
-			<td style="border-right: 1px solid #666; color:#333; background-color:white; width:340px; text-align:center"></td>
 
 			<td style="border: 1px solid #666; background-color:white; width:100px; text-align:center">
 				Total:
