@@ -235,14 +235,14 @@
               <div class="col-xs-12 col-sm-6">
                 <div class="input-group">
                   <label class="input-group-addon" for="precioCompra"><i class="fa fa-arrow-up"></i></label>
-                  <input type="number" step="any" id="editarPrecioCompra" name="precioCompra" class="form-control" value="" placeholder="precio de compra" data-toggle="tooltip" title="campo obligatorio" required pattern="[0-9.]+" min="0">
+                  <input type="number" step="any" id="editarPrecioCompra" name="editarPrecioCompra" class="form-control" value="" placeholder="precio de compra" data-toggle="tooltip" title="campo obligatorio" required pattern="[0-9.]+" min="0">
                 </div>
               </div>
                 <!-- INPUT DE PRECIO DE VENTA -->
                 <div class="col-xs-12 col-sm-6">
                   <div class="input-group">
                     <label class="input-group-addon" for="precioVenta"><i class="fa fa-arrow-down"></i></label>
-                    <input type="number" step="any" id="editarPrecioVenta" readonly name="precioVenta" class="form-control" placeholder="precio de venta" data-toggle="tooltip" title="campo obligatorio" required pattern="[0-9.]+" min="0">
+                    <input type="number" step="any" id="editarPrecioVenta" readonly name="editarPrecioVenta" class="form-control" placeholder="precio de venta" data-toggle="tooltip" title="campo obligatorio" required pattern="[0-9.]+" min="0">
                   </div>
                 </div>
                 <br>
