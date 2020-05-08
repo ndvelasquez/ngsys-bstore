@@ -857,7 +857,7 @@ $(document).ready(function () {
        let arrayCantidades = $(".cantidadProducto");
        for (let i = 0; i < arrayDescripciones.length; i++) {
             
-            if($(arrayDescripciones[i]).val() == "delivery" || $(arrayDescripciones[i]).val() == "10") {
+            if($(arrayDescripciones[i]).val().toLowerCase() == "delivery" || $(arrayDescripciones[i]).val() == "10") {
                 $(arrayPrecios[i]).removeAttr("readonly");
                 $(arrayPrecios[i]).attr("precioReal", "1");
                 $(arrayCantidades[i]).attr("readonly", true);
