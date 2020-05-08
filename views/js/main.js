@@ -1354,7 +1354,7 @@ $(document).ready(function () {
         confirmButtonText: 'Anular'
     }).then((result) => {
             if (result.value) {
-            window.location = "index.php?ruta=ventas&idVenta="+idVenta;
+            window.location = "index.php?ruta=pedidos&idVenta="+idVenta;
             }
         })
     });
