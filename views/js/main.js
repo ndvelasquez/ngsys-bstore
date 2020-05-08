@@ -431,7 +431,7 @@ $(document).ready(function () {
                 $("#editarCodProducto").val(respuesta["codigo"]);
                 $("#editarCategoria").val(respuesta["id_categoria"]);
                 $("#editarCategoria").html(respuesta["categoria"]);
-                $("#editarCategoria").val(respuesta["id_categoria"]);
+                $("#editarCantidad").val(respuesta["stock"]);
                 $("#editarPrecioCompra").val(respuesta["precio_compra"]);
                 $("#editarPrecioVenta").val(respuesta["precio_venta"]);
                 $("#imagenActual").val(respuesta["imagen"]);

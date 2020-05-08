@@ -147,7 +147,7 @@
             <!-- INPUT DE IMAGEN DEL PRODUCTO -->
             <div class="form-group">
               <div class="panel">SUBIR IMAGEN</div>
-              <input type="file" class="imagenProducto" name="imagenProducto">
+              <input type="file" class="imagenProducto" name="editarImagen">
               <p class="help-block">Tamaño máximo de la foto: 10 MB</p>
               <img src="views/img/productos/default/anonymous.png" class="img-thumbnail preview" alt="foto de producto" width="100px">
             </div>
@@ -227,7 +227,7 @@
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="cantidad"><i class="fa fa-plus"></i></label>
-                <input type="number" id="editarCantidad" name="editarCantidad" class="form-control" value="" placeholder="cantidad" data-toggle="tooltip" title="campo obligatorio" min="0" pattern="[0-9]+">
+                <input type="number" id="editarCantidad" name="editarCantidad" class="form-control" value="" placeholder="stock" data-toggle="tooltip" title="campo obligatorio" min="0" pattern="[0-9]+">
               </div>
             </div>
             <!-- INPUT DE PRECIO DE COMPRA -->

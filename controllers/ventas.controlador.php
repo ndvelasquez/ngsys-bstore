@@ -116,7 +116,7 @@
                                 closeOnConfirm: false
                               }).then((result) =>{
                                 if(result.value){
-                                    window.location = 'ventas';
+                                    window.location = 'pedidos';
                                 }
                               });
                                   </script>";
@@ -131,7 +131,7 @@
                                 closeOnConfirm: false
                             }).then((result) =>{
                                 if(result.value){
-                                    window.location = 'ventas';
+                                    window.location = 'pedidos';
                                 }
                             });
                               </script>";
@@ -147,7 +147,7 @@
                             closeOnConfirm: false
                           }).then((result) =>{
                             if(result.value){
-                                window.location = 'ventas';
+                                window.location = 'pedidos';
                             }
                           });
                               </script>";

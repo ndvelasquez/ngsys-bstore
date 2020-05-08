@@ -61,7 +61,7 @@
                         =============================================
                         */
 
-                        if ($_FILES["imagenProducto"]["type"] == "image/jpeg") {
+                        if ($_FILES["imagenProducto"]["type"] == "image/jpeg" || $_FILES["imagenProducto"]["type"] == "image/jpg") {
                             /*
                             =============================================
                             PROCESO DE GUARDADO
