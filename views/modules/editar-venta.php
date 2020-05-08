@@ -3,7 +3,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Editar venta
+        Editar pedido
         <small>Panel de control</small>
       </h1>
       <ol class="breadcrumb">
