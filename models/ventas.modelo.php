@@ -24,7 +24,7 @@
         }
         // INSERTA NUEVA VENTA
         static public function mdlCrearVenta($tabla,$datos) {
-            $sentencia = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, id_usuario, id_cliente, productos, neto, impuestos, total, metodo_pago, observacion, estado) VALUES (:codigo, :id_usuario, :id_cliente, :productos, :neto, :impuestos, :total, :metodo_pago, :observacion, 1)");
+            $sentencia = Conexion::conectar()->prepare("INSERT INTO $tabla(codigo, id_usuario, id_cliente, productos, neto, impuestos, total, metodo_pago, observacion, estado) VALUES (:codigo, :id_usuario, :id_cliente, :productos, :neto, :impuestos, :total, :metodo_pago, :observacion, 3)");
             $sentencia -> bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
             $sentencia -> bindParam(":id_usuario", $datos["id_usuario"], PDO::PARAM_INT);
             $sentencia -> bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
@@ -46,7 +46,7 @@
         }
         // EDITAR VENTA
         static public function mdlEditarVenta($tabla,$datos) {
-            $sentencia = Conexion::conectar()->prepare("UPDATE $tabla SET codigo = :codigo, id_usuario = :id_usuario, id_cliente = :id_cliente, productos = :productos, neto = :neto, impuestos = :impuestos, total = :total, metodo_pago = :metodo_pago WHERE id = :id");
+            $sentencia = Conexion::conectar()->prepare("UPDATE $tabla SET codigo = :codigo, id_usuario = :id_usuario, id_cliente = :id_cliente, productos = :productos, neto = :neto, impuestos = :impuestos, total = :total, metodo_pago = :metodo_pago, estado = :estado, observacion = :observacion WHERE id = :id");
             $sentencia -> bindParam(":id", $datos["id"], PDO::PARAM_INT);
             $sentencia -> bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
             $sentencia -> bindParam(":id_usuario", $datos["id_usuario"], PDO::PARAM_INT);
@@ -56,6 +56,8 @@
             $sentencia -> bindParam(":impuestos", $datos["impuestos"], PDO::PARAM_STR);
             $sentencia -> bindParam(":total", $datos["total"], PDO::PARAM_STR);
             $sentencia -> bindParam(":metodo_pago", $datos["metodo_pago"], PDO::PARAM_STR);
+            $sentencia -> bindParam(":estado", $datos["estado"], PDO::PARAM_STR);
+            $sentencia -> bindParam(":observacion", $datos["observacion"], PDO::PARAM_STR);
 
             if($sentencia -> execute()) {
                 return "ok";

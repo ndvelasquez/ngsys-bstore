@@ -212,6 +212,7 @@
                             "impuestos" => $_POST["valorImpuesto"],
                             "total" => $_POST["totalVenta"],
                             "metodo_pago" => $_POST["listaMetodoPago"],
+                            "estado" => $_POST["estado"],
                             "observacion" => $_POST["observacion"]
                         );
                     $respuesta = ModeloVentas::mdlEditarVenta($tabla,$datos);
