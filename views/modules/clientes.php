@@ -90,7 +90,7 @@
         <div class="modal-body">
           <div class="box-body">
             <!-- INPUT DEL TIPO DE DOCUMENTO -->
-            <div class="form-group">
+            <!-- <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="tipoDocumento"><i class="fa fa-id-badge"></i></label>
                 <select id="tipoDocumento" name="tipoDocumento" class="form-control" data-toggle="tooltip" title="opcional" >
@@ -101,12 +101,12 @@
                   <option value="pasaporte">Pasaporte</option>
                 </select>
               </div>
-            </div>
+            </div> -->
             <!-- INPUT DEL NUMERO DE DOCUMENTO -->
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="documento"><i class="fa fa-id-card"></i></label>
-                <input type="number" id="documento" name="documento" class="form-control" value="" placeholder="N° de documento" data-toggle="tooltip" title="opcional" min="0" minlength="7" pattern="[0-9]+">
+                <input type="number" id="documento" name="documento" class="form-control" value="" placeholder="N° de RUC" data-toggle="tooltip" title="campo opcional" min="0" minlength="7" pattern="[0-9]+">
               </div>
             </div>
             <!-- INPUT DEL NOMBRE -->
@@ -127,16 +127,16 @@
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="telefono"><i class="fa fa-phone"></i></label>
-                <input type="text" id="telefono" name="telefono" class="form-control" value="" placeholder="Télefono del Cliente" data-toggle="tooltip" title="campo obligatorio" data-inputmask='"mask": "(99) 999-999-999"' data-mask required>
+                <input type="text" id="telefono" name="telefono" class="form-control" value="51" placeholder="Télefono del Cliente" data-toggle="tooltip" title="campo obligatorio" data-inputmask='"mask": "(99) 999-999-999"' data-mask required>
               </div>
             </div>
             <!-- INPUT DE FECHA DE NACIMIENTO -->
-            <div class="form-group">
+            <!-- <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="fechaNacimiento"><i class="far fa-calendar-alt"></i></label>
                 <input type="text" id="fechaNacimiento" name="fechaNacimiento" class="form-control" value="" placeholder="Fecha de nacimiento" data-toggle="tooltip" title="opcional">
               </div>
-            </div>
+            </div> -->
             <!-- INPUT DE DIRECCION -->
             <div class="form-group">
               <div class="input-group">
@@ -184,7 +184,7 @@
             <!-- ID DE Cliente -->
             <input type="hidden" id="idCliente" name="idCliente" value="">
             <!-- INPUT DEL TIPO DE DOCUMENTO -->
-            <div class="form-group">
+            <!-- <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="editarTipoDocumento"><i class="fa fa-users"></i></label>
                 <select name="editarTipoDocumento" class="form-control" data-toggle="tooltip" title="opcional">
@@ -195,12 +195,12 @@
                   <option value="pasaporte">Pasaporte</option>
                 </select>
               </div>
-            </div>
+            </div> -->
             <!-- INPUT DEL NUMERO DE DOCUMENTO -->
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="editarDocumento"><i class="fa fa-id-card"></i></label>
-                <input type="number" id="editarDocumento" name="editarDocumento" class="form-control" value="" placeholder="N° de documento" data-toggle="tooltip" title="opcional" min="0" minlength="7" pattern="[0-9]+">
+                <input type="number" id="editarDocumento" name="editarDocumento" class="form-control" value="" placeholder="N° de RUC" data-toggle="tooltip" title="opcional" min="0" minlength="7" pattern="[0-9]+">
               </div>
             </div>
             <!-- INPUT DEL NOMBRE -->
@@ -225,12 +225,12 @@
               </div>
             </div>
             <!-- INPUT DE FECHA DE NACIMIENTO -->
-            <div class="form-group">
+            <!-- <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="editarFechaNacimiento"><i class="far fa-calendar-alt"></i></label>
                 <input type="text" id="editarFechaNacimiento" name="editarFechaNacimiento" class="form-control" value="" placeholder="Fecha de nacimiento" data-toggle="tooltip" title="opcional">
               </div>
-            </div>
+            </div> -->
             <!-- INPUT DE DIRECCION -->
             <div class="form-group">
               <div class="input-group">

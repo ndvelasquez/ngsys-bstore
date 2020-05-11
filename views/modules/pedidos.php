@@ -61,11 +61,17 @@
                           <td>'.$value["vendedor"].'</td>
                           <td>S/'.$value["neto"].'</td>
                           <td>S/'.$value["total"].'</td>';
-                          if ($value["estado"] == 1) {
-                            echo '<td><span class="bg-green">Activa</span></td>';
+                          if ($value["estado"] == 3) {
+                            echo '<td><span class="bg-yellow">Pendiente de envío</span></td>';
+                          }
+                          else if ($value["estado"] == 4) {
+                            echo '<td><span class="bg-blue">En proceso de envío</span></td>';
+                          }
+                          else if ($value["estado"] == 1) {
+                            echo '<td><span class="bg-green">Enviado</span></td>';
                           }
                           else {
-                            echo '<td><span class="bg-red">Anulada</span></td>';
+                            echo '<td><span class="bg-red">Anulado</span></td>';
                           }
                   echo    '<td>'.$value["fecha_creacion"].'</td>';
                     echo '<td>';
@@ -77,14 +83,14 @@
                       echo     '<button class="btn btn-primary btn-imprimirDetalleVendedor" codVenta="'.$value["codigo"].'"><i class="fa fa-print"></i></button>';
                     }
                     if ($_SESSION["perfil"] == "Administrador") {
-                      echo     '<button class="btn btn-warning btn-editarVenta" idVenta="'.$value["id"].'"><i class="far fa-edit"></i></button>';
+                      if ($value["estado"] != 2) {
+
+                        echo     '<button class="btn btn-warning btn-editarVenta" idVenta="'.$value["id"].'"><i class="far fa-edit"></i></button>';
+                      }
                     }
                     if ($_SESSION["perfil"] == "Administrador") {
                       if ($value["estado"] != 2) {
                         echo '<button class="btn btn-danger btn-anularVenta" idVenta="'.$value["id"].'"><i class="fa fa-times"></i></button>';
-                      }
-                      else {
-                        echo '<button class="btn btn-default"><i class="fa fa-times"></i></button>';
                       }
                     }
                     echo    '</div>';

@@ -34,6 +34,8 @@ session_start();
   <link rel="stylesheet" href="views/bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- Morris js -->
   <link rel="stylesheet" href="views/bower_components/morris.js/morris.css">
+  <!-- Bootstrap Select -->
+  <link rel="stylesheet" href="views/plugins/bootstrap-select/dist/css/bootstrap-select.css">
   <!-- 
 ========================
 SCRIPTS
@@ -74,6 +76,8 @@ SCRIPTS
 <script src="views/bower_components/morris.js/morris.min.js"></script>
 <!-- ChartJS -->
 <script src="views/bower_components/chart.js/Chart.js"></script>
+<!-- Bootstrap Select -->
+<script src="views/plugins/bootstrap-select/dist/js/bootstrap-select.js"></script>
 
 </head>
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini login-page">

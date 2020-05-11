@@ -520,10 +520,10 @@ $(document).ready(function () {
     });
 
     // formato de fecha
-    $('#fechaNacimiento').datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true
-      });
+    // $('#fechaNacimiento').datepicker({
+    //     format: 'yyyy-mm-dd',
+    //     autoclose: true
+    //   });
     // formato de telefono
     $('[data-mask]').inputmask();
 
@@ -546,13 +546,13 @@ $(document).ready(function () {
         dataType: 'json',
         success: function(respuesta) {
             $("#idCliente").val(respuesta["id"]);
-            $("#editarTipoDocumento").val(respuesta["tipo_documento"]);
-            $("#editarTipoDocumento").html(respuesta["tipo_documento"]);
+            // $("#editarTipoDocumento").val(respuesta["tipo_documento"]);
+            // $("#editarTipoDocumento").html(respuesta["tipo_documento"]);
             $("#editarDocumento").val(respuesta["documento"]);
             $("#editarNombre").val(respuesta["nombre"]);
             $("#editarEmail").val(respuesta["email"]);
             $("#editarTelefono").val(respuesta["telefono"]);
-            $("#editarFechaNacimiento").val(respuesta["fecha_nacimiento"]);
+            // $("#editarFechaNacimiento").val(respuesta["fecha_nacimiento"]);
             $("#editarDireccion").val(respuesta["direccion"]);
         }
    })
@@ -1409,7 +1409,7 @@ $(document).ready(function () {
 
       localStorage.setItem('capturarRango', capturarRango);
 
-      window.location = 'index.php?ruta=ventas&fechaInicial='+fechaInicial+'&fechaFinal='+fechaFinal;
+      window.location = 'index.php?ruta=pedidos&fechaInicial='+fechaInicial+'&fechaFinal='+fechaFinal;
     }
   );
     /* 
@@ -1721,11 +1721,36 @@ $(document).ready(function () {
     });
     
     /*=============================================
-        INVOCO FUNCION MÉTODO DE PAGO AL COLOCAR EL COD DE TRANSACCION CON TC O TD
-        =============================================*/
+    INVOCO FUNCION MÉTODO DE PAGO AL COLOCAR EL COD DE TRANSACCION CON TC O TD
+    =============================================*/
     
         $(".formularioCotizacion").on("change", "input#codigoTransaccion", function () {
             // LISTAR METODO EN EL INPUT
             listarMetodos();
         });
+    
+    /*===================================================
+    MOSTRAR ESTADOS DEL PEDIDO EN EL SELECT (EDITAR PEDIDO)
+    =====================================================*/
+    let estado = $("#estado").selectpicker();
+    let valorEstado = $(estado).selectpicker('val');
+
+    switch (valorEstado) {
+        case '1':
+            $(estado).find('[value=1]').prop("selected", true);
+            $(estado).selectpicker('refresh');
+            break;
+        case '3':
+            $(estado).find('[value=3]').prop("selected", true);
+            $(estado).selectpicker('refresh');
+            break;
+        case '4':
+            $(estado).find('[value=4]').prop("selected", true);
+            $(estado).selectpicker('refresh');
+            break;
+    
+        default:
+            
+            break;
+    }
 });

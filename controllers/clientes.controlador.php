@@ -115,7 +115,6 @@
             if (isset($_POST["idCliente"])) {
 
                 if (preg_match('/[a-zA-ZñÑ]\w+/', $_POST["editarNombre"])
-                && preg_match('/[0-9]+/', $_POST["editarDocumento"])
                 && preg_match('/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/', $_POST["editarEmail"])
                 && preg_match('/[0-9]+/', $_POST["editarTelefono"])) {
                     

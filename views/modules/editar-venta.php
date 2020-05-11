@@ -180,6 +180,17 @@
 
                     </div>
 
+                    <!-- INPUT DE ESTADO -->
+                    <div class="form-group">
+                      <div class="input-group">
+                        <select class="form-control" name="estado" id="estado">
+                          <option id="valorEstado" value="<?=$venta["estado"]?>"></option>
+                          <option value="1" data-content="<span><i class='fas fa-flag' style='color:green'></i> Enviado</span>">Enviado</option>
+                          <option value="3" data-content="<span><i class='fas fa-flag' style='color:yellow'></i> Pendiente de envío</span>">Pendiente de envío</option>
+                          <option value="4" data-content="<span><i class='fas fa-flag' style='color:blue'></i> En Proceso de envío</span>">En Proceso de envío</option>
+                        </select>
+                      </div>
+                    </div>
                     <!-- INPUT DE OBSERVACION -->
                     <div class="form-group">
                       <div class="input-group">

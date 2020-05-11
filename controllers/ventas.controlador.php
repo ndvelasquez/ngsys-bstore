@@ -54,7 +54,7 @@
                         "total" => $precioFormateado,
                         "metodo_pago" => $_POST["listaMetodoPago"],
                         "observacion" => $_POST["observacion"],
-                        "estado" => 1
+                        "estado" => 3
                     );
                     $respuesta = ModeloVentas::mdlCrearVenta($tabla,$datos);
                     /*======================================================
