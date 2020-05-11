@@ -1450,7 +1450,7 @@ $(document).ready(function () {
    $('.daterangepicker.opensleft .range_inputs .cancelBtn').on('click', function () {
        localStorage.removeItem('capturarRango');
        localStorage.clear();
-       window.location = 'ventas';
+       window.location = 'pedidos';
    });
    /* 
     =====================================================
@@ -1497,7 +1497,7 @@ $(document).ready(function () {
 
         localStorage.setItem("capturarRango", "Hoy");
 
-        window.location = 'index.php?ruta=ventas&fechaInicial='+fechaInicial+'&fechaFinal='+fechaFinal;
+        window.location = 'index.php?ruta=pedidos&fechaInicial='+fechaInicial+'&fechaFinal='+fechaFinal;
     }
    });
    /* 
