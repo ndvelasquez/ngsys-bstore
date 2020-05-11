@@ -79,6 +79,21 @@
             $sentencia = null;
         }
 
+        // ACTUALIZAR ESTADO COOTIZACION
+        static public function mdlActualizaCotizacion($item, $valor) {
+            $sentencia = Conexion::conectar()->prepare("UPDATE cotizaciones SET estado = 3 WHERE $item = :$item");
+            $sentencia -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+            $sentencia -> execute();
+
+            if($sentencia -> execute()) {
+                return "ok";
+            }
+            else {
+                return "error";
+            }
+            $sentencia = null;
+        }
+
         // MOSTRAR COTIZACIONES POR RANGO DE FECHAS Y VENDEDOR
         static public function mdlMostrarCotizacionVendedor($tabla, $fechaInicio, $fechaFin, $vendedor) {
             if ($fechaInicio == null) {

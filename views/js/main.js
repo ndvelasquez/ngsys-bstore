@@ -783,7 +783,7 @@ $(document).ready(function () {
     */
    $(".tablaProductoCotizacion tbody").on("click", "button.agregarProducto", function () {
     let idProducto = $(this).attr("idproducto");
-    
+    let contador = 1;
     $(this).removeClass("btn-primary agregarProducto");
     $(this).addClass("btn-default");
 
@@ -819,7 +819,7 @@ $(document).ready(function () {
 
                     '<!-- Cantidad del producto -->' +
                     '<div class="col-xs-3 ingresoCantidad">' +
-                    '<input type="number" class="form-control cantidadProducto" name="cantidadProducto" min="1" value="1" stock="'+stock+'" nuevoStock="'+Number(stock-1)+'" required>' +
+                    '<input type="number" id="producto'+contador+'" class="form-control cantidadProducto" name="cantidadProducto" min="1" value="1" stock="'+stock+'" nuevoStock="'+Number(stock-1)+'" required>' +
                     '</div>' +
 
                     '<!-- Precio del producto -->' +
@@ -843,7 +843,8 @@ $(document).ready(function () {
             listarProductos();
             // MODIFICAR EL PRECIO DE DELIVERY
             modificaPrecioDelivery();
-
+            
+            contador++;
         }
     });
    });
@@ -1679,6 +1680,7 @@ $(document).ready(function () {
        ==================================================*/
        $(".formularioCotizacion").on("change", ".cantidadProducto", function () {
         let precio = $(this).parent().parent().children(".ingresoPrecio").children().children(".precioProducto");
+
         let precioSumado = $(this).val() * precio.attr("precioReal");
         $(precio).val(precioSumado);
     

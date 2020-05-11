@@ -40,7 +40,8 @@
                     // var_dump($venta);
                   ?>
                     
-                    
+                    <!-- INPUT ID COTIZACION -->
+                    <input type="hidden" name="idCotizacion" value="<?=$valor?>">
                     <!-- INPUT VENDEDOR -->
                     <div class="form-group">
                       <div class="input-group">
@@ -81,7 +82,7 @@
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-users"></i></span>
                         <input type="text" class="form-control" name="cliente" id="cliente" value="<?=$venta["cliente"]?>" readonly>
-                        <input type="hidden" name="idCliente" value="<?=$venta["id_cliente"]?>" readonly>
+                        <input type="hidden" name="agregarCliente" value="<?=$venta["id_cliente"]?>" readonly>
                       </div>
                     </div>
 

@@ -66,10 +66,13 @@
                           <td>S/'.$value["neto"].'</td>
                           <td>S/'.$value["total"].'</td>';
                           if ($value["estado"] == 1) {
-                            echo '<td>Activa</td>';
+                            echo '<td><span class="bg-green">Activa</span></td>';
+                          }
+                          else if ($value["estado"] == 3) {
+                            echo '<td><span class="bg-blue">Pedido Procesado</span></td>';
                           }
                           else {
-                            echo '<td>Anulada</td>';
+                            echo '<td><span class="bg-red">Anulada</span></td>';
                           }
                   echo    '<td>'.$value["fecha_creacion"].'</td>';
                     echo '<td>';
@@ -79,10 +82,9 @@
                     if ($value["estado"] != 2) {
                       echo '<button class="btn btn-danger btn-anularCotizacion" idCotizacion="'.$value["id"].'"><i class="fa fa-times"></i></button>';
                     }
-                    else {
-                      echo '<button class="btn btn-default"><i class="fa fa-times"></i></button>';
+                    if ($value["estado"] == 1) {
+                      echo     '<button class="btn btn-success btn-convierteVenta" idCotizacion="'.$value["id"].'"><i class="ion ion-ios-cart"></i><span> Generar Pedido</span></button>';
                     }
-                    echo     '<button class="btn btn-success btn-convierteVenta" idCotizacion="'.$value["id"].'"><i class="ion ion-ios-cart"></i><span> Generar Pedido</span></button>';
                     echo    '</div>';
                     echo '</td>';
                   echo '</tr>';

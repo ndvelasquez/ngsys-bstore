@@ -44,6 +44,12 @@
                     $precioFormateado = (0+str_replace(",","",$precioTotal));
                     $precioFormateado = number_format($precioFormateado,2,".","");
                     
+                    // si la venta es a partir de una cotización, actualiza estado
+                    if (isset($_POST["idCotizacion"])) {
+                        $itemCotizacion = "id";
+                        $valorCotizacion = $_POST["idCotizacion"];
+                        ModeloCotizaciones::mdlActualizaCotizacion($itemCotizacion, $valorCotizacion);
+                    }
                     $datos = array(
                         "codigo" => $_POST["codVenta"],
                         "id_usuario" => $_POST["idVendedor"],
