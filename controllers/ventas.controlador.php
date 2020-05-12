@@ -37,8 +37,7 @@
 
                 foreach ($arrayVentas as $key => $venta) {
                     if($_POST["codVenta"] == $venta["codigo"]) {
-                        ob_start();
-                        header("Location: crear-pedido");
+                        echo "<script>window.location = 'crear-pedido'</script>";
                     }
                 }
 

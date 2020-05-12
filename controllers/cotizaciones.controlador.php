@@ -49,8 +49,7 @@
    
                 foreach ($arrayCotizaciones as $key => $cotizacion) {
                     if($_POST["codCotizacion"] == $cotizacion["codigo"]) {
-                        ob_start();
-                        header("Location: crear-cotizacion");
+                        echo "<script>window.location = 'crear-cotizacion'</script>";
                     }
                 }
 

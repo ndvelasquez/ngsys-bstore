@@ -70,7 +70,7 @@
                     <div class="form-group">
                       <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                        <select class="form-control" name="agregarCliente" id="agregarCliente" required>
+                        <select class="selectpicker form-control" data-live-search="true" name="agregarCliente" id="agregarCliente" required>
                           <option value="">Seleccionar Cliente</option>
                           <?php
                             $item = null;

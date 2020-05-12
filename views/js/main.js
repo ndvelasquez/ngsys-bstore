@@ -1676,8 +1676,8 @@ $(document).ready(function () {
        
     
     /*===================================================
-       MODIFICAR PRECIO DEL PRODUCTO SEGUN LA CANTIDAD EN COTIZACION
-       ==================================================*/
+    MODIFICAR PRECIO DEL PRODUCTO SEGUN LA CANTIDAD EN COTIZACION
+    =====================================================*/
        
        $(".formularioCotizacion").on("change", ".cantidadProducto", function () {
         console.log($(this));
