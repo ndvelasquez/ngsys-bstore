@@ -30,6 +30,18 @@
                && isset($_POST["listaMetodoPago"])
                && isset($_POST["observacion"])) {
 
+                /*===================================================
+                VERIFICO QUE NO HAYAN CODIGOS DUPLICADOS
+                =====================================================*/
+                $arrayVentas = ModeloVentas::mdlMostrarVenta('ventas', null, null);
+
+                foreach ($arrayVentas as $key => $venta) {
+                    if($_POST["codVenta"] == $venta["codigo"]) {
+                        ob_start();
+                        header("Location: crear-pedido");
+                    }
+                }
+
                 if (preg_match('/[0-9]+/', $_POST["codVenta"])
                   && preg_match('/[0-9.]+/', $_POST["precioNeto"])
                   && preg_match('/[0-9.]+/', $_POST["valorImpuesto"])

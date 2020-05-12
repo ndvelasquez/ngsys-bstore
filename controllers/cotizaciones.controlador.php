@@ -41,6 +41,18 @@
                && isset($_POST["precioNeto"])
                && isset($_POST["valorImpuesto"])
                && isset($_POST["totalVenta"])) {
+                
+                /*===================================================
+                VERIFICO QUE NO HAYAN CODIGOS DUPLICADOS
+                =====================================================*/
+                $arrayCotizaciones = ModeloCotizaciones::mdlMostrarCotizacion('cotizaciones', null, null);
+   
+                foreach ($arrayCotizaciones as $key => $cotizacion) {
+                    if($_POST["codCotizacion"] == $cotizacion["codigo"]) {
+                        ob_start();
+                        header("Location: crear-cotizacion");
+                    }
+                }
 
                 if (preg_match('/[0-9]+/', $_POST["codCotizacion"])
                   && preg_match('/[0-9.]+/', $_POST["precioNeto"])

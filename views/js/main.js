@@ -781,9 +781,9 @@ $(document).ready(function () {
     AGREGAR PRODUCTOS EN COTIZACION
     ====================================================
     */
+   var contador = 1;
    $(".tablaProductoCotizacion tbody").on("click", "button.agregarProducto", function () {
     let idProducto = $(this).attr("idproducto");
-    let contador = 1;
     $(this).removeClass("btn-primary agregarProducto");
     $(this).addClass("btn-default");
 
@@ -1618,7 +1618,7 @@ $(document).ready(function () {
     $(".formularioCotizacion").on("change", ".precioProducto", function (e) {
         let precioDelivery = $(this).val();
         $(this).attr("precioReal", precioDelivery);
-        console.log($(this).attr("precioReal"));
+        // console.log($(this).attr("precioReal"));
         // SUMAR TOTAL DE PRECIOS
         sumarTotalPrecios();
         // SUMAR LOS IMPUESTOS AL TOTAL
@@ -1675,12 +1675,16 @@ $(document).ready(function () {
     
        
     
-    /*================================================
+    /*===================================================
        MODIFICAR PRECIO DEL PRODUCTO SEGUN LA CANTIDAD EN COTIZACION
        ==================================================*/
+       
        $(".formularioCotizacion").on("change", ".cantidadProducto", function () {
+        console.log($(this));
+        
         let precio = $(this).parent().parent().children(".ingresoPrecio").children().children(".precioProducto");
-
+        console.log(precio);
+        
         let precioSumado = $(this).val() * precio.attr("precioReal");
         $(precio).val(precioSumado);
     

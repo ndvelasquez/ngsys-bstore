@@ -13,18 +13,18 @@ error_reporting(0);
 
     $arrayFechas = array();
     $arrayVentas = array();
-    $sumaPagoMes = array();
+    $sumaPagoDia = array();
     foreach ($ventas as $key => $value) {
         if ($value["estado"] != 2) {
             // CAPTURO EL AÑO Y EL MES
-            $fecha = substr($value["fecha_creacion"],0,7);
+            $fecha = substr($value["fecha_creacion"],0,10);
             // INTRODUZCO LAS FECHAS EN EL ARRAY DE FECHAS
             array_push($arrayFechas, $fecha);
             // CAPTURO LAS VENTAS
             $arrayVentas = array($fecha => $value["total"]);
             // SUMO LOS PAGOS TOTALES POR MES
-            foreach ($arrayVentas as $key => $totalMes) {
-                $sumaPagoMes[$key] += $totalMes;
+            foreach ($arrayVentas as $key => $totalDia) {
+                $sumaPagoDia[$key] += $totalDia;
             }
         }
     }
@@ -54,9 +54,9 @@ GRAFICO DE VENTAS
       <?php
       if ($arrayFechas != null) {
           foreach ($arrayFechas as $key) {
-              echo "{ y: '".$key."', ventas: ".$sumaPagoMes[$key]." },";
+              echo "{ y: '".$key."', ventas: ".$sumaPagoDia[$key]." },";
           }
-          echo "{ y: '".$key."', ventas: ".$sumaPagoMes[$key]." }";
+          echo "{ y: '".$key."', ventas: ".$sumaPagoDia[$key]." }";
       }
       else {
           echo "{ y: '0', ventas: '0' }";

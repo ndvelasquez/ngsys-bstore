@@ -96,7 +96,7 @@
                                 <!-- Precio del producto -->
                                 <div class="col-xs-3 ingresoPrecio" style="padding-left: 0px">
                                     <div class="input-group">
-                                        <input type="text" class="form-control precioProducto" name="precioProducto" precioReal="'.$producto["precio"].'" value="'.$producto["total"].'" readonly required>
+                                        <input type="text" class="form-control precioProducto" name="precioProducto" precioReal="'.$producto["precio"].'" value="'.$producto["total"].'" required>
                                         <span class="input-group-addon"><b>S/</b></i></span>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                     <input type="hidden" name="listaProductos" id="listaProductos">
 
                     <!-- BOTON PARA AGREGAR PRODUCTOS (DISPOSITIVOS MOVILES) -->
-                    <button class="btn btn-default hidden-lg btnAgregarProductoCoti">Agregar Producto</button>
+                    <button class="btn btn-default hidden-lg" data-toggle="modal" data-target="#modalTablaProductosMovil">Agregar Producto</button>
 
                     <hr>
 
@@ -200,7 +200,32 @@
   </div>
   <!-- /.content-wrapper -->
 
-  <!-- Modal de agregar Cliente-->
+  <!-- ================================
+  LISTADO DE PRODUCTOS MOVILES MODAL
+  ====================================-->
+  <div id="modalTablaProductosMovil" class="modal fade" role="dialog">
+    <div class="box box-warning">
+      <div class="box-header with-border">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+              
+        <table class="table table-bordered table-striped dt-responsive tablaProductoCotizacion">
+          <thead>
+            <tr>
+              <th style="width: 10px">#</th>
+              <th>Imagen</th>
+              <th>Código</th>
+              <th>Descripción</th>
+              <th>Stock</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+        </table>
+              
+    </div>
+  </div>
+
+<!-- Modal de agregar Cliente-->
 <div id="modalAgregarCliente" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
@@ -220,10 +245,10 @@
         <div class="modal-body">
           <div class="box-body">
             <!-- INPUT DEL TIPO DE DOCUMENTO -->
-            <div class="form-group">
+            <!-- <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="tipoDocumento"><i class="fa fa-id-badge"></i></label>
-                <select id="tipoDocumento" name="tipoDocumento" class="form-control" data-toggle="tooltip" title="campo obligatorio" required>
+                <select id="tipoDocumento" name="tipoDocumento" class="form-control" data-toggle="tooltip" title="opcional" >
                   <option value="">Seleccione un tipo de documento</option>
                   <option value="dni">DNI</option>
                   <option value="carnet de extranjeria">Carnet de extranjería</option>
@@ -231,47 +256,47 @@
                   <option value="pasaporte">Pasaporte</option>
                 </select>
               </div>
-            </div>
+            </div> -->
             <!-- INPUT DEL NUMERO DE DOCUMENTO -->
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="documento"><i class="fa fa-id-card"></i></label>
-                <input type="number" id="documento" name="documento" class="form-control" value="" placeholder="N° de documento" data-toggle="tooltip" title="campo obligatorio" required min="0" minlength="7" pattern="[0-9]+">
+                <input type="number" id="documento" name="documento" class="form-control" value="" placeholder="N° de RUC" data-toggle="tooltip" title="campo opcional" min="0" minlength="7" pattern="[0-9]+">
               </div>
             </div>
             <!-- INPUT DEL NOMBRE -->
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="nombre"><i class="fa fa-font"></i></label>
-                <input type="text" id="nombre" name="nombre" class="form-control" value="" placeholder="Nombre del Cliente" data-toggle="tooltip" title="campo obligatorio" required pattern="[a-zA-ZñÑ ]+">
+                <input type="text" id="nombre" name="nombre" class="form-control" value="" placeholder="Nombre del Cliente" data-toggle="tooltip" title="campo obligatorio" required pattern="[a-zA-ZñÑ0-9.´\- ]+">
               </div>
             </div>
             <!-- INPUT DEL EMAIL -->
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="email"><i class="fa fa-envelope"></i></label>
-                <input type="email" id="email" name="email" class="form-control" value="" placeholder="Email del Cliente" data-toggle="tooltip" title="campo obligatorio" required>
+                <input type="email" id="email" name="email" class="form-control" value="" placeholder="Email del Cliente" data-toggle="tooltip" title="opcional">
               </div>
             </div>
             <!-- INPUT DEL TELEFONO -->
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="telefono"><i class="fa fa-phone"></i></label>
-                <input type="text" id="telefono" name="telefono" class="form-control" value="" placeholder="Télefono del Cliente" data-toggle="tooltip" title="campo obligatorio" data-inputmask='"mask": "(99) 999-999-999"' data-mask required>
+                <input type="text" id="telefono" name="telefono" class="form-control" value="51" placeholder="Télefono del Cliente" data-toggle="tooltip" title="campo obligatorio" data-inputmask='"mask": "(99) 999-999-999"' data-mask required>
               </div>
             </div>
             <!-- INPUT DE FECHA DE NACIMIENTO -->
-            <div class="form-group">
+            <!-- <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="fechaNacimiento"><i class="far fa-calendar-alt"></i></label>
-                <input type="text" id="fechaNacimiento" name="fechaNacimiento" class="form-control" value="" placeholder="Fecha de nacimiento" data-toggle="tooltip" title="campo obligatorio" required>
+                <input type="text" id="fechaNacimiento" name="fechaNacimiento" class="form-control" value="" placeholder="Fecha de nacimiento" data-toggle="tooltip" title="opcional">
               </div>
-            </div>
+            </div> -->
             <!-- INPUT DE DIRECCION -->
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="direcicon"><i class="fa fa-map-marker"></i></label>
-                <textarea name="direccion" class="form-control" placeholder="Dirección del cliente" data-toggle="tooltip" title="campo obligatorio" id="direccion" cols="5" rows="3" required></textarea>
+                <textarea name="direccion" class="form-control" placeholder="Dirección de despacho" data-toggle="tooltip" title="campo obligatorio" id="direccion" cols="5" rows="3" required></textarea>
               </div>
             </div>
           </div>
