@@ -126,7 +126,6 @@
                         if ($respuestaDetalleVenta == "ok" && $comprasCliente == "ok" && $ultimaCompra == "ok") {
                             echo "<script>
                             Swal.fire({
-                                type: 'success',
                                 title: 'Venta creada con éxito',
                                 icon: 'success',
                                 confirmButtonText: 'Cerrar',

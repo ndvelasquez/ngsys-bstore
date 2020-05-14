@@ -4,7 +4,7 @@
 
     class ModeloProductos {
 
-        // MOSTRAR USUARIOS
+        // MOSTRAR PRODUCTOS
         static public function mdlMostrarProducto($tabla, $item, $valor) {
             if ($item != null) {
                 $sentencia = Conexion::conectar()->prepare("SELECT productos.*, categorias.nombre as categoria FROM $tabla INNER JOIN categorias on categorias.id = productos.id_categoria WHERE productos.$item = :$item ORDER BY productos.id DESC");

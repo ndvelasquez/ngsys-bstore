@@ -94,6 +94,22 @@
                             $itemProducto = "id";
                             $valorProducto = $producto["id"];
                             $traerProducto = ControladorProductos::ctrlMostrarProductos($itemProducto, $valorProducto);
+                            if ($producto["cantidad"] > $traerProducto["stock"]) {
+                              echo "<script>
+                                Swal.fire({
+                                    title: 'Advertencia',
+                                    icon: 'warning',
+                                    text: 'Uno o varios productos no se encuentran en stock actualmente',
+                                    footer: 'comuniquese con el encargado del área',
+                                    confirmButtonText: 'Cerrar',
+                                    closeOnConfirm: false
+                                  }).then((result) =>{
+                                    if(result.value){
+                                        window.location = 'pedidos';
+                                    }
+                                  });
+                                </script>";
+                            }
                             $stockAntiguo = $traerProducto["stock"] + $producto["cantidad"];
                             echo '
                             <div class="row" style="padding:5px 15px">
