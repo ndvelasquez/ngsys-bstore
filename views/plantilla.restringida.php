@@ -95,10 +95,8 @@ SCRIPTS
             || $_GET["ruta"] == "categorias"
             || $_GET["ruta"] == "clientes"
             || $_GET["ruta"] == "pedidos"
-            || $_GET["ruta"] == "cotizaciones"
             || $_GET["ruta"] == "crear-pedido"
             || $_GET["ruta"] == "crear-pedido2"
-            || $_GET["ruta"] == "crear-cotizacion"
             || $_GET["ruta"] == "editar-venta"
             || $_GET["ruta"] == "editar-cotizacion"
             || $_GET["ruta"] == "reporte-ventas"
@@ -123,7 +121,5 @@ SCRIPTS
   ?>
   <!-- Main js -->
 <script src="views/js/main.js"></script>
-<!-- Barcode JS -->
-<script src="views/js/JsBarcode.all.min.js"></script>
 </body>
 </html>

@@ -1759,4 +1759,9 @@ $(document).ready(function () {
             
             break;
     }
+
+    /*==================================================
+    CREAR CODIGO DE BARRAS DE LOS PRODUCTOS
+    ====================================================*/
+    $("#barcode").JsBarcode("Holi!");
 });

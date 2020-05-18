@@ -7,12 +7,12 @@
         // MOSTRAR VENTAS
         static public function mdlMostrarVenta($tabla, $item, $valor) {
             if ($item != null) {
-                $sentencia = Conexion::conectar()->prepare("SELECT ventas.*, clientes.nombre as cliente, clientes.telefono as telefono, clientes.direccion as direccion, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = ventas.id_cliente INNER JOIN usuarios ON usuarios.id = ventas.id_usuario WHERE ventas.$item = :$item");
+                $sentencia = Conexion::conectar()->prepare("SELECT ventas.*, clientes.nombre as cliente, clientes.telefono as telefono, clientes.direccion as direccion, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = ventas.id_cliente INNER JOIN usuarios ON usuarios.id = ventas.id_usuario WHERE ventas.$item = :$item ORDER BY codigo ASC");
                 $sentencia -> bindParam(":".$item, $valor, PDO::PARAM_STR);
                 $sentencia -> execute();
             }
             else {
-                $sentencia = Conexion::conectar()->prepare("SELECT ventas.*, clientes.nombre as cliente, clientes.telefono as telefono, clientes.direccion as direccion, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = ventas.id_cliente INNER JOIN usuarios ON usuarios.id = ventas.id_usuario");
+                $sentencia = Conexion::conectar()->prepare("SELECT ventas.*, clientes.nombre as cliente, clientes.telefono as telefono, clientes.direccion as direccion, usuarios.nombre as vendedor FROM $tabla INNER JOIN clientes ON clientes.id = ventas.id_cliente INNER JOIN usuarios ON usuarios.id = ventas.id_usuario ORDER BY codigo ASC");
                 $sentencia -> execute();
 
                 return $sentencia -> fetchAll();
@@ -46,9 +46,8 @@
         }
         // EDITAR VENTA
         static public function mdlEditarVenta($tabla,$datos) {
-            $sentencia = Conexion::conectar()->prepare("UPDATE $tabla SET codigo = :codigo, id_usuario = :id_usuario, id_cliente = :id_cliente, productos = :productos, neto = :neto, impuestos = :impuestos, total = :total, metodo_pago = :metodo_pago, estado = :estado, observacion = :observacion WHERE id = :id");
+            $sentencia = Conexion::conectar()->prepare("UPDATE $tabla SET id_usuario = :id_usuario, id_cliente = :id_cliente, productos = :productos, neto = :neto, impuestos = :impuestos, total = :total, metodo_pago = :metodo_pago, estado = :estado, observacion = :observacion WHERE id = :id");
             $sentencia -> bindParam(":id", $datos["id"], PDO::PARAM_INT);
-            $sentencia -> bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
             $sentencia -> bindParam(":id_usuario", $datos["id_usuario"], PDO::PARAM_INT);
             $sentencia -> bindParam(":id_cliente", $datos["id_cliente"], PDO::PARAM_INT);
             $sentencia -> bindParam(":productos", $datos["productos"], PDO::PARAM_STR);

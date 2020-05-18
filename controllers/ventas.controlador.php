@@ -214,7 +214,6 @@
                         $comprasCliente = ModeloClientes::mdlActualizarCliente($tablaClientes, $item1, $valor1, $valorCliente);
                         $datos = array(
                             "id" => $_POST["idVenta"],
-                            "codigo" => $_POST["codVenta"],
                             "id_usuario" => $_POST["idVendedor"],
                             "id_cliente" => $_POST["idCliente"],
                             "productos" => $_POST["listaProductos"],
