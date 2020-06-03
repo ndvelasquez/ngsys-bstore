@@ -29,7 +29,7 @@
           <table class="table table-bordered table-striped dt-responsive tablaProducto">
             <thead>
               <tr>
-                <th style="width: 10px"><svg class="barcode"></svg></th>
+                <th style="width: 10px">#</th>
                 <th>Imagen</th>
                 <th>Código</th>
                 <th>Descripción</th>

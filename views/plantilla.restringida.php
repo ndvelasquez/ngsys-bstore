@@ -96,9 +96,7 @@ SCRIPTS
             || $_GET["ruta"] == "clientes"
             || $_GET["ruta"] == "pedidos"
             || $_GET["ruta"] == "crear-pedido"
-            || $_GET["ruta"] == "crear-pedido2"
             || $_GET["ruta"] == "editar-venta"
-            || $_GET["ruta"] == "editar-cotizacion"
             || $_GET["ruta"] == "reporte-ventas"
             || $_GET["ruta"] == "movimientos"
             || $_GET["ruta"] == "salir") {

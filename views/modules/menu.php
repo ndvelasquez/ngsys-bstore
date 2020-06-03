@@ -75,23 +75,29 @@
                 </a>
             </li>
             <li>
-                <a href="cotizaciones">
-                    <i class="far fa-circle"></i>
-                    <span>cotizaciones</span>
-                </a>
-            </li>
-            <li>
                 <a href="crear-pedido">
                     <i class="far fa-circle"></i>
                     <span>Crear pedido</span>
                 </a>
             </li>
-            <li>
-                <a href="crear-cotizacion">
+            <?php
+              if($_SESSION["perfil"] == "Administrador") {
+                echo '
+                <li>
+                  <a href="cotizaciones">
+                    <i class="far fa-circle"></i>
+                    <span>cotizaciones</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="crear-cotizacion">
                     <i class="far fa-circle"></i>
                     <span>Crear cotización</span>
-                </a>
-            </li>
+                  </a>
+                </li>
+                ';
+              }
+            ?>
             <?php
               if($_SESSION["perfil"] == "Administrador") {
                 echo '
