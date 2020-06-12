@@ -100,10 +100,6 @@ $pdf->writeHTML($bloque1, false, false, false, false, '');
 
 foreach ($productos as $key => $item) {
 
-$valorUnitario = number_format($item["precio"], 2);
-
-$precioTotal = number_format($item["total"], 2);
-
 $bloque2 = <<<EOF
 
 	<table style="font-size:9px;">
@@ -116,7 +112,7 @@ $bloque2 = <<<EOF
 
 		<tr>
 			<td style="width:160px; text-align:left">
-			S/ $valorUnitario Und. * $item[cantidad] = $precioTotal
+			Und. $item[cantidad]
 			<br>
 			</td>
 		</tr>
@@ -128,63 +124,6 @@ EOF;
 
 $pdf->writeHTML($bloque2, false, false, false, false, '');
 }
-
-// ---------------------------------------------------------
-
-$bloque3 = <<<EOF
-
-	<table style="font-size:9px; text-align:right">
-		
-		<tr>
-
-			<td style="width:80px;">
-				Neto:
-			</td>
-
-			<td style="width:80px;">
-				S/ $neto
-			</td>
-
-		</tr>
-
-		<tr>
-
-			<td style="width:80px;">
-				IGV:
-			</td>
-
-			<td style="width:80px;">
-				S/ $impuesto
-			</td>
-
-		</tr>
-
-		<tr>
-
-			<td style="width:160px;">
-				----------------------
-			</td>
-
-		</tr>
-
-		<tr>
-
-			<td style="width:80px;">
-				TOTAL:
-			</td>
-
-			<td style="width:80px;">
-				S/ $total
-			</td>
-
-		</tr>
-
-	</table>
-
-EOF;
-
-$pdf->writeHTML($bloque3, false, false, false, false, '');
-
 
 // ---------------------------------------------------------
 //SALIDA DEL ARCHIVO 

@@ -61,6 +61,7 @@
                         $valorCotizacion = $_POST["idCotizacion"];
                         ModeloCotizaciones::mdlActualizaCotizacion($itemCotizacion, $valorCotizacion);
                     }
+                    
                     $datos = array(
                         "codigo" => $_POST["codVenta"],
                         "id_usuario" => $_POST["idVendedor"],

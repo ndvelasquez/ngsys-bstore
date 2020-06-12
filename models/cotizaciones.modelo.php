@@ -79,7 +79,7 @@
             $sentencia = null;
         }
 
-        // ACTUALIZAR ESTADO COOTIZACION
+        // ACTUALIZAR ESTADO COTIZACION
         static public function mdlActualizaCotizacion($item, $valor) {
             $sentencia = Conexion::conectar()->prepare("UPDATE cotizaciones SET estado = 3 WHERE $item = :$item");
             $sentencia -> bindParam(":".$item, $valor, PDO::PARAM_STR);
