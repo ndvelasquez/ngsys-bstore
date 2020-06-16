@@ -818,17 +818,24 @@ $(document).ready(function () {
                     '</div>' +
 
                     '<!-- Cantidad del producto -->' +
-                    '<div class="col-xs-3 ingresoCantidad">' +
+                    '<div class="col-xs-2 ingresoCantidad">' +
                     '<input type="number" id="producto'+contador+'" class="form-control cantidadProducto" name="cantidadProducto" min="1" value="1" stock="'+stock+'" nuevoStock="'+Number(stock-1)+'" required>' +
                     '</div>' +
 
-                    '<!-- Precio del producto -->' +
-                    '<div class="col-xs-3 ingresoPrecio" style="padding-left: 0px">' +
-                    '<div class="input-group">' +
-                        
-                        '<input type="text" class="form-control precioProducto" name="precioProducto" precioReal="'+precio+'" value="'+precio+'" required>' +
-                        '<span class="input-group-addon"><b>S/</b></span>' +
+                    '<!-- Precio unitario del producto -->' +
+                    '<div class="col-xs-2 precioUnitario" style="padding-left: 0px">' +
+                        '<div class="input-group">' +
+                            '<input type="text" class="form-control precioUnitario" name="precioUnitario" value="'+precio+'" readonly required>' +
+                            '<span class="input-group-addon"><b>S/</b></span>' +
+                        '</div>' +
                     '</div>' +
+
+                    '<!-- Precio del producto -->' +
+                    '<div class="col-xs-2 ingresoPrecio" style="padding-left: 0px">' +
+                        '<div class="input-group">' +
+                            '<input type="text" class="form-control precioProducto" name="precioProducto" precioReal="'+precio+'" value="'+precio+'" required>' +
+                            '<span class="input-group-addon"><b>S/</b></span>' +
+                        '</div>' +
                     '</div>' +
                 '</div>'
             );
