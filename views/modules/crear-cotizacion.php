@@ -134,13 +134,13 @@
                       </div>
                     </div>
 
-                    <hr>
+                    <!-- <hr> -->
 
                     <!-- INPUT DE PORCENTAJE -->
                     <div class="form-group" style="width: 50%">
                       <div class="input-group">
-                        <input type="number" class="form-control porcentajeProducto" name="porcentaje" id="editarPorcentaje" min="0" max="99" placeholder="% de descuento">
-                        <span class="input-group-addon"><i class="fa fa-percent"></i></span>
+                        <input type="hidden" class="form-control porcentajeProducto" name="porcentaje" id="editarPorcentaje" min="0" max="99" placeholder="% de descuento">
+                        <!-- <span class="input-group-addon"><i class="fa fa-percent"></i></span> -->
                       </div>
                     </div>
 

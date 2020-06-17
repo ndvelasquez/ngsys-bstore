@@ -810,7 +810,7 @@ $(document).ready(function () {
                 '<div class="row" style="padding:5px 15px">' +
 
                     '<!-- Descripción del producto -->' +
-                    '<div class="col-xs-6" style="padding-right: 0px">' +
+                    '<div class="col-xs-4" style="padding-right: 0px">' +
                     '<div class="input-group">' +
                         '<span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto="'+idProducto+'"><i class="fa fa-times" aria-hidden="true"></i></button></span>' +
                         '<input type="text" class="form-control descripcionProducto" name="agregarProducto" id="agregarProducto" idProducto="'+idProducto+'" value="'+descripcion+'" required>' +
@@ -823,15 +823,15 @@ $(document).ready(function () {
                     '</div>' +
 
                     '<!-- Precio unitario del producto -->' +
-                    '<div class="col-xs-2 precioUnitario" style="padding-left: 0px">' +
+                    '<div class="col-xs-3 ingresoPrecioUnitario" style="padding-left: 0px">' +
                         '<div class="input-group">' +
-                            '<input type="text" class="form-control precioUnitario" name="precioUnitario" value="'+precio+'" readonly required>' +
+                            '<input type="text" class="form-control precioUnitario" name="precioUnitario" value="'+precio+'" required>' +
                             '<span class="input-group-addon"><b>S/</b></span>' +
                         '</div>' +
                     '</div>' +
 
                     '<!-- Precio del producto -->' +
-                    '<div class="col-xs-2 ingresoPrecio" style="padding-left: 0px">' +
+                    '<div class="col-xs-3 ingresoPrecio" style="padding-left: 0px">' +
                         '<div class="input-group">' +
                             '<input type="text" class="form-control precioProducto" name="precioProducto" precioReal="'+precio+'" value="'+precio+'" required>' +
                             '<span class="input-group-addon"><b>S/</b></span>' +
@@ -846,6 +846,7 @@ $(document).ready(function () {
             agregarImpuesto();
             // FORMATEAR EL PRECIO
             $(".precioProducto").number(true, 2);
+            $(".precioUnitario").number(true, 2);
             // LISTAR PRODUCTOS EN JSON
             listarProductos();
             // MODIFICAR EL PRECIO DE DELIVERY
@@ -1629,13 +1630,34 @@ $(document).ready(function () {
     $(".formularioCotizacion").on("change", ".precioProducto", function (e) {
         let precioDelivery = $(this).val();
         $(this).attr("precioReal", precioDelivery);
-        // console.log($(this).attr("precioReal"));
         // SUMAR TOTAL DE PRECIOS
         sumarTotalPrecios();
         // SUMAR LOS IMPUESTOS AL TOTAL
         agregarImpuesto();
         // FORMATEAR EL PRECIO
         $(".precioProducto").number(true, 2);
+        // LISTAR PRODUCTOS EN JSON
+        listarProductos();
+        
+    });
+    $(".formularioCotizacion").on("change", ".precioUnitario", function (e) {
+        
+        let cantidad = $(this).parent().parent().parent().children(".ingresoCantidad").children(".cantidadProducto");
+        let precioSumado = $(this).val() * cantidad.val();
+        
+        let precio = $(this).parent().parent().parent().children(".ingresoPrecio").children().children(".precioProducto");
+        $(precio).attr("precioReal", precioSumado);
+        $(precio).val(precioSumado);
+
+        // SUMAR TOTAL DE PRECIOS
+        sumarTotalPrecios();
+    
+        // SUMAR LOS IMPUESTOS AL TOTAL
+        agregarImpuesto();
+    
+        // APLICAR DESCUENTOS
+        // aplicaDescuento();
+    
         // LISTAR PRODUCTOS EN JSON
         listarProductos();
         
@@ -1691,19 +1713,21 @@ $(document).ready(function () {
     =====================================================*/
        
        $(".formularioCotizacion").on("change", ".cantidadProducto", function () {
-        console.log($(this));
         
-        let precio = $(this).parent().parent().children(".ingresoPrecio").children().children(".precioProducto");
-        console.log(precio);
+        let precio = $(this).parent().parent().children(".ingresoPrecioUnitario").children().children(".precioUnitario");
+        // console.log(precio.val());
         
-        let precioSumado = $(this).val() * precio.attr("precioReal");
-        $(precio).val(precioSumado);
+        let precioSumado = $(this).val() * precio.val();
+        // console.log(precioSumado);
+        
+        let precio2 = $(this).parent().parent().children(".ingresoPrecio").children().children(".precioProducto");
+        
+        $(precio2).val(precioSumado);
     
         let nuevoStock = Number($(this).attr("stock")) - $(this).val();
     
         $(this).attr("nuevoStock", nuevoStock);
     
-        precioSumado = $(this).val() * precio.attr("precioReal");
         // if (Number($(this).attr("stock")) < Number($(this).val())) {
         //     Swal.fire({
         //         title: 'La cantidad supera el stock',
@@ -1719,7 +1743,7 @@ $(document).ready(function () {
         agregarImpuesto();
     
         // APLICAR DESCUENTOS
-        aplicaDescuento();
+        // aplicaDescuento();
     
         // LISTAR PRODUCTOS EN JSON
         listarProductos();
