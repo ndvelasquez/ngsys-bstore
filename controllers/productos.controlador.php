@@ -109,7 +109,7 @@
                     ASIGNA UN ALMACEN AL PRODUCTO
                     ========================================================*/
                     $itemProducto = "codigo";
-                    $traerProducto = ModeloProductos::mdlMostrarProducto($tabla,$itemProducto,$datos["codigo"]);
+                    $traerProducto = ModeloProductos::mdlTraerSoloProducto($tabla,$itemProducto,$datos["codigo"]);
                     if($traerProducto) {
                         $tablaProductoAlmacen = "productos_almacen";
                         $datosProductoAlmacen = array("id_producto" => $traerProducto["id"], "id_almacen" => $_POST["almacen"]);
@@ -334,6 +334,11 @@
                     rmdir("views/img/productos/".$_GET["codProducto"]);
                 }
                 $respuesta = Modeloproductos::mdlEliminarProducto($tabla, $datos);
+                 /*======================================================
+                    ELIMINA EL PRODUCTO DEL ALMACEN
+                    ========================================================*/
+                    $tablaProductoAlmacen = "productos_almacen";
+                    $actualizaProductoAlmacen = ModeloProductoAlmacen::mdlEditarAlmacen($tablaProductoAlmacen, $datos);
                 /*======================================================
                 INSERTA EL LOG DE AUDITORIA
                 ========================================================*/

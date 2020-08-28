@@ -145,6 +145,24 @@
             return $sentencia -> fetchAll();
             $sentencia = null;
         }
+        // TRAER SOLO PRODUCTOS
+        static public function mdlTraerSoloProducto($tabla, $item, $valor) {
+
+            $sentencia = Conexion::conectar()->prepare("SELECT
+                    categorias.nombre AS categoria,
+                    productos.*
+                    FROM
+                        productos
+                    INNER JOIN categorias ON categorias.id = productos.id_categoria
+                    WHERE $tabla.$item = :$item
+                    ORDER BY
+                    productos.id DESC");
+                    $sentencia -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+                    $sentencia -> execute();
+
+                    return $sentencia -> fetch();
+                    $sentencia = null;
+        }
     }
 
 ?>
