@@ -222,6 +222,22 @@
               <div class="box-header with-border"></div>
 
               <div class="box-body">
+                <!-- SELECCIONAR ALMACEN -->
+                <div>
+                  <select class="selectpicker form-control" data-live-search="true" name="selectAlmacenVenta" id="selectAlmacenVenta" required>
+                    <option value="">Seleccionar Almacén</option>
+                    <?php
+                      $item = null;
+                      $valor = null;
+
+                      $almacen = ControladorAlmacenes::ctrlMostrarAlmacen($item, $valor);
+
+                      foreach ($almacen as $key => $value) {
+                        echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>';
+                      }
+                    ?>
+                  </select>
+                </div>
                 <table class="table table-bordered table-striped dt-responsive tablaProductoVenta">
                   <thead>
                     <tr>
