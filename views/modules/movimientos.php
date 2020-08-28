@@ -46,7 +46,7 @@
 
                 foreach ($movimientos as $key => $value) {
                   echo '<tr>
-                          <td>'.$value["id"].'</td>
+                          <td>'.($key+1).'</td>
                           <td>'.$value["producto"].'</td>';
                           if($value["tipo_movimiento"] == "ENTRADA") {
                             echo '<td>'.$value["tipo_movimiento"].'&nbsp;<i class="fas fa-long-arrow-alt-up" style="color: green;"></i></td>';
