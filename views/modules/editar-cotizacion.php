@@ -177,7 +177,24 @@
               <div class="box-header with-border"></div>
 
               <div class="box-body">
-                <table class="table table-bordered table-striped dt-responsive tablaProductoVenta">
+                  <!-- SELECCIONAR ALMACEN -->
+                <div>
+                  <select class="selectpicker form-control" data-live-search="true" name="selectAlmacenCotizacion" id="selectAlmacenCotizacion" required>
+                    <option value="">Seleccionar Almacén</option>
+                    <?php
+                      $item = null;
+                      $valor = null;
+
+                      $almacen = ControladorAlmacenes::ctrlMostrarAlmacen($item, $valor);
+
+                      foreach ($almacen as $key => $value) {
+                        echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>';
+                      }
+                    ?>
+                  </select>
+                </div>
+                <hr>
+                <table class="table table-bordered table-striped dt-responsive tablaProductoCotizacion">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
