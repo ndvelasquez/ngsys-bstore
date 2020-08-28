@@ -4,10 +4,16 @@
 
     class TablaProductosVentas {
         public function mostrarTablaProductosVentas () {
-            $item = null;
-            $valor = null;
-            $productos = Controladorproductos::ctrlMostrarproductos($item, $valor);
-            
+            if(isset($_POST["id_almacen"]) && $_POST["id_almacen"] != "") {
+                $item = "id_almacen";
+                $valor = $_POST["id_almacen"];
+                $productos = Controladorproductos::ctrlMostrarproductos($item, $valor);
+            }
+            else {
+                $item = null;
+                $valor = null;
+                $productos = Controladorproductos::ctrlMostrarproductos($item, $valor);
+            }
             $datosJson = '{
                 "data": [';
                 for ($i=0; $i < count($productos); $i++) {

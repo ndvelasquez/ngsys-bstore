@@ -297,75 +297,117 @@ $(document).ready(function () {
     });
 
     /* 
+    ================================================
+    SELECCIONAR ALMACEN A EDITAR
+    ================================================
+    */
+   $(document).on("click", ".btn-editarAlmacen", function () {
+    let idAlmacen = $(this).attr("idAlmacen");
+    let datos = new FormData();
+    datos.append("idAlmacen", idAlmacen);
+    $.ajax({
+        url: 'ajax/almacenes.ajax.php',
+        method: 'POST',
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function(respuesta) {
+            $("#editarNombre").val(respuesta["nombre"]);
+            $("#idAlmacen").val(respuesta["id"]);
+
+        }
+   })
+
+   });
+
+   /*
+    =============================================
+    VERIFICAR SI UN NOMBRE YA ESTA REGISTRADO
+    =============================================
+    */
+   $('#nombre').change(function () {
+    $(".alert").remove();
+    let nombre = $(this).val();
+    let datos = new FormData();
+    datos.append('validaNombre', nombre);
+    $.ajax({
+        url: 'ajax/almacenes.ajax.php',
+        method: 'POST',
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        success: function(respuesta) {
+           if(respuesta) {
+               $("#nombre").parent().after('<div class="alert alert-danger">este nombre ya existe en la base de datos</div>');
+               $("#nombre").val("");
+           }
+        }
+   })
+});
+
+    /* 
+    =====================================================
+    ELIMINAR ALMACEN
+    ====================================================
+    */
+    $(document).on("click", ".btn-eliminarAlmacen", function () {
+    let idAlmacen = $(this).attr("idAlmacen");
+    
+    Swal.fire({
+        title: '¿Desea eliminar el almacén?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar'
+    }).then((result) => {
+            if (result.value) {
+            window.location = "index.php?ruta=almacenes&idAlmacen="+idAlmacen;
+            }
+        })
+    });
+
+    /* 
     =====================================================
     CARGAR DATOS DINAMICOS DE LOS PRODUCTOS CON AJAX
     ====================================================
     */
-    $('.tablaProducto').DataTable( {
-        "ajax": "ajax/productos-datatable.ajax.php",
-        "deferRender": true,
-        "retrieve": true,
-        "processing": true,
-        "language": {
-            "sProcessing":     "Procesando...",
-                        "sLengthMenu":     "Mostrar _MENU_ registros",
-                        "sZeroRecords":    "No se encontraron resultados",
-                        "sEmptyTable":     "Ningún dato disponible en esta tabla =(",
-                        "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                        "sInfoPostFix":    "",
-                        "sSearch":         "Buscar:",
-                        "sUrl":            "",
-                        "sInfoThousands":  ",",
-                        "sLoadingRecords": "Cargando...",
-                        "oPaginate": {
-                            "sFirst":    "Primero",
-                            "sLast":     "Último",
-                            "sNext":     "Siguiente",
-                            "sPrevious": "Anterior"
-                        },
-                        "oAria": {
-                            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                        },
-                        "buttons": {
-                            "copy": "Copiar",
-                            "colvis": "Visibilidad"
-                        }
-        }
-    });
+   cargarDataTable();
     /* 
     =====================================================
     CREAR NUEVO CODIGO DEL PRODUCTO
     ====================================================
     */
-    $("#categoria").change(function () {
-        let idCategoria = $(this).val();
-        let datos = new FormData();
-        datos.append('idCategoria', idCategoria);
-        $.ajax({
-            url: 'ajax/productos.ajax.php',
-            method: 'POST',
-            data: datos,
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'json',
-            success: function(respuesta) {
-               if (!respuesta) {
-                   let nuevoCodigo = idCategoria + "01";
-                   $("#codProducto").val(nuevoCodigo);
-               }
-               else {
-                   let nuevoCodigo = Number(respuesta["codigo"]) + 1;
-                   $("#codProducto").val(nuevoCodigo);
-               }
+    // $("#categoria").change(function () {
+    //     let idCategoria = $(this).val();
+    //     let datos = new FormData();
+    //     datos.append('idCategoria', idCategoria);
+    //     $.ajax({
+    //         url: 'ajax/productos.ajax.php',
+    //         method: 'POST',
+    //         data: datos,
+    //         cache: false,
+    //         contentType: false,
+    //         processData: false,
+    //         dataType: 'json',
+    //         success: function(respuesta) {
+    //            if (!respuesta) {
+    //                let nuevoCodigo = idCategoria + "001";
+    //                $("#codProducto").val(nuevoCodigo);
+    //            }
+    //            else {
+    //                let nuevoCodigo = Number(respuesta["codigo"]) + 1;
+    //                $("#codProducto").val(nuevoCodigo);
+    //            }
                
-            }
-       })
+    //         }
+    //    })
 
-    });
+    // });
     /* 
     =========================================
     SUBIR Y PRE VISUALIZAR IMAGEN DEL PRODUCTO
@@ -426,11 +468,14 @@ $(document).ready(function () {
             processData: false,
             dataType: 'json',
             success: function(respuesta) {
+                console.log(respuesta);
                 $("#idProducto").val(respuesta["id"]);
                 $("#editarDescripcion").val(respuesta["descripcion"]);
                 $("#editarCodProducto").val(respuesta["codigo"]);
                 $("#editarCategoria").val(respuesta["id_categoria"]);
                 $("#editarCategoria").html(respuesta["categoria"]);
+                $("#editarAlmacen").val(respuesta["id_almacen"]);
+                $("#editarAlmacen").html(respuesta["almacen"]);
                 $("#editarCantidad").val(respuesta["stock"]);
                 $("#editarPrecioCompra").val(respuesta["precio_compra"]);
                 $("#editarPrecioVenta").val(respuesta["precio_venta"]);
@@ -618,80 +663,96 @@ $(document).ready(function () {
     CARGAR DATOS DINAMICOS DE LOS PRODUCTOS(VENTAS) CON AJAX
     ====================================================
     */
-   $('.tablaProductoVenta').DataTable( {
-    "ajax": "ajax/ventas-datatable.ajax.php",
-    "deferRender": true,
-    "retrieve": true,
-    "processing": true,
-    "language": {
-                    "sProcessing":     "Procesando...",
-                    "sLengthMenu":     "Mostrar _MENU_ registros",
-                    "sZeroRecords":    "No se encontraron resultados",
-                    "sEmptyTable":     "Ningún dato disponible en esta tabla =(",
-                    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                    "sInfoPostFix":    "",
-                    "sSearch":         "Buscar:",
-                    "sUrl":            "",
-                    "sInfoThousands":  ",",
-                    "sLoadingRecords": "Cargando...",
-                    "oPaginate": {
-                        "sFirst":    "Primero",
-                        "sLast":     "Último",
-                        "sNext":     "Siguiente",
-                        "sPrevious": "Anterior"
-                    },
-                    "oAria": {
-                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                    },
-                    "buttons": {
-                        "copy": "Copiar",
-                        "colvis": "Visibilidad"
-                    }
+   cargarDataTableVenta();
+   function cargarDataTableVenta() {
+    let almacen = $('#selectAlmacenVenta').selectpicker();
+    let idAlmacen = $(almacen).selectpicker('val');
+        $('.tablaProductoVenta').DataTable( {
+            "destroy" : true,
+            "ajax": {
+                "url" : "ajax/ventas-datatable.ajax.php",
+                "data" : {"id_almacen" : idAlmacen},
+                "type" : "post"
+            },
+            "order" : [],
+            "language": {
+                "sProcessing":     "Procesando...",
+                            "sLengthMenu":     "Mostrar _MENU_ registros",
+                            "sZeroRecords":    "No se encontraron resultados",
+                            "sEmptyTable":     "Ningún dato disponible en esta tabla =(",
+                            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                            "sInfoPostFix":    "",
+                            "sSearch":         "Buscar:",
+                            "sUrl":            "",
+                            "sInfoThousands":  ",",
+                            "sLoadingRecords": "Cargando...",
+                            "oPaginate": {
+                                "sFirst":    "Primero",
+                                "sLast":     "Último",
+                                "sNext":     "Siguiente",
+                                "sPrevious": "Anterior"
+                            },
+                            "oAria": {
+                                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                            },
+                            "buttons": {
+                                "copy": "Copiar",
+                                "colvis": "Visibilidad"
+                            }
                 }
-    });
+        });
+    }
 
     /* 
     =====================================================
     CARGAR DATOS DINAMICOS DE LOS PRODUCTOS(COTIZACION) CON AJAX
     ====================================================
     */
-   $('.tablaProductoCotizacion').DataTable( {
-    "ajax": "ajax/ventas-datatable.ajax.php",
-    "deferRender": true,
-    "retrieve": true,
-    "processing": true,
-    "language": {
-                    "sProcessing":     "Procesando...",
-                    "sLengthMenu":     "Mostrar _MENU_ registros",
-                    "sZeroRecords":    "No se encontraron resultados",
-                    "sEmptyTable":     "Ningún dato disponible en esta tabla =(",
-                    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                    "sInfoPostFix":    "",
-                    "sSearch":         "Buscar:",
-                    "sUrl":            "",
-                    "sInfoThousands":  ",",
-                    "sLoadingRecords": "Cargando...",
-                    "oPaginate": {
-                        "sFirst":    "Primero",
-                        "sLast":     "Último",
-                        "sNext":     "Siguiente",
-                        "sPrevious": "Anterior"
-                    },
-                    "oAria": {
-                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                    },
-                    "buttons": {
-                        "copy": "Copiar",
-                        "colvis": "Visibilidad"
-                    }
+   cargarDataTableCotizacion();
+   function cargarDataTableCotizacion() {
+    let almacen = $('#selectAlmacenCotizacion').selectpicker();
+    let idAlmacen = $(almacen).selectpicker('val');
+        $('.tablaProductoCotizacion').DataTable( {
+            "destroy" : true,
+            "ajax": {
+                "url" : "ajax/ventas-datatable.ajax.php",
+                "data" : {"id_almacen" : idAlmacen},
+                "type" : "post"
+            },
+            "order" : [],
+            "language": {
+                "sProcessing":     "Procesando...",
+                            "sLengthMenu":     "Mostrar _MENU_ registros",
+                            "sZeroRecords":    "No se encontraron resultados",
+                            "sEmptyTable":     "Ningún dato disponible en esta tabla =(",
+                            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                            "sInfoPostFix":    "",
+                            "sSearch":         "Buscar:",
+                            "sUrl":            "",
+                            "sInfoThousands":  ",",
+                            "sLoadingRecords": "Cargando...",
+                            "oPaginate": {
+                                "sFirst":    "Primero",
+                                "sLast":     "Último",
+                                "sNext":     "Siguiente",
+                                "sPrevious": "Anterior"
+                            },
+                            "oAria": {
+                                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                            },
+                            "buttons": {
+                                "copy": "Copiar",
+                                "colvis": "Visibilidad"
+                            }
                 }
-    });
+        });
+    }
 
     /* 
     =====================================================
@@ -1795,8 +1856,69 @@ $(document).ready(function () {
             break;
     }
 
+    /*===================================================
+    MOSTRAR PRODUCTOS POR ALMACEN SELECCIONADO
+    =====================================================*/    
+    $('#selectAlmacen').change(function() {
+        cargarDataTable();
+    });
+
+    /*===================================================
+    MOSTRAR PRODUCTOS POR ALMACEN SELECCIONADO (VENTAS)
+    =====================================================*/    
+    $('#selectAlmacenVenta').change(function() {
+        cargarDataTableVenta();
+    });
+
+    /*===================================================
+    MOSTRAR PRODUCTOS POR ALMACEN SELECCIONADO (COTIZACIONES)
+    =====================================================*/    
+    $('#selectAlmacenCotizacion').change(function() {
+        cargarDataTableCotizacion();
+    });
+
     /*==================================================
-    CREAR CODIGO DE BARRAS DE LOS PRODUCTOS
+    INVOCO A MI DATATABLE ENVIANDO COMO PARAMETRO EL DEL ID DEL ALMACEN
     ====================================================*/
-    $("#barcode").JsBarcode("Holi!");
+    function cargarDataTable() {
+        let almacen = $('#selectAlmacen').selectpicker();
+        let idAlmacen = $(almacen).selectpicker('val');
+        $('.tablaProducto').DataTable( {
+            "destroy" : true,
+            "ajax": {
+                "url" : "ajax/productos-datatable.ajax.php",
+                "data" : {"id_almacen" : idAlmacen},
+                "type" : "post"
+            },
+            "order" : [],
+            "language": {
+                "sProcessing":     "Procesando...",
+                            "sLengthMenu":     "Mostrar _MENU_ registros",
+                            "sZeroRecords":    "No se encontraron resultados",
+                            "sEmptyTable":     "Ningún dato disponible en esta tabla =(",
+                            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                            "sInfoPostFix":    "",
+                            "sSearch":         "Buscar:",
+                            "sUrl":            "",
+                            "sInfoThousands":  ",",
+                            "sLoadingRecords": "Cargando...",
+                            "oPaginate": {
+                                "sFirst":    "Primero",
+                                "sLast":     "Último",
+                                "sNext":     "Siguiente",
+                                "sPrevious": "Anterior"
+                            },
+                            "oAria": {
+                                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                            },
+                            "buttons": {
+                                "copy": "Copiar",
+                                "colvis": "Visibilidad"
+                            }
+            }
+        });
+    }
 });

@@ -7,17 +7,63 @@
         // MOSTRAR PRODUCTOS
         static public function mdlMostrarProducto($tabla, $item, $valor) {
             if ($item != null) {
-                $sentencia = Conexion::conectar()->prepare("SELECT productos.*, categorias.nombre as categoria FROM $tabla INNER JOIN categorias on categorias.id = productos.id_categoria WHERE productos.$item = :$item ORDER BY productos.id DESC");
-                $sentencia -> bindParam(":".$item, $valor, PDO::PARAM_STR);
-                $sentencia -> execute();
+                // VERIFICO SI SE ESTA SELECCIONANDO UN ALMACEN
+                if ($item == "id_almacen") {
+                    $tabla = "productos_almacen";
+                    $sentencia = Conexion::conectar()->prepare("SELECT
+                    categorias.nombre AS categoria,
+                    productos.*,
+                    productos_almacen.id_almacen,
+                    almacen.nombre AS almacen
+                    FROM
+                        productos
+                    INNER JOIN categorias ON categorias.id = productos.id_categoria
+                    INNER JOIN productos_almacen ON productos_almacen.id_producto = productos.id
+                    INNER JOIN almacen ON almacen.id = productos_almacen.id_almacen
+                    WHERE $tabla.$item = :$item
+                    ORDER BY
+                    productos.id DESC");
+                    $sentencia -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+                    $sentencia -> execute();
+
+                    return $sentencia -> fetchAll();
+                    $sentencia = null;
+                }
+                else {
+                    $sentencia = Conexion::conectar()->prepare("SELECT
+                    categorias.nombre AS categoria,
+                    productos.*,
+                    productos_almacen.id_almacen,
+                    almacen.nombre AS almacen
+                    FROM
+                        productos
+                    INNER JOIN categorias ON categorias.id = productos.id_categoria
+                    INNER JOIN productos_almacen ON productos_almacen.id_producto = productos.id
+                    INNER JOIN almacen ON almacen.id = productos_almacen.id_almacen
+                    WHERE $tabla.$item = :$item
+                    ORDER BY
+                    productos.id DESC");
+                    $sentencia -> bindParam(":".$item, $valor, PDO::PARAM_STR);
+                    $sentencia -> execute();
+                }
+
             }
             else {
-                $sentencia = Conexion::conectar()->prepare("SELECT productos.*, categorias.nombre as categoria FROM $tabla INNER JOIN categorias on categorias.id = productos.id_categoria ORDER BY productos.id DESC");
+                $sentencia = Conexion::conectar()->prepare("SELECT
+                categorias.nombre AS categoria,
+                productos.*,
+                productos_almacen.id_almacen,
+                almacen.nombre AS almacen
+                FROM
+                productos
+                INNER JOIN categorias ON categorias.id = productos.id_categoria
+                INNER JOIN productos_almacen ON productos_almacen.id_producto = productos.id
+                INNER JOIN almacen ON almacen.id = productos_almacen.id_almacen");
                 $sentencia -> execute();
 
                 return $sentencia -> fetchAll();
                 $sentencia = null;
-            }
+            }   
 
             return $sentencia -> fetch();
             $sentencia = null;

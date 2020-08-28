@@ -8,6 +8,7 @@ require_once "controllers/productos.controlador.php";
 require_once "controllers/categorias.controlador.php";
 require_once "controllers/cotizaciones.controlador.php";
 require_once "controllers/inventario.controlador.php";
+require_once "controllers/almacenes.controlador.php";
 
 require_once "models/usuarios.modelo.php";
 require_once "models/clientes.modelo.php";
@@ -17,6 +18,8 @@ require_once "models/categorias.modelo.php";
 require_once "models/detalle-venta.modelo.php";
 require_once "models/cotizaciones.modelo.php";
 require_once "models/inventario.modelo.php";
+require_once "models/almacenes.modelo.php";
+require_once "models/productoAlmacen.modelo.php";
 require_once "models/auditoria.modelo.php";
 
 $plantilla = new ControladorPlantilla();

@@ -17,6 +17,22 @@
       <div class="box">
         <div class="box-header with-border">
           <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto">Agregar producto</button>
+          <!-- SELECCIONAR ALMACEN -->
+          <div class="pull-left">
+            <select class="selectpicker form-control" data-live-search="true" name="selectAlmacen" id="selectAlmacen" required>
+              <option value="">Seleccionar Almacén</option>
+              <?php
+                $item = null;
+                $valor = null;
+
+                $almacen = ControladorAlmacenes::ctrlMostrarAlmacen($item, $valor);
+
+                foreach ($almacen as $key => $value) {
+                  echo '<option value="'.$value["id"].'">'.$value["nombre"].'</option>';
+                }
+              ?>
+            </select>
+          </div>
           <div class="pull-right">
           <button class="btn btn-danger imprimirProductos">
                   <span>
@@ -78,15 +94,34 @@
                 <select name="categoria" id="categoria" class="form-control" data-toggle="tooltip" title="campo obligatorio" required>
                   <option value="">Seleccione una categoría</option>
                   <?php
-                $item = null;
-                $valor = null;
+                    $item = null;
+                    $valor = null;
 
-                $categorias = ControladorCategorias::ctrlMostrarCategorias($item, $valor);
+                    $categorias = ControladorCategorias::ctrlMostrarCategorias($item, $valor);
 
-                foreach ($categorias as $key => $value) {
-                  echo "<option value='".$value["id"]."'>".$value["nombre"]."</option>";
-                }
-              ?>
+                    foreach ($categorias as $key => $value) {
+                      echo "<option value='".$value["id"]."'>".$value["nombre"]."</option>";
+                    }
+                  ?>
+                </select>
+              </div>
+            </div>
+            <!-- INPUT DE ALMACEN -->
+            <div class="form-group">
+              <div class="input-group">
+                <label class="input-group-addon" for="almacen"><i class="fas fa-boxes"></i></label>
+                <select name="almacen" id="almacen" class="form-control" data-toggle="tooltip" title="campo obligatorio" required>
+                  <option value="">Seleccione un almacén</option>
+                  <?php
+                    $item = null;
+                    $valor = null;
+
+                    $almacenes = ControladorAlmacenes::ctrlMostrarAlmacen($item, $valor);
+
+                    foreach ($almacenes as $key => $value) {
+                      echo "<option value='".$value["id"]."'>".$value["nombre"]."</option>";
+                    }
+                  ?>
                 </select>
               </div>
             </div>
@@ -94,7 +129,7 @@
             <div class="form-group">
               <div class="input-group">
                 <label class="input-group-addon" for="codProducto"><i class="fa fa-code"></i></label>
-                <input type="text" name="codProducto" id="codProducto" class="form-control" value="" readonly placeholder="Código del producto" data-toggle="tooltip" title="campo obligatorio" required pattern="[0-9]+">
+                <input type="text" name="codProducto" id="codProducto" class="form-control" value="" placeholder="Código del producto" data-toggle="tooltip" title="campo obligatorio" required pattern="[0-9]+">
               </div>
             </div>
             <!-- INPUT DE DESCRIPCION DEL PRODUCTO -->
@@ -203,6 +238,25 @@
                 $categorias = ControladorCategorias::ctrlMostrarCategorias($item, $valor);
 
                 foreach ($categorias as $key => $value) {
+                  echo "<option value='".$value["id"]."'>".$value["nombre"]."</option>";
+                }
+              ?>
+                </select>
+              </div>
+            </div>
+            <!-- INPUT DE ALMACEN -->
+            <div class="form-group">
+              <div class="input-group">
+                <label class="input-group-addon" for="almacen"><i class="fas fa-boxes"></i></label>
+                <select name="editarAlmacen" class="form-control" data-toggle="tooltip" title="campo obligatorio" required>
+                  <option id="editarAlmacen" value=""></option>
+                  <?php
+                $item = null;
+                $valor = null;
+
+                $almacenes = ControladorAlmacenes::ctrlMostrarAlmacen($item, $valor);
+
+                foreach ($almacenes as $key => $value) {
                   echo "<option value='".$value["id"]."'>".$value["nombre"]."</option>";
                 }
               ?>

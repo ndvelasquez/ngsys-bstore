@@ -24,6 +24,7 @@
             if (isset($_POST["codProducto"])
                && isset($_POST["descripcion"])
                && isset($_POST["categoria"])
+               && isset($_POST["almacen"])
                && isset($_POST["precioCompra"])
                && isset($_POST["precioVenta"])) {
 
@@ -97,12 +98,24 @@
                             "codigo" => $_POST["codProducto"],
                             "descripcion" => $_POST["descripcion"],
                             "categoria" => $_POST["categoria"],
+                            "almacen" => $_POST["almacen"],
                             "stock" => $_POST["cantidad"],
                             "precioCompra" => $_POST["precioCompra"],
                             "precioVenta" => $_POST["precioVenta"],
                             "imagen" => $ruta
                     );
                     $respuesta = ModeloProductos::mdlCrearProducto($tabla,$datos);
+                    /*======================================================
+                    ASIGNA UN ALMACEN AL PRODUCTO
+                    ========================================================*/
+                    $itemProducto = "codigo";
+                    $traerProducto = ModeloProductos::mdlMostrarProducto($tabla,$itemProducto,$datos["codigo"]);
+                    if($traerProducto) {
+                        $tablaProductoAlmacen = "productos_almacen";
+                        $datosProductoAlmacen = array("id_producto" => $traerProducto["id"], "id_almacen" => $_POST["almacen"]);
+                        $respuestaProductoAlmacen = ModeloProductoAlmacen::mdlCrearProductoAlmacen($tablaProductoAlmacen, $datosProductoAlmacen);
+                    }
+
                     /*======================================================
                     INSERTA EL LOG DE AUDITORIA
                     ========================================================*/
@@ -112,7 +125,7 @@
                         "tabla" => $tabla
                     );
                     $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
-                    if ($respuesta == "ok") {
+                    if ($respuestaProductoAlmacen == "ok") {
                         echo "<script>
                         Swal.fire({
                             type: 'success',
@@ -237,11 +250,17 @@
                             "descripcion" => $_POST["editarDescripcion"],
                             "cantidad" => $_POST["editarCantidad"],
                             "categoria" => $_POST["editarCategoria"],
+                            "almacen" => $_POST["editarAlmacen"],
                             "precioCompra" => $_POST["editarPrecioCompra"],
                             "precioVenta" => $_POST["editarPrecioVenta"],
                             "imagen" => $ruta
                     );
                     $respuesta = Modeloproductos::mdleditarProducto($tabla,$datos);
+                    /*======================================================
+                    ACTUALIZA LA UBICACION (ALMACEN) DEL PRODUCTO
+                    ========================================================*/
+                    $tablaProductoAlmacen = "productos_almacen";
+                    $actualizaProductoAlmacen = ModeloProductoAlmacen::mdlEditarAlmacen($tablaProductoAlmacen, $datos);
                     /*======================================================
                     INSERTA EL LOG DE AUDITORIA
                     ========================================================*/
@@ -251,7 +270,7 @@
                         "tabla" => $tabla
                     );
                     $respuestoaAuditoria = ModeloAuditoria::mdlInsertaLog($datosAuditoria);
-                    if ($respuesta == "ok") {
+                    if ($actualizaProductoAlmacen == "ok") {
                         echo "<script>
                         Swal.fire({
                             type: 'success',

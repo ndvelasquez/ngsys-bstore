@@ -50,6 +50,11 @@
                 <i class="fa fa-th"></i> <span>Categorías</span>
               </a>
             </li>
+            <li>
+              <a href="almacenes">
+                <i class="fas fa-boxes"></i> <span>Almacenes</span>
+              </a>
+            </li>
             ';
           }
         ?>
