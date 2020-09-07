@@ -1438,10 +1438,10 @@ $(document).ready(function () {
     let codigoVenta = $(this).attr("codVenta");
 
     // formato CARTA
-    // window.open("extensions/tcpdf/pdf/pedido.php?codigo="+codigoVenta, "_blank");
+    window.open("extensions/tcpdf/pdf/pedido.php?codigo="+codigoVenta, "_blank");
 
     // formato TICKETERA
-    window.open("extensions/tcpdf/pdf/pedido-ticket.php?codigo="+codigoVenta, "_blank");
+    // window.open("extensions/tcpdf/pdf/pedido-ticket.php?codigo="+codigoVenta, "_blank");
     // window.open("extensions/tcpdf/pdf/pdf.php");
    });
 
